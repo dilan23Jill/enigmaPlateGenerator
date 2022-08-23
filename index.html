@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+    <link rel="stylesheet" href="style/style.css" />
+    <link
+      href="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css"
+      rel="stylesheet"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+
+    <title>Enigma serial plate generator</title>
+  </head>
+
+  <body>
+    <section id="input_window" class="window">
+      <img src="img/logo_enigma.png" alt="enigma_logo" id="img_enigma_logo" />
+      <div class="break"></div>
+      <form id="parameters">
+        <div class="plate_info">
+          <label for="companyName"><sup>*</sup>Company Name:</label>
+          <input
+            type="text"
+            id="companyName"
+            class="companyInfo"
+            value="ENIGMA GAMING"
+            required
+          /><br />
+
+          <label for="serialNumber"><sup>*</sup>Serial Number:</label>
+          <input type="text" id="serialNumber" class="companyInfo" maxlength="11" required />
+
+          <label for="productionDate"><sup>*</sup>Production Date:</label>
+          <input
+            type="text"
+            id="productionDate"
+            class="companyInfo"
+            placeholder="MM/YYYY"
+          />
+
+          <label for="productName"><sup>*</sup>Product:</label>
+          <input type="text" id="productName" class="companyInfo" required />
+
+          <label for="modelName">Model Name:</label>
+          <input type="text" id="modelName" class="companyInfo" />
+
+          <label for="modelId"><sup>*</sup>Model ID:</label>
+          <input type="text" id="modelId" class="companyInfo" required />
+
+          <label for="ElecRatings"><sup>*</sup>Elec. ratings:</label>
+          <input type="text" id="ElecRatings" class="companyInfo" required />
+        </div>
+        <div class="plate_info">
+          <label for="companyAddress"><sup>*</sup>Company Address:</label>
+          <input
+            type="text"
+            id="companyAddress"
+            class="companyInfo"
+            value="ENIGMA GAMING, Vrtine 4, 6276 Pobegi, Slovenia, Europe"
+            required
+          />
+
+          <label for="logo_enigma">Logo Enigma:</label>
+          <input type="checkbox" id="logo_enigma" checked />
+
+          <label for="logo_certifikat">Logo Certifikat:</label>
+          <input type="checkbox" id="logo_certifikat" checked /> <br />
+          <button type="button" id="preview">PREVIEW</button>
+
+        </div>
+        <br />
+
+        <!--             <input type="submit" value="Submit"> 
+ -->
+      </form>
+    </section>
+    <section id="preview_window" class="window">
+      <h2>PREVIEW</h2>
+      <div class="preview_plate">
+        <div class="plate_border"></div>
+
+        <p id="preview_plate_name">ENIGMA GAMING</p>
+
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+
+        <div class="underline_name"></div>
+
+        <div class="logo_space"></div>
+        <div class="info_space">
+            <p class="preview_plate_info" id="serial_number_plate_text">Serial Number: </p>
+            <p class="preview_plate_info" id="production_date_plate_text">Production Date:</p>
+            <p class="preview_plate_info" id="product_name_plate_text">Product:</p>
+            <p class="preview_plate_info" id="model_name_plate_text">Model Name:</p>
+            <p class="preview_plate_info" id="model_id_plate_text">Model ID:</p>
+            <p class="preview_plate_info" id="elec_ratings_plate_text">Elec. ratings: </p>               
+
+        </div>
+            <p id="preview_plate_address">ENIGMA GAMING, Vrtine 4, 6276 Pobegi, Slovenia, Europe</p>
+ 
+      </div>
+    </section>
+
+    <script src="script/script.js"></script>
+  </body>
+</html>
