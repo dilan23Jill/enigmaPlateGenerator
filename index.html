@@ -46,34 +46,36 @@
         <label for="ElecRatings"><sup>*</sup>Elec. ratings:</label>
         <div class="drop_text_elec">
           <select class="ElecRatingsGroup" id="selec_elec_one">
-             <option></option>
-             <option value="12V">12V</option>
-             <option value="24V">24V</option>
-             <option value="120V">120V</option>
-             <option value="120V">230V</option>
-             <option value="120V">120-230V</option>
+            <option></option>
+            <option value="12V">12V</option>
+            <option value="24V">24V</option>
+            <option value="120V">120V</option>
+            <option value="120V">230V</option>
+            <option value="120V">120-230V</option>
           </select>
-          <input name="displayValueOne" placeholder="Voltage" class= "displayValue" id="displayValueOne"  onfocus="this.select()" type="text">
-          <input name="idValueOne" id="idValueOne"  type="hidden">
-          </div>
+          <input name="displayValueOne" placeholder="Voltage" class="displayValue" id="displayValueOne"
+            onfocus="this.select()" type="text">
+          <input name="idValueOne" id="idValueOne" type="hidden">
+        </div>
 
-          <div class="drop_text_elec">
-            <select class="ElecRatingsGroup" id="selec_elec_two">
-               <option></option>
-               <option value="50Hz">50Hz</option>
-               <option value="60Hz">60Hz</option>
-               <option value="50/60Hz">50/60Hz</option>
-            </select>
-            <input name="displayValueTwo" placeholder="Frequency" class= "displayValue" id="displayValueTwo"  onfocus="this.select()" type="text">
-            <input name="idValueTwo" id="idValueTwo" type="hidden">
-            </div><br/>
-            <input type="number" id="displayValueThree" name="displayValueThree" placeholder="Wattage"  step="10" required>
-            <input type="number" id="displayValueFour" name="displayValueFour" placeholder="El. current"  step="10" required>
+        <div class="drop_text_elec">
+          <select class="ElecRatingsGroup" id="selec_elec_two">
+            <option></option>
+            <option value="50Hz">50Hz</option>
+            <option value="60Hz">60Hz</option>
+            <option value="50/60Hz">50/60Hz</option>
+          </select>
+          <input name="displayValueTwo" placeholder="Frequency" class="displayValue" id="displayValueTwo"
+            onfocus="this.select()" type="text">
+          <input name="idValueTwo" id="idValueTwo" type="hidden">
+        </div><br />
+        <input type="number" id="displayValueThree" name="displayValueThree" placeholder="Wattage" step="10" required>
+        <input type="number" id="displayValueFour" name="displayValueFour" placeholder="El. current" step="10" required>
 
 
 
       </div>
-      
+
       <div class="plate_info">
         <label for="companyAddress"><sup>*</sup>Company Address:</label>
         <input type="text" id="companyAddress" class="companyInfo"
@@ -83,10 +85,10 @@
         <input type="file" id="logo_enigma_input" accept="image/svg">
 
         <label for="logo_certifikat">Logo Certifikat:</label>
-        <input type="checkbox" id="logo_certifikat" checked /> 
+        <input type="checkbox" id="logo_certifikat" checked />
         <input type="file" id="logo_certifikat_input" accept="image/svg">
 
-        <button type="button" id="preview">PREVIEW</button> 
+        <button type="button" id="preview">PREVIEW</button>
 
       </div>
 
@@ -95,10 +97,11 @@
     </form>
   </section>
   <section id="preview_window" class="window">
-    <img src="img/logo_enigma.png" alt="enigma_logo" id="img_enigma_logo" />
-
-    <h2>PREVIEW</h2>
-    <div class="preview_plate">
+    <!--     <img src="img/logo_enigma.png" alt="enigma_logo" id="img_enigma_logo" />
+ -->
+    <!--     <h2>PREVIEW</h2>
+ -->
+    <!--  <div class="preview_plate">
       <div class="plate_border"></div>
 
       <p id="preview_plate_name">ENIGMA GAMING</p>
@@ -125,7 +128,49 @@
       </div>
       <p id="preview_plate_address">ENIGMA GAMING, Vrtine 4, 6276 Pobegi, Slovenia, Europe</p>
 
+    </div> -->
+    
+    <div class="parameters_tab">
+      <label for="plate_width">Plate width</label>
+      <input type="range" id="plate_width" min="70" max="100" value="90" step="1" onchange="changeWidth(this.value)"
+        oninput="this.nextElementSibling.value = this.value">
+      <output>90</output><br />
+      <label for="plate_width">Plate height</label>
+      <input type="range" id="plate_height" min="40" max="70" value="54" step="1" onchange="changeHeight(this.value)"
+        oninput="this.nextElementSibling.value = this.value">
+      <output>54</output><br />
+      <label for="plate_underline">Underline</label>
+      <input type="range" id="plate_underline" min="7" max="12" value="10" step="1"
+        onchange="changeUnderline(this.value)" oninput="this.nextElementSibling.value = this.value">
+      <output>10</output><br />
+      <label for="plate_cn_size">text</label>
+      <input type="range" id="plate_cn_size" min="2" max="5" value="4" step="1" onchange="changeCNtext(this.value)"
+        oninput="this.nextElementSibling.value = this.value">
+      <output>10</output><br />
     </div>
+<!--    <a href='data:image/svg+xml;utf8,
+ --> 
+    
+
+      <svg id="prv_plate" width="100mm" height="70mm" xmlns="http://www.w3.org/2000/svg">
+        <rect id="svg_plateBorder" x="0" y="0" width="90mm" height="54mm" fill="none" stroke="magenta"
+          stroke-width="0.1mm" />
+        <rect id="svg_plateInnerLine" x="1.5mm" y="1.5mm" width="87mm" height="51mm" fill="none" stroke="black"
+          stroke-width="0.5mm" />
+        <rect id="svg_underline" x="10mm" y="10mm" width="70mm" height="0.3mm" fill="black" />
+        <circle id="svg_hole_tl" cx="5mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
+        <circle id="svg_hole_tr" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
+        <circle id="svg_hole_bl" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
+        <circle id="svg_hole_br" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
+        <text id="svg_CompanyName" x="45mm" y="6.5mm" font-size="4mm" letter-spacing="8" word-spacing="10"
+          dominant-baseline="middle" font-weight="bold" text-anchor="middle">0</text>
+     
+      </svg>
+    
+
+<!--          'download="circlesandcircles.svg">download SVG</a>
+ -->   <!--         <text id="svg_serialNumber" x="36mm" y="17mm" text-anchor="middle">Serial Number:</text>  
+ -->
   </section>
 
   <script src="script/script.js"></script>
