@@ -5,21 +5,87 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <style>
+        html, body{
+            margin: 0;
+            padding: 0;
+
+        }
+    </style>
 </head>
 <body>
-<!--     <a href='data:image/svg+xml;utf8,
- -->    
-    <svg width="90mm" height="54mm" xmlns="http://www.w3.org/2000/svg"> 
-        <rect id="svg_plateBorder" x="0" y="0" width="90mm" height="54mm" fill="none" stroke="magenta" stroke-width="0.1mm" />
-        <rect x="1.5mm" y="1.5mm" width="87mm" height="51mm" fill="none" stroke="black" stroke-width="0.5mm" />
-        <line x1="10mm" y1="10mm" x2="80mm" y2="10mm" stroke="black" stroke-width="0.3mm"/>
-        <circle cx="5mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
-        <circle cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
-        <circle cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
-        <circle cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
-    </svg>
+ 
+ <svg id="prv_plate" width="600mm" height="600mm" xmlns="http://www.w3.org/2000/svg">
+    <rect id="svg_plateBorder" x="0" y="0" width="90mm" height="54mm" fill="none" stroke="magenta"
+      stroke-width="0.1mm" />
+    <rect id="svg_plateInnerLine" x="1.5mm" y="1.5mm" width="87mm" height="51mm" fill="none" stroke="black"
+      stroke-width="0.5mm" />
+    <rect id="svg_underline" x="10mm" y="10mm" width="70mm" height="0.3mm" fill="black" />
+    <circle id="svg_hole_tl" cx="5mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
+    <circle id="svg_hole_tr" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
+    <circle id="svg_hole_bl" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
+    <circle id="svg_hole_br" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
+    <text id="svg_CompanyName" x="45mm" y="6.5mm" font-size="4mm" letter-spacing="6" word-spacing="7"
+      dominant-baseline="middle" font-weight="bold" text-anchor="middle">ENIGMA GAMING</text>
+    <text id="svg_serialNumber" x="36mm" y="17mm" dominant-baseline="middle">Serial Number:</text>
+    <text id="svg_productionDate" x="36mm" y="23mm" dominant-baseline="middle">Production Date:</text>
+    <text id="svg_product" x="36mm" y="29mm" dominant-baseline="middle">Product:</text>
+    <text id="svg_modelName" x="36mm" y="35mm" dominant-baseline="middle">Model Name:</text>
+    <text id="svg_modelID" x="36mm" y="41mm" dominant-baseline="middle">Model ID:</text>
+    <text id="svg_elecRatings" x="36mm" y="47mm" dominant-baseline="middle">Elec. ratings:</text>
+  </svg>
     
-<!--       'download="circlesandcircles.svg">download SVG</a>
- -->      
+     <script>
+        $(document).ready(function () {
+  
+
+
+        var newrect1 = document.getElementById('svg_plateBorder').cloneNode(true);
+        var newrect2 = document.getElementById('svg_plateInnerLine').cloneNode(true);
+        var newrect3 = document.getElementById('svg_underline').cloneNode(true);
+        var newrect4 = document.getElementById('svg_hole_tl').cloneNode(true);
+        var newrect5 = document.getElementById('svg_hole_tr').cloneNode(true);
+        var newrect6 = document.getElementById('svg_hole_bl').cloneNode(true);
+        var newrect7 = document.getElementById('svg_hole_br').cloneNode(true);
+        var newrect8 = document.getElementById('svg_CompanyName').cloneNode(true);
+        var newrect9 = document.getElementById('svg_serialNumber').cloneNode(true);
+        var newrect10 = document.getElementById('svg_productionDate').cloneNode(true);
+        var newrect11 = document.getElementById('svg_product').cloneNode(true);
+        var newrect12 = document.getElementById('svg_modelName').cloneNode(true);
+        var newrect13 = document.getElementById('svg_modelID').cloneNode(true);
+        var newrect14 = document.getElementById('svg_elecRatings').cloneNode(true);
+
+      
+var hh= $('#svg_plateBorder').width();
+
+var maxNum_width= Math.floor(2267.7165354/hh);
+for(let i=1; i<maxNum_width; i++){
+      document.getElementById('prv_plate').appendChild(newrect1);
+      document.getElementById('prv_plate').appendChild(newrect2);
+      document.getElementById('prv_plate').appendChild(newrect3);
+      document.getElementById('prv_plate').appendChild(newrect4);
+      document.getElementById('prv_plate').appendChild(newrect5);
+      document.getElementById('prv_plate').appendChild(newrect6);
+      document.getElementById('prv_plate').appendChild(newrect7);
+      document.getElementById('prv_plate').appendChild(newrect8);
+      document.getElementById('prv_plate').appendChild(newrect9);
+      document.getElementById('prv_plate').appendChild(newrect10);
+      document.getElementById('prv_plate').appendChild(newrect11);
+      document.getElementById('prv_plate').appendChild(newrect12);
+      document.getElementById('prv_plate').appendChild(newrect13);
+      document.getElementById('prv_plate').appendChild(newrect14);
+
+      newrect1.setAttribute("x", $('#svg_plateBorder').width());
+      newrect1.setAttribute("y", $("#svg_plateBorder").offset().top); 
+      newrect2.setAttribute("x", $('#svg_plateBorder').width()+$("#svg_plateInnerLine").offset().left);
+      newrect2.setAttribute("y", $("#svg_plateBorder").offset().top + $("#svg_plateInnerLine").offset().top); 
+      
+}
+});
+
+   
+     </script>
 </body>
 </html>
