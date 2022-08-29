@@ -88,8 +88,12 @@
         <label for="logo_certifikat">Logo Certifikat:</label>
         <input type="checkbox" id="logo_certifikat" checked />
         <input type="file" id="logo_certifikat_input" accept="image/svg">
+      <br />      <br />
+      <br />
 
         <button type="button" id="previewBtn">PREVIEW</button>
+        <button type="button" id="downloadBtn">DOWNLOAD</button>
+
 
       </div>
 
@@ -120,7 +124,8 @@
     </div>
     <a id="a">
 
-      <svg id="prv_plate" xmlns="http://www.w3.org/2000/svg">
+      <svg id="prv_plate" width ="90mm" height ="54mm" xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
         <rect id="svg_plateBorder" x="0" y="0" fill="none" stroke="magenta" stroke-width="0.2mm" />
         <rect id="svg_plateInnerLine" x="1.5mm" y="1.5mm" fill="none" stroke="black" stroke-width="0.5mm" />
         <rect id="svg_underline" x="10mm" y="10mm" width="70mm" height="0.3mm" fill="black" />
@@ -128,7 +133,8 @@
         <circle id="svg_hole_tr" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
         <circle id="svg_hole_bl" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
         <circle id="svg_hole_br" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
-        <image width="80" height="80" xlink:href=""  />
+        <image id="svg_imgLogo"  />
+        <image id="svg_imgCertificat"  width="20" height="20"  y="20" x="20"/>
         <text id="svg_CompanyName" font-weight="bold" text-anchor="middle">ENIGMA GAMING</text>
         <text id="svg_serialNumber" class="data">Serial Number:</text>
         <text id="svg_productionDate" class="data">Production Date:</text>
