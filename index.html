@@ -14,8 +14,9 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
- 
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+
 
   <title>Enigma serial plate generator</title>
 </head>
@@ -50,8 +51,8 @@
             <option value="12V">12V</option>
             <option value="24V">24V</option>
             <option value="120V">120V</option>
-            <option value="120V">230V</option>
-            <option value="120V">120-230V</option>
+            <option value="230V">230V</option>
+            <option value="120V-230V">120-230V</option>
           </select>
           <input name="displayValueOne" placeholder="Voltage" class="displayValue" id="displayValueOne"
             onfocus="this.select()" type="text">
@@ -88,7 +89,7 @@
         <input type="checkbox" id="logo_certifikat" checked />
         <input type="file" id="logo_certifikat_input" accept="image/svg">
 
-        <button type="button" id="preview">PREVIEW</button>
+        <button type="button" id="previewBtn">PREVIEW</button>
 
       </div>
 
@@ -119,31 +120,30 @@
     </div>
     <a id="a">
 
-    <svg id="prv_plate" width="200mm" height="100mm" xmlns="http://www.w3.org/2000/svg">
-      <rect id="svg_plateBorder" x="0" y="0" width="90mm" height="54mm" fill="none" stroke="magenta"
-        stroke-width="0.1mm" />
-      <rect id="svg_plateInnerLine" x="1.5mm" y="1.5mm" width="87mm" height="51mm" fill="none" stroke="black"
-        stroke-width="0.5mm" />
-      <rect id="svg_underline" x="10mm" y="10mm" width="70mm" height="0.3mm" fill="black" />
-      <circle id="svg_hole_tl" cx="5mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
-      <circle id="svg_hole_tr" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
-      <circle id="svg_hole_bl" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
-      <circle id="svg_hole_br" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1" fill="none" />
-      <text id="svg_CompanyName" x="45mm" y="6.5mm" font-size="4mm" letter-spacing="6" word-spacing="7"
-        dominant-baseline="middle" font-weight="bold" text-anchor="middle">ENIGMA GAMING</text>
-      <text id="svg_serialNumber" x="36mm" y="17mm" dominant-baseline="middle">Serial Number:</text>
-      <text id="svg_productionDate" x="36mm" y="23mm" dominant-baseline="middle">Production Date:</text>
-      <text id="svg_product" x="36mm" y="29mm" dominant-baseline="middle">Product:</text>
-      <text id="svg_modelName" x="36mm" y="35mm" dominant-baseline="middle">Model Name:</text>
-      <text id="svg_modelID" x="36mm" y="41mm" dominant-baseline="middle">Model ID:</text>
-      <text id="svg_elecRatings" x="36mm" y="47mm" dominant-baseline="middle">Elec. ratings:</text>
-    </svg>
-</a>
+      <svg id="prv_plate" xmlns="http://www.w3.org/2000/svg">
+        <rect id="svg_plateBorder" x="0" y="0" fill="none" stroke="magenta" stroke-width="0.2mm" />
+        <rect id="svg_plateInnerLine" x="1.5mm" y="1.5mm" fill="none" stroke="black" stroke-width="0.5mm" />
+        <rect id="svg_underline" x="10mm" y="10mm" width="70mm" height="0.3mm" fill="black" />
+        <circle id="svg_hole_tl" cx="5mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
+        <circle id="svg_hole_tr" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
+        <circle id="svg_hole_bl" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
+        <circle id="svg_hole_br" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
+        <image width="80" height="80" xlink:href=""  />
+        <text id="svg_CompanyName" font-weight="bold" text-anchor="middle">ENIGMA GAMING</text>
+        <text id="svg_serialNumber" class="data">Serial Number:</text>
+        <text id="svg_productionDate" class="data">Production Date:</text>
+        <text id="svg_product" class="data">Product:</text>
+        <text id="svg_modelName" class="data">Model Name:</text>
+        <text id="svg_modelID" class="data">Model ID:</text>
+        <text id="svg_elecRatings" class="data">Elec. ratings:</text>
+        <text id="svg_companyAddress" text-anchor="middle" font-size="2.4mm">ENIGMA GAMING, Vrtine 4, 6276 Pobegi, Slovenia, Europe</text>
+      </svg>
+    </a>
   </section>
-<script>
- 
-</script>
- 
+  <script>
+
+  </script>
+
   <script src="script/script.js"></script>
 </body>
 
