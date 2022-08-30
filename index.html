@@ -29,16 +29,20 @@
         <label for="companyName"><sup>*</sup>Company Name:</label>
         <input type="text" id="companyName" class="companyInfo" value="ENIGMA GAMING" required /><br />
 
-        <label for="serialNumber"><sup>*</sup>Serial Number:</label>
+        <label for="serialNumber"><sup>*</sup>Serial Number: First part</label>
         <input type="text" id="serialNumber" class="companyInfo" maxlength="11" required />
-
+        <label for="serialNumber"><sup>*</sup>(START FROM):</label>
+        <input type="number" id="serialNumberStart" value="1" class="companyInfo" maxlength="11" required />
+        <label for="serialNumber"><sup>*</sup>(UNTIL):</label> <input type="checkbox" id="chk_maxNumPlate">MAX
+        <input type="number" id="serialNumberUntil" class="companyInfo" maxlength="11" required />
         <label for="productionDate"><sup>*</sup>Production Date:</label>
         <input type="text" id="productionDate" class="companyInfo" placeholder="MM/YYYY" />
 
         <label for="productName"><sup>*</sup>Product:</label>
         <input type="text" id="productName" class="companyInfo" required />
 
-        <label for="modelName">Model Name:</label>
+        <label for="modelName" id="lbl_modelName">Model Name:</label><input type="checkbox" id="chk_enableModelName"
+          checked>
         <input type="text" id="modelName" class="companyInfo" />
 
         <label for="modelId"><sup>*</sup>Model ID:</label>
@@ -88,8 +92,8 @@
         <label for="logo_certifikat">Logo Certifikat:</label>
         <input type="checkbox" id="logo_certifikat" checked />
         <input type="file" id="logo_certifikat_input" accept="image/svg">
-      <br />      <br />
-      <br />
+        <br /> <br />
+        <br />
 
         <button type="button" id="previewBtn">PREVIEW</button>
         <button type="button" id="downloadBtn">DOWNLOAD</button>
@@ -115,26 +119,25 @@
       <input type="range" id="plate_height" min="50" max="70" value="54" step="1" onchange="changeHeight(this.value)"
         oninput="this.nextElementSibling.value = this.value">
       <output>54</output><br />
-
-      <!-- <label for="plate_underline">Underline</label>
-      <input type="range" id="plate_underline" min="7" max="12" value="10" step="1"
-        onchange="changeUnderline(this.value)" oninput="this.nextElementSibling.value = this.value">
-      <output>10</output><br /> -->
+      <p>Max num on plate: <span id="displayMaxPlate">66</span></p>  
+      <p style="display:inline-block">Hole size-r:</p>
+      <input type="number" id="hole_size" value="1.75" min="1" max="4" step="0.05"><br />
+      <p style="display:inline-block">Text spacing: </p>
+      <input type="number" id="text_spacing" value="5.6" min="1" max="10" step="0.1"><br />  
+      
 
     </div>
-    <a id="a">
-
-      <svg id="prv_plate" width ="90mm" height ="54mm" xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- <a id="a"> -->
+      <svg id="prv_plate" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 90mm 54mm">
         <rect id="svg_plateBorder" x="0" y="0" fill="none" stroke="magenta" stroke-width="0.2mm" />
         <rect id="svg_plateInnerLine" x="1.5mm" y="1.5mm" fill="none" stroke="black" stroke-width="0.5mm" />
         <rect id="svg_underline" x="10mm" y="10mm" width="70mm" height="0.3mm" fill="black" />
-        <circle id="svg_hole_tl" cx="5mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
-        <circle id="svg_hole_tr" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
-        <circle id="svg_hole_bl" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
-        <circle id="svg_hole_br" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
-        <image id="svg_imgLogo"  />
-        <image id="svg_imgCertificat"  width="20" height="20"  y="20" x="20"/>
+        <circle id="svg_hole_tl" class="hole" cx="5mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
+        <circle id="svg_hole_tr" class="hole" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
+        <circle id="svg_hole_bl" class="hole" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
+        <circle id="svg_hole_br" class="hole" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
+        <image id="svg_imgLogo" />
+        <image id="svg_imgCertificat" />
         <text id="svg_CompanyName" font-weight="bold" text-anchor="middle">ENIGMA GAMING</text>
         <text id="svg_serialNumber" class="data">Serial Number:</text>
         <text id="svg_productionDate" class="data">Production Date:</text>
@@ -142,13 +145,32 @@
         <text id="svg_modelName" class="data">Model Name:</text>
         <text id="svg_modelID" class="data">Model ID:</text>
         <text id="svg_elecRatings" class="data">Elec. ratings:</text>
-        <text id="svg_companyAddress" text-anchor="middle" font-size="2.4mm">ENIGMA GAMING, Vrtine 4, 6276 Pobegi, Slovenia, Europe</text>
-      </svg>
-    </a>
+        <text id="svg_companyAddress" text-anchor="middle" font-size="2.4mm">ENIGMA GAMING, Vrtine 4, 6276 Pobegi,
+          Slovenia, Europe</text>
+        </svg>
+    <!-- </a> -->
+    
+    <button id="btn"></button>
   </section>
-  <script>
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="clone_one">
+      <use xlink:href="#prv_plate" class="plates_final"></use>
+      <use xlink:href="#prv_plate" class="plates_final"></use>
+      <use xlink:href="#prv_plate" class="plates_final"></use>
+      <use xlink:href="#prv_plate" class="plates_final"></use>
+      <use xlink:href="#prv_plate" class="plates_final"></use>
+      <use xlink:href="#prv_plate" class="plates_final"></use>
+      <use xlink:href="#prv_plate" class="plates_final"></use>
+      <use xlink:href="#prv_plate" class="plates_final"></use>
+      <use xlink:href="#prv_plate" class="plates_final"></use>
+      <use xlink:href="#prv_plate" class="plates_final"></use>
+      <use xlink:href="#prv_plate" class="plates_final"></use>
+      <use xlink:href="#prv_plate" class="plates_final"></use>
+      <use xlink:href="#prv_plate" class="plates_final"></use>
+      <use xlink:href="#prv_plate" class="plates_final"></use>
+      <use xlink:href="#prv_plate" class="plates_final"></use>
 
-  </script>
+    </svg> 
+  
 
   <script src="script/script.js"></script>
 </body>

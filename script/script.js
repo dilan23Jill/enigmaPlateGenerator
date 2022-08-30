@@ -25,14 +25,22 @@ document
 
 const defaultUnit = 'mm';
 const defaultWidth = 90;
-const defaultHeight = 54;
+let defaultHeight = 54;
 const defaultFontSize = 4;
 const defaultOffsetInline = 3;
 const defaultOffsetHole = 5;
+const printPageSize = 600;
 
 let textY = 4;
 let textX = 0.3;
-let textSpacing = textY * 1.5;
+let textSpacing = textY * 1.4;
+let maxX = 6;
+let maxY = 11;
+let maxNumPlate = 66;
+let startNum = document.getElementById('serialNumberStart');
+let lastNum = document.getElementById('serialNumberUntil');
+let modelNameFirstPart = '00000000';
+let modelNameComplete;
 
 const textSerialNumber = 'Serial Number: ';
 const textProductionDate = 'Production Date: ';
@@ -41,6 +49,7 @@ const textModelName = 'Model Name: ';
 const textModelID = 'Model ID: ';
 const textElecRatings = 'Elec. ratings: ';
 
+var holes = document.getElementsByClassName('hole');
 var elms = document.getElementsByClassName('data');
 var plateFull = document.getElementById('prv_plate');
 var plateBorder = document.getElementById('svg_plateBorder');
@@ -64,6 +73,19 @@ var imgCertificat = document.getElementById('svg_imgCertificat');
 
 var xlinkNS = 'http://www.w3.org/1999/xlink';
 
+document
+  .querySelector('#logo_certifikat')
+  .addEventListener('change', function () {
+    if (document.getElementById('logo_certifikat').checked == true) {
+      document.getElementById('logo_certifikat_input').disabled = false;
+      imgLogo.setAttribute('y', defaultHeight / 5 + defaultUnit);
+    } else {
+      document.getElementById('logo_certifikat_input').disabled = true;
+      imgLogo.setAttribute('y', defaultHeight / 3 + defaultUnit);
+      imgCertificat.setAttribute('display', 'none');
+    }
+  });
+
 $('#logo_enigma_input').on('change', function () {
   var reader = new FileReader();
   reader.onload = function (e) {
@@ -72,10 +94,10 @@ $('#logo_enigma_input').on('change', function () {
   reader.readAsDataURL(this.files[0]);
 });
 
-imgLogo.setAttribute('width', defaultWidth/5 + defaultUnit);
-imgLogo.setAttribute('height', defaultWidth/5 + defaultUnit);
-imgLogo.setAttribute('x', defaultWidth/25 + defaultUnit);
-imgLogo.setAttribute('y', defaultHeight/5 + defaultUnit);
+imgLogo.setAttribute('width', defaultWidth / 4 + defaultUnit);
+imgLogo.setAttribute('height', defaultWidth / 4 + defaultUnit);
+imgLogo.setAttribute('x', defaultWidth / 25 + defaultUnit);
+imgLogo.setAttribute('y', defaultHeight / 6 + defaultUnit);
 
 $('#logo_certifikat_input').on('change', function () {
   var reader_two = new FileReader();
@@ -85,10 +107,10 @@ $('#logo_certifikat_input').on('change', function () {
   reader_two.readAsDataURL(this.files[0]);
 });
 
-imgCertificat.setAttribute('width', defaultWidth/5 + defaultUnit);
-imgCertificat.setAttribute('height', defaultWidth/5 + defaultUnit);
-imgCertificat.setAttribute('x', defaultWidth/25 + defaultUnit);
-imgCertificat.setAttribute('y', defaultHeight/2 + defaultUnit);
+imgCertificat.setAttribute('width', defaultWidth / 4 + defaultUnit);
+imgCertificat.setAttribute('height', defaultWidth / 4 + defaultUnit);
+imgCertificat.setAttribute('x', defaultWidth / 25 + defaultUnit);
+imgCertificat.setAttribute('y', defaultHeight / 2 + defaultUnit);
 
 plateBorder.setAttribute('width', defaultWidth + defaultUnit);
 plateBorder.setAttribute('height', defaultHeight + defaultUnit);
@@ -96,8 +118,14 @@ plateBorder.setAttribute('height', defaultHeight + defaultUnit);
 plateFull.setAttribute('width', defaultWidth + defaultUnit);
 plateFull.setAttribute('height', defaultHeight + defaultUnit);
 
-innerLine.setAttribute('width', defaultWidth - defaultOffsetInline + defaultUnit);
-innerLine.setAttribute('height', defaultHeight - defaultOffsetInline + defaultUnit);
+innerLine.setAttribute(
+  'width',
+  defaultWidth - defaultOffsetInline + defaultUnit
+);
+innerLine.setAttribute(
+  'height',
+  defaultHeight - defaultOffsetInline + defaultUnit
+);
 
 underLine.setAttribute('x', 2 * defaultOffsetHole + defaultUnit);
 underLine.setAttribute('y', defaultFontSize * 2 + defaultUnit);
@@ -130,16 +158,33 @@ for (var i = 0; i < elms.length; i++) {
 
 function equalizeSvgWidth(val_width) {
   plateFull.setAttribute('width', val_width + defaultUnit);
+  maxX = printPageSize / val_width;
+  maxNumPlate = Math.floor(maxY) * Math.floor(maxX);
+  document.getElementById('displayMaxPlate').innerHTML = maxNumPlate;
+  if (document.getElementById('chk_maxNumPlate').checked == true)
+    lastNum.value = parseInt(maxNumPlate) + parseInt(startNum.value);
 }
+
 function equalizeSvgHeight(val_height) {
   plateFull.setAttribute('height', val_height + defaultUnit);
-
+  maxY = printPageSize / val_height;
+  maxNumPlate = Math.floor(maxY) * Math.floor(maxX);
+  document.getElementById('displayMaxPlate').innerHTML = maxNumPlate;
+  defaultHeight = val_height;
+  if (document.getElementById('chk_maxNumPlate').checked == true)
+    lastNum.value = parseInt(maxNumPlate) + parseInt(startNum.value);
 }
 
 function changeWidth(val_width) {
   plateBorder.setAttribute('width', val_width + defaultUnit);
-  innerLine.setAttribute('width', val_width - defaultOffsetInline + defaultUnit);
-  underLine.setAttribute('width', val_width - 4 * defaultOffsetHole + defaultUnit);
+  innerLine.setAttribute(
+    'width',
+    val_width - defaultOffsetInline + defaultUnit
+  );
+  underLine.setAttribute(
+    'width',
+    val_width - 4 * defaultOffsetHole + defaultUnit
+  );
 
   holeTR.setAttribute('cx', val_width - defaultOffsetHole + defaultUnit);
   holeBR.setAttribute('cx', val_width - defaultOffsetHole + defaultUnit);
@@ -154,27 +199,24 @@ function changeWidth(val_width) {
   companyName.setAttribute('textLength', val_width - 20 + defaultUnit);
   companyAddress.setAttribute('textLength', val_width - 20 + defaultUnit);
 
-  imgLogo.setAttribute('width', val_width/4 + defaultUnit);
-  imgLogo.setAttribute('x', val_width/25 + defaultUnit);
+  imgLogo.setAttribute('width', val_width / 4 + defaultUnit);
+  imgLogo.setAttribute('x', val_width / 25 + defaultUnit);
 
-  imgCertificat.setAttribute('width', val_width/4 + defaultUnit);
-  imgCertificat.setAttribute('x', val_width/25 + defaultUnit);
+  imgCertificat.setAttribute('width', val_width / 4 + defaultUnit);
+  imgCertificat.setAttribute('x', val_width / 25 + defaultUnit);
 
   equalizeSvgWidth(val_width);
 }
 
 function changeHeight(val_height) {
-  plateBorder.setAttribute(
-    'height',
-    val_height + defaultUnit
-  );
+  plateBorder.setAttribute('height', val_height + defaultUnit);
   innerLine.setAttribute(
     'height',
     val_height - defaultOffsetInline + defaultUnit
   );
   holeBL.setAttribute('cy', val_height - defaultOffsetHole + defaultUnit);
   holeBR.setAttribute('cy', val_height - defaultOffsetHole + defaultUnit);
- 
+
   companyAddress.setAttribute(
     'y',
     val_height - 1.4 * defaultOffsetInline + defaultUnit
@@ -188,50 +230,153 @@ function changeHeight(val_height) {
     );
   }
 
-  imgLogo.setAttribute('y', val_height/5 + defaultUnit);
+  imgLogo.setAttribute('y', val_height / 6 + defaultUnit);
 
-  imgCertificat.setAttribute('y', val_height/2 + defaultUnit);
-
+  imgCertificat.setAttribute('y', val_height / 2 + defaultUnit);
 
   equalizeSvgHeight(val_height);
 }
 
 document.getElementById('previewBtn').onclick = function () {
-  companyName.textContent = document.getElementById('companyName').value;
-  companyAddress.textContent = document.getElementById('companyAddress').value;
-  serialNumber.textContent =
-    textSerialNumber + document.getElementById('serialNumber').value;
-  productionDate.textContent =
-    textProductionDate + document.getElementById('productionDate').value;
-  product.textContent =
-    textProduct + document.getElementById('productName').value;
-  modelName.textContent =
-    textModelName + document.getElementById('modelName').value;
-  modelID.textContent = textModelID + document.getElementById('modelId').value;
-  elecRatings.textContent =
-    textElecRatings +
-    document.getElementById('displayValueOne').value +
-    '~' +
-    document.getElementById('displayValueTwo').value +
-    ', ' +
-    document.getElementById('displayValueThree').value +
-    ', ' +
-    document.getElementById('displayValueFour').value;
+  if (lastNum.value - startNum.value > maxNumPlate) {
+    alert('TO moany plates');
+  } else if (lastNum.value - startNum.value <= 0) {
+    alert('Start number cant be higher than last');
+  } else if (lastNum.value < 1 || startNum.value < 1) {
+    alert('Number cant be lower than 1');
+  } else {
+    modelNameComplete = startNum.value + '';
+    modelNameFirstPart = '00000000';
+    for (i = 0; i <= modelNameComplete.length; i++) {
+      modelNameFirstPart = modelNameFirstPart.substring(
+        0,
+        modelNameFirstPart.length - 1
+      );
+    }
+    modelNameComplete =
+      document.getElementById('serialNumber').value +
+      modelNameFirstPart +
+      modelNameComplete;
+
+    companyName.textContent = document.getElementById('companyName').value;
+    companyAddress.textContent =
+      document.getElementById('companyAddress').value;
+    serialNumber.textContent = textSerialNumber + modelNameComplete;
+    productionDate.textContent =
+      textProductionDate + document.getElementById('productionDate').value;
+    product.textContent =
+      textProduct + document.getElementById('productName').value;
+    modelName.textContent =
+      textModelName + document.getElementById('modelName').value;
+    modelID.textContent =
+      textModelID + document.getElementById('modelId').value;
+    elecRatings.textContent =
+      textElecRatings +
+      document.getElementById('displayValueOne').value +
+      '~' +
+      document.getElementById('displayValueTwo').value +
+      ', ' +
+      document.getElementById('displayValueThree').value +
+      'W, ' +
+      document.getElementById('displayValueFour').value +'A';
+  }
 };
 
 document.getElementById('downloadBtn').onclick = function () {
- var svgData = $("#prv_plate")[0].outerHTML;
-  var svgBlob = new Blob([svgData], {type:"image/svg+xml;charset=utf-8"});
+  var svgData = $('#prv_plate')[0].outerHTML;
+  var svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
   var svgUrl = URL.createObjectURL(svgBlob);
   var downloadLink = document.createElement('a');
   downloadLink.href = svgUrl;
-  downloadLink.download = "newitem.svg";
+  downloadLink.download = 'newitem.svg';
   document.body.appendChild(downloadLink);
   downloadLink.click();
-  document.body.removeChild(downloadLink);  
-
+  document.body.removeChild(downloadLink);
 };
 
+document
+  .querySelector('#chk_maxNumPlate')
+  .addEventListener('change', function () {
+    if (document.getElementById('chk_maxNumPlate').checked == true)
+      lastNum.value = parseInt(maxNumPlate) + parseInt(startNum.value);
+  });
 
+document
+  .querySelector('#chk_enableModelName')
+  .addEventListener('change', function () {
+    if (document.getElementById('chk_enableModelName').checked == false) {
+      document.getElementById('modelName').disabled = true;
+      modelName.setAttribute('display', 'none');
+      modelID.setAttribute(
+        'y',
+        defaultHeight / textY + 3 * textSpacing + defaultUnit
+      );
+      elecRatings.setAttribute(
+        'y',
+        defaultHeight / textY + 4 * textSpacing + defaultUnit
+      );
+    } else {
+      document.getElementById('modelName').disabled = false;
+      modelName.style.display = 'block';
+      modelID.setAttribute(
+        'y',
+        defaultHeight / textY + 4 * textSpacing + defaultUnit
+      );
+      elecRatings.setAttribute(
+        'y',
+        defaultHeight / textY + 5 * textSpacing + defaultUnit
+      );
+    }
+  });
 
-  
+document
+  .querySelector('#serialNumberStart')
+  .addEventListener('change', function () {
+    if (document.getElementById('chk_maxNumPlate').checked == true)
+      lastNum.value = parseInt(maxNumPlate) + parseInt(startNum.value);
+  });
+
+document.querySelector('#hole_size').addEventListener('change', function () {
+  for (var i = 0; i < holes.length; i++) {
+    holes[i].setAttribute('r', this.value + 'mm');
+  }
+});
+
+document.querySelector('#text_spacing').addEventListener('change', function () {
+  textSpacing=this.value;
+  for (var i = 0; i < elms.length; i++) {
+     elms[i].setAttribute(
+      'y',
+      defaultHeight / textY + i * textSpacing + defaultUnit
+    );
+  }
+});
+
+document.getElementById("btn").onclick = (evt) => {
+	// grab your svg element
+	const svg = document.querySelector("#prv_plate");
+	// convert to a valid XML source
+	const as_text = new XMLSerializer().serializeToString(svg);
+	// store in a Blob
+	const blob = new Blob([as_text], { type: "image/svg+xml" });
+	// create an URI pointing to that blob
+	const url = URL.createObjectURL(blob);
+	const win = open(url);
+	// so the Garbage Collector can collect the blob
+	win.onload = (evt) => URL.revokeObjectURL(url);
+};
+
+document.getElementById('clone_one').setAttribute('width',"600mm");
+document.getElementById('clone_one').setAttribute('height',"600mm");
+
+var plates_final = document.getElementsByClassName('plates_final');
+var arr_plate = new Array(maxNumPlate);
+let bra = 5;
+
+for (var i = 0; i < maxX; i++) {
+  for(var j=0; j < maxX; j++){
+  plates_final[i].setAttribute('x', defaultWidth * i + defaultUnit);
+  }
+  plates_final[i].setAttribute('y', 60 + defaultUnit);
+
+}
