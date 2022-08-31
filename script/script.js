@@ -115,8 +115,8 @@ imgCertificat.setAttribute('y', defaultHeight / 2 + defaultUnit);
 plateBorder.setAttribute('width', defaultWidth + defaultUnit);
 plateBorder.setAttribute('height', defaultHeight + defaultUnit);
 
-plateFull.setAttribute('width', defaultWidth + defaultUnit);
-plateFull.setAttribute('height', defaultHeight + defaultUnit);
+plateFull.setAttribute('width', 600 + defaultUnit);
+plateFull.setAttribute('height', 600 + defaultUnit);
 
 innerLine.setAttribute(
   'width',
@@ -160,7 +160,6 @@ function equalizeSvgWidth(val_width) {
   defaultWidth = val_width;
   maxY = printPageSize / defaultHeight;
 
-  plateFull.setAttribute('width', val_width + defaultUnit);
   maxX = printPageSize / val_width;
   maxNumPlate = Math.floor(maxY) * Math.floor(maxX);
   document.getElementById('displayMaxPlate').innerHTML = maxNumPlate;
@@ -172,7 +171,6 @@ function equalizeSvgWidth(val_width) {
 function equalizeSvgHeight(val_height) {
   defaultHeight = val_height;
   maxX = printPageSize / defaultWidth;
-  plateFull.setAttribute('height', val_height + defaultUnit);
   maxY = printPageSize / val_height;
   maxNumPlate = Math.floor(maxY) * Math.floor(maxX);
   document.getElementById('displayMaxPlate').innerHTML = maxNumPlate;
@@ -290,16 +288,8 @@ document.getElementById('previewBtn').onclick = function () {
   }
 };
 
-document.getElementById('downloadBtn').onclick = function () {
-  var svgData = $('#clone_one')[0].outerHTML;
-  var svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
-  var svgUrl = URL.createObjectURL(svgBlob);
-  var downloadLink = document.createElement('a');
-  downloadLink.href = svgUrl;
-  downloadLink.download = 'newitem.svg';
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
+document.getElementById('download').onclick = function () {
+  downloadSvg();
 };
 
 document
@@ -360,8 +350,6 @@ document.querySelector('#text_spacing').addEventListener('change', function () {
   }
 });
 
-document.getElementById('clone_one').setAttribute('width', '600mm');
-document.getElementById('clone_one').setAttribute('height', '600mm');
 var plates_final = document.getElementsByClassName('plates_final');
 
 let addup = 1;
@@ -402,5 +390,33 @@ plates_final[0].setAttribute("width", 90+defaultUnit);
 plates_final[0].setAttribute("height", 60+defaultUnit);
 
 } */
+function downloadSvg() {
+  var svg = document.getElementById('bra');
+  var serializer = new XMLSerializer();
+  var source = serializer.serializeToString(svg);
+  source = source.replace(/(\w+)?:?xlink=/g, 'xmlns:xlink='); // Fix root xlink without namespace
 
+  source = source.replace(/ns\d+:href/g, 'xlink:href'); // Safari NS namespace fix.
 
+  if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
+    source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+  }
+  if (!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)) {
+    source = source.replace(
+      /^<svg/,
+      '<svg xmlns:xlink="http://www.w3.org/1999/xlink"'
+    );
+  }
+
+  var preface = '<?xml version="1.0" standalone="no"?>\r\n';
+  var svgBlob = new Blob([preface, source], {
+    type: 'image/svg+xml;charset=utf-8',
+  });
+  var svgUrl = URL.createObjectURL(svgBlob);
+  var downloadLink = document.createElement('a');
+  downloadLink.href = svgUrl;
+  downloadLink.download = name;
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+}

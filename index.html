@@ -17,12 +17,10 @@
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
 
-    
   <title>Enigma serial plate generator</title>
 </head>
 
 <body>
-
   <section id="input_window" class="window">
     <div class="break"></div>
     <form id="parameters">
@@ -125,11 +123,11 @@
       <input type="number" id="hole_size" value="1.75" min="1" max="4" step="0.05"><br />
       <p style="display:inline-block">Text spacing: </p>
       <input type="number" id="text_spacing" value="5.6" min="1" max="10" step="0.1"><br />  
-      
+      <button id="download">BRA</button>
 
-    </div>
-    <!-- <a id="a"> -->
-      <svg id="prv_plate" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 90mm 54mm">
+    </div>  </section>
+<svg width="600mm" height="600mm" id="bra">
+      <svg id="prv_plate" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 90mm 54mm" >
      
         <rect id="svg_plateBorder" x="0" y="0" fill="none" stroke="magenta" stroke-width="0.2mm" />
         <rect id="svg_plateInnerLine" x="1.5mm" y="1.5mm" fill="none" stroke="black" stroke-width="0.5mm" />
@@ -148,15 +146,29 @@
         <text id="svg_modelID" class="data">Model ID:</text>
         <text id="svg_elecRatings" class="data">Elec. ratings:</text>
         <text id="svg_companyAddress" text-anchor="middle" font-size="2.4mm">ENIGMA GAMING, Vrtine 4, 6276 Pobegi,
-          Slovenia, Europe</text></a>
+          Slovenia, Europe</text>
         </svg>
-    <!-- </a> -->
     
-    <button id="btn"></button>
-  </section>
-  <a di="a">
-   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="clone_one">
-    
+    <svg id="prv_plate"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+      <rect id="svg_plateBorder" x="0" y="0" fill="none" stroke="magenta" stroke-width="0.2mm" />
+      <rect id="svg_plateInnerLine" x="1.5mm" y="1.5mm" fill="none" stroke="black" stroke-width="0.5mm" />
+      <rect id="svg_underline" x="10mm" y="10mm" width="70mm" height="0.3mm" fill="black" />
+      <circle id="svg_hole_tl" class="hole" cx="5mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
+      <circle id="svg_hole_tr" class="hole" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
+      <circle id="svg_hole_bl" class="hole" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
+      <circle id="svg_hole_br" class="hole" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
+      <image id="svg_imgLogo" />
+      <image id="svg_imgCertificat" />
+      <text id="svg_CompanyName" font-weight="bold" text-anchor="middle">ENIGMA GAMING</text>
+      <text id="svg_serialNumber" class="data">Serial Number:</text>
+      <text id="svg_productionDate" class="data">Production Date:</text>
+      <text id="svg_product" class="data">Product:</text>
+      <text id="svg_modelName" class="data">Model Name:</text>
+      <text id="svg_modelID" class="data">Model ID:</text>
+      <text id="svg_elecRatings" class="data">Elec. ratings:</text>
+      <text id="svg_companyAddress" text-anchor="middle" font-size="2.4mm">ENIGMA GAMING, Vrtine 4, 6276 Pobegi,
+        Slovenia, Europe</text>  
+         
     <use xlink:href="#prv_plate" class="plates_final"></use>
     <use xlink:href="#prv_plate" class="plates_final"></use>
     <use xlink:href="#prv_plate" class="plates_final"></use>
@@ -243,15 +255,11 @@
     <use xlink:href="#prv_plate" class="plates_final"></use>
     <use xlink:href="#prv_plate" class="plates_final"></use>
     <use xlink:href="#prv_plate" class="plates_final"></use>
-    </svg>  
-<script src="https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.min.js"></script>
-<script src="https://d3js.org/d3.v3.js"></script>
+        </svg>
 
-<svg height="100" width="300">
-  <a id="link_svg">
-    <text x="0" y="50">download file (from SVG)</text>
-  </a>
 </svg>
+
+
   <script src="script/script.js"></script>
 </body>
 
