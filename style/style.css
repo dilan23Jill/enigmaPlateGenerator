@@ -258,4 +258,10 @@ label {
   z-index: 5;
 }
 
+.plates_final {
+  z-index: 10;
+  visibility: visible;
+  fill: black;
+}
+
 /*# sourceMappingURL=style.css.map */
