@@ -165,7 +165,6 @@ function equalizeSvgWidth(val_width) {
   document.getElementById('displayMaxPlate').innerHTML = maxNumPlate;
   if (document.getElementById('chk_maxNumPlate').checked == true)
     lastNum.value = parseInt(maxNumPlate) + parseInt(startNum.value);
-  draw(val_width, defaultHeight);
 }
 
 function equalizeSvgHeight(val_height) {
@@ -177,7 +176,6 @@ function equalizeSvgHeight(val_height) {
   defaultHeight = val_height;
   if (document.getElementById('chk_maxNumPlate').checked == true)
     lastNum.value = parseInt(maxNumPlate) + parseInt(startNum.value);
-  draw(defaultWidth, val_height);
 }
 
 function changeWidth(val_width) {
@@ -257,6 +255,7 @@ document.getElementById('previewBtn').onclick = function () {
         0,
         modelNameFirstPart.length - 1
       );
+
     }
     modelNameComplete =
       document.getElementById('serialNumber').value +
@@ -286,7 +285,8 @@ document.getElementById('previewBtn').onclick = function () {
       document.getElementById('displayValueFour').value +
       'A';
   }
-};
+   draw(defaultWidth, defaultHeight);
+ };
 
 document.getElementById('download').onclick = function () {
   downloadSvg();
@@ -351,45 +351,35 @@ document.querySelector('#text_spacing').addEventListener('change', function () {
 });
 
 var plates_final = document.getElementsByClassName('plates_final');
-
 let addup = 1;
-var x, y, z;
+var x, y;
+let posX, posY;
 
 function draw(width, height) {
+  var numPlate=  document.getElementById('serialNumberUntil').value-document.getElementById('serialNumberStart').value +1;
   var virX = Math.floor(maxX);
   var virY = Math.floor(maxY);
-  /* createUse();
-   */
-  for (z = 0; z < addup; z += 1) {
-    plates_final[z].setAttribute('y', 0 + defaultUnit);
-    plates_final[z].setAttribute('x', 0 + defaultUnit);
-  }
-  addup = 1;
 
   for (x = 0; x < virY; x += 1) {
     for (y = 0; y < virX; y += 1) {
-      plates_final[addup].setAttribute('y', height * x + defaultUnit);
-      plates_final[addup].setAttribute('x', width * y + defaultUnit);
+      if(addup<=numPlate){
+        posX = width * y + defaultUnit;
+        posY = height * x + defaultUnit;        
+        cloneSvg(posX,posY);
+        
       addup++;
     }
   }
+  
+  }
+} 
+function cloneSvg(x,y){
+  var newrect = document.getElementById('prv_plate').cloneNode(true);
+  document.getElementById('bra').appendChild(newrect);
+  newrect.setAttribute("x", x);
+  newrect.setAttribute("y", y);
 }
 
-/* 
-function  createUse(){
-  var xmlns = "http://www.w3.org/2000/svg";   
-  var xlink = 'http://www.w3.org/2000/xlink/namespace/';
-  var Node = document.createElementNS(xmlns,'use'); 
-  Node.setAttributeNS(xlink,'xlink:href','#prv_plate');
-  Node.setAttributeNS(null,'class','plates_final');
-  document.getElementById('clone_one').appendChild(Node);
-
-plates_final[0].setAttribute("x", 40+defaultUnit);
-plates_final[0].setAttribute("y", 40+defaultUnit);
-plates_final[0].setAttribute("width", 90+defaultUnit);
-plates_final[0].setAttribute("height", 60+defaultUnit);
-
-} */
 function downloadSvg() {
   var svg = document.getElementById('bra');
   var serializer = new XMLSerializer();
@@ -420,3 +410,5 @@ function downloadSvg() {
   downloadLink.click();
   document.body.removeChild(downloadLink);
 }
+
+
