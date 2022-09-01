@@ -1,10 +1,5 @@
 $(document).ready(function () {
-  $('#productionDate').datepicker({
-    format: 'mm/yyyy',
-    startView: 'months',
-    minViewMode: 'months',
-  });
-});
+ 
 document
   .querySelector('#selec_elec_one')
   .addEventListener('change', function () {
@@ -248,6 +243,7 @@ document.getElementById('previewBtn').onclick = function () {
   } else if (lastNum.value < 1 || startNum.value < 1) {
     alert('Number cant be lower than 1');
   } else {
+    
     modelNameComplete = startNum.value + '';
     modelNameFirstPart = '00000000';
     for (i = 0; i <= modelNameComplete.length; i++) {
@@ -362,22 +358,25 @@ function draw(width, height) {
 
   for (x = 0; x < virY; x += 1) {
     for (y = 0; y < virX; y += 1) {
-      if(addup<=numPlate){
+      if(addup<numPlate){
         posX = width * y + defaultUnit;
         posY = height * x + defaultUnit;        
-        cloneSvg(posX,posY);
-        
+        cloneSvg(posX, posY, addup);
       addup++;
-    }
+    }        
+
   }
   
   }
 } 
-function cloneSvg(x,y){
+function cloneSvg(x,y,index){
   var newrect = document.getElementById('prv_plate').cloneNode(true);
   document.getElementById('bra').appendChild(newrect);
   newrect.setAttribute("x", x);
   newrect.setAttribute("y", y);
+  if(index>1)
+  document.getElementsByClassName('serial')[index].textContent=textSerialNumber + parseInt(document.getElementById('serialNumberStart').value) + index; 
+ console.log(index);
 }
 
 function downloadSvg() {
@@ -412,3 +411,4 @@ function downloadSvg() {
 }
 
 
+});
