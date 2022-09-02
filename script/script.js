@@ -146,14 +146,11 @@ companyAddress.setAttribute('textLength', defaultWidth - 20 + defaultUnit);
 
 for (var i = 0; i < elms.length; i++) {
   elms[i].setAttribute('x', defaultWidth * textX + defaultUnit);
+  elms[i].setAttribute('font-family', 'Brush Script MT');
+  elms[i].setAttribute('y', defaultHeight / textY + i * textSpacing + defaultUnit);
 }
 
-for (var i = 0; i < elms.length; i++) {
-  elms[i].setAttribute(
-    'y',
-    defaultHeight / textY + i * textSpacing + defaultUnit
-  );
-}
+
 
 function equalizeSvgWidth(val_width) {
   defaultWidth = val_width;
@@ -231,6 +228,7 @@ function changeHeight(val_height) {
       val_height / textY + i * textSpacing + defaultUnit
     );
   }
+  if(document.getElementsByName('chk_enableModelName').checked=false){
   modelID.setAttribute(
     'y',
     val_height / textY + 3 * textSpacing + defaultUnit
@@ -238,7 +236,7 @@ function changeHeight(val_height) {
   elecRatings.setAttribute(
     'y',
     val_height / textY + 4 * textSpacing + defaultUnit
-  );
+  );}
 
   imgLogo.setAttribute('y', val_height / 6 + defaultUnit);
 
@@ -449,16 +447,10 @@ function exitPreview(){
 document.getElementById('downloadPdf').onclick = function () {
   downloadPDF(svg, "bralex");
   };
-
   function downloadPDF(svg, outFileName) {
     let doc = new PDFDocument({compress: false,
       size: [ 1700 , 1700 ]});    
-    let options = {
-      width: 2000,
-      height: 2000
-  };
-
-    SVGtoPDF(doc, svg, 0, 0, options);
+    SVGtoPDF(doc, svg, 0, 0);
     let stream = doc.pipe(blobStream());
     stream.on('finish', () => {
       let blob = stream.toBlob('application/pdf');
