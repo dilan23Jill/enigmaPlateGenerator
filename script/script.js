@@ -1,5 +1,3 @@
-$(document).ready(function () {
- 
 document
   .querySelector('#selec_elec_one')
   .addEventListener('change', function () {
@@ -81,26 +79,34 @@ document
     }
   });
 
-$('#logo_enigma_input').on('change', function () {
-  var reader = new FileReader();
-  reader.onload = function (e) {
-    $('#svg_imgLogo')[0].setAttributeNS(xlinkNS, 'href', e.target.result);
-  };
-  reader.readAsDataURL(this.files[0]);
-});
+document
+  .getElementById('logo_enigma_input')
+  .addEventListener('change', function () {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      document
+        .getElementById('svg_imgLogo')
+        .setAttributeNS(xlinkNS, 'href', e.target.result);
+    };
+    reader.readAsDataURL(this.files[0]);
+  });
 
 imgLogo.setAttribute('width', defaultWidth / 4 + defaultUnit);
 imgLogo.setAttribute('height', defaultWidth / 4 + defaultUnit);
 imgLogo.setAttribute('x', defaultWidth / 25 + defaultUnit);
 imgLogo.setAttribute('y', defaultHeight / 6 + defaultUnit);
 
-$('#logo_certifikat_input').on('change', function () {
-  var reader_two = new FileReader();
-  reader_two.onload = function (e) {
-    $('#svg_imgCertificat')[0].setAttributeNS(xlinkNS, 'href', e.target.result);
-  };
-  reader_two.readAsDataURL(this.files[0]);
-});
+document
+  .getElementById('logo_certifikat_input')
+  .addEventListener('change', function () {
+    var reader_two = new FileReader();
+    reader_two.onload = function (e) {
+      document
+        .getElementById('svg_imgCertificat')
+        .setAttributeNS(xlinkNS, 'href', e.target.result);
+    };
+    reader_two.readAsDataURL(this.files[0]);
+  });
 
 imgCertificat.setAttribute('width', defaultWidth / 4 + defaultUnit);
 imgCertificat.setAttribute('height', defaultWidth / 4 + defaultUnit);
@@ -110,8 +116,8 @@ imgCertificat.setAttribute('y', defaultHeight / 2 + defaultUnit);
 plateBorder.setAttribute('width', defaultWidth + defaultUnit);
 plateBorder.setAttribute('height', defaultHeight + defaultUnit);
 
-plateFull.setAttribute('width', 600 + defaultUnit);
-plateFull.setAttribute('height', 600 + defaultUnit);
+plateFull.setAttribute('width', printPageSize + defaultUnit);
+plateFull.setAttribute('height', printPageSize + defaultUnit);
 
 innerLine.setAttribute(
   'width',
@@ -131,7 +137,6 @@ companyName.setAttribute(
   defaultFontSize + defaultOffsetInline + defaultUnit
 );
 companyName.setAttribute('textLength', defaultWidth - 20 + defaultUnit);
-
 companyAddress.setAttribute('x', defaultWidth / 2 + defaultUnit);
 companyAddress.setAttribute(
   'y',
@@ -144,8 +149,7 @@ for (var i = 0; i < elms.length; i++) {
 }
 
 for (var i = 0; i < elms.length; i++) {
-  /*   elms[i].setAttribute('dominant-baseline', "middle");
-   */ elms[i].setAttribute(
+  elms[i].setAttribute(
     'y',
     defaultHeight / textY + i * textSpacing + defaultUnit
   );
@@ -154,7 +158,6 @@ for (var i = 0; i < elms.length; i++) {
 function equalizeSvgWidth(val_width) {
   defaultWidth = val_width;
   maxY = printPageSize / defaultHeight;
-
   maxX = printPageSize / val_width;
   maxNumPlate = Math.floor(maxY) * Math.floor(maxX);
   document.getElementById('displayMaxPlate').innerHTML = maxNumPlate;
@@ -170,7 +173,7 @@ function equalizeSvgHeight(val_height) {
   document.getElementById('displayMaxPlate').innerHTML = maxNumPlate;
   defaultHeight = val_height;
   if (document.getElementById('chk_maxNumPlate').checked == true)
-    lastNum.value = parseInt(maxNumPlate) + parseInt(startNum.value);
+    lastNum.value = parseInt(maxNumPlate) + parseInt(startNum.value) - 1;
 }
 
 function changeWidth(val_width) {
@@ -191,7 +194,7 @@ function changeWidth(val_width) {
   companyAddress.setAttribute('x', val_width / 2 + defaultUnit);
 
   for (var i = 0; i < elms.length; i++) {
-    elms[i].setAttribute('x', val_width * textX + defaultUnit);
+    elms[i].setAttributeNS(null, 'x', val_width * textX + defaultUnit);
   }
 
   companyName.setAttribute('textLength', val_width - 20 + defaultUnit);
@@ -222,11 +225,20 @@ function changeHeight(val_height) {
 
   for (var i = 0; i < elms.length; i++) {
     textSpacing = val_height / 9;
-    elms[i].setAttribute(
+    elms[i].setAttributeNS(
+      null,
       'y',
       val_height / textY + i * textSpacing + defaultUnit
     );
   }
+  modelID.setAttribute(
+    'y',
+    val_height / textY + 3 * textSpacing + defaultUnit
+  );
+  elecRatings.setAttribute(
+    'y',
+    val_height / textY + 4 * textSpacing + defaultUnit
+  );
 
   imgLogo.setAttribute('y', val_height / 6 + defaultUnit);
 
@@ -236,23 +248,27 @@ function changeHeight(val_height) {
 }
 
 document.getElementById('previewBtn').onclick = function () {
-  if (lastNum.value - startNum.value > maxNumPlate) {
+/*   document.getElementById('bwp').style.display = "block";
+ */  if (lastNum.value - startNum.value > maxNumPlate) {
     alert('TO moany plates');
   } else if (lastNum.value - startNum.value <= 0) {
     alert('Start number cant be higher than last');
   } else if (lastNum.value < 1 || startNum.value < 1) {
     alert('Number cant be lower than 1');
   } else {
-    
     modelNameComplete = startNum.value + '';
-    modelNameFirstPart = '00000000';
+    modelNameFirstPart = '0000000';
     for (i = 0; i <= modelNameComplete.length; i++) {
       modelNameFirstPart = modelNameFirstPart.substring(
         0,
         modelNameFirstPart.length - 1
       );
-
     }
+
+    var dateP = document.getElementById('productionDate').value;
+    dateP = dateP.split('-');
+    var dateFinal = dateP[1] + '/' + dateP[0];
+
     modelNameComplete =
       document.getElementById('serialNumber').value +
       modelNameFirstPart +
@@ -262,8 +278,7 @@ document.getElementById('previewBtn').onclick = function () {
     companyAddress.textContent =
       document.getElementById('companyAddress').value;
     serialNumber.textContent = textSerialNumber + modelNameComplete;
-    productionDate.textContent =
-      textProductionDate + document.getElementById('productionDate').value;
+    productionDate.textContent = textProductionDate + dateFinal;
     product.textContent =
       textProduct + document.getElementById('productName').value;
     modelName.textContent =
@@ -281,8 +296,8 @@ document.getElementById('previewBtn').onclick = function () {
       document.getElementById('displayValueFour').value +
       'A';
   }
-   draw(defaultWidth, defaultHeight);
- };
+  draw(defaultWidth, defaultHeight);
+};
 
 document.getElementById('download').onclick = function () {
   downloadSvg();
@@ -292,7 +307,7 @@ document
   .querySelector('#chk_maxNumPlate')
   .addEventListener('change', function () {
     if (document.getElementById('chk_maxNumPlate').checked == true)
-      lastNum.value = parseInt(maxNumPlate) + parseInt(startNum.value);
+      lastNum.value = parseInt(maxNumPlate) + parseInt(startNum.value) - 1;
   });
 
 document
@@ -311,7 +326,8 @@ document
       );
     } else {
       document.getElementById('modelName').disabled = false;
-      modelName.style.display = 'block';
+      modelName.setAttribute('display', 'block');
+
       modelID.setAttribute(
         'y',
         defaultHeight / textY + 4 * textSpacing + defaultUnit
@@ -326,8 +342,18 @@ document
 document
   .querySelector('#serialNumberStart')
   .addEventListener('change', function () {
-    if (document.getElementById('chk_maxNumPlate').checked == true)
-      lastNum.value = parseInt(maxNumPlate) + parseInt(startNum.value);
+    if (document.getElementById('chk_maxNumPlate').checked == true) {
+      lastNum.value = parseInt(maxNumPlate) + parseInt(startNum.value) - 1;
+    }
+  });
+document
+  .querySelector('#chk_maxNumPlate')
+  .addEventListener('change', function () {
+    if (document.getElementById('chk_maxNumPlate').checked == true) {
+      document.getElementById('serialNumberUntil').disabled = true;
+    } else {
+      document.getElementById('serialNumberUntil').disabled = false;
+    }
   });
 
 document.querySelector('#hole_size').addEventListener('change', function () {
@@ -339,7 +365,7 @@ document.querySelector('#hole_size').addEventListener('change', function () {
 document.querySelector('#text_spacing').addEventListener('change', function () {
   textSpacing = this.value;
   for (var i = 0; i < elms.length; i++) {
-    elms[i].setAttribute(
+    elms[i].setAttributeNS(null,
       'y',
       defaultHeight / textY + i * textSpacing + defaultUnit
     );
@@ -347,36 +373,39 @@ document.querySelector('#text_spacing').addEventListener('change', function () {
 });
 
 var plates_final = document.getElementsByClassName('plates_final');
-let addup = 1;
+let addup = 0;
 var x, y;
 let posX, posY;
+document.getElementsByClassName('serial')[0].setAttribute = ('display', 'none');
 
 function draw(width, height) {
-  var numPlate=  document.getElementById('serialNumberUntil').value-document.getElementById('serialNumberStart').value +1;
+  var numPlate =
+    document.getElementById('serialNumberUntil').value -
+    document.getElementById('serialNumberStart').value + 1;
   var virX = Math.floor(maxX);
   var virY = Math.floor(maxY);
 
   for (x = 0; x < virY; x += 1) {
     for (y = 0; y < virX; y += 1) {
-      if(addup<numPlate){
+      if (addup < numPlate) {
         posX = width * y + defaultUnit;
-        posY = height * x + defaultUnit;        
+        posY = height * x + defaultUnit;
         cloneSvg(posX, posY, addup);
-      addup++;
-    }        
-
+        addup++;
+      }
+    }
   }
-  
+}
+function cloneSvg(x, y, index) {
+  if (index > 0) {
+    var newrect = document.getElementById('prv_plate').cloneNode(true);
+    document.getElementById('bra').appendChild(newrect);
+    newrect.setAttribute('x', x);
+    newrect.setAttribute('y', y);
+     var NextNum =
+      parseInt(document.getElementById('serialNumberStart').value) + index;
+    document.querySelectorAll('.serial')[index].textContent = textSerialNumber + document.getElementById('serialNumber').value + modelNameFirstPart + NextNum; 
   }
-} 
-function cloneSvg(x,y,index){
-  var newrect = document.getElementById('prv_plate').cloneNode(true);
-  document.getElementById('bra').appendChild(newrect);
-  newrect.setAttribute("x", x);
-  newrect.setAttribute("y", y);
-  if(index>1)
-  document.getElementsByClassName('serial')[index].textContent=textSerialNumber + parseInt(document.getElementById('serialNumberStart').value) + index; 
- console.log(index);
 }
 
 function downloadSvg() {
@@ -410,5 +439,6 @@ function downloadSvg() {
   document.body.removeChild(downloadLink);
 }
 
-
-});
+function exitPreview(){
+  document.getElementById('bwp').style.display = "none";
+}

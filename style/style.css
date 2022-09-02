@@ -64,8 +64,17 @@ sup {
   width: 5em;
 }
 
-#productionDate {
+#companyAddress {
+  width: 30em;
+}
+
+#serialNumber {
   width: 7em;
+  resize: both;
+}
+
+#productionDate {
+  width: 9em;
 }
 
 #display_logo_enigma, #display_logo_certifikat {
@@ -130,6 +139,24 @@ sup {
   line-height: 20px;
   margin: 0;
   padding: 0;
+}
+
+.previewWinow {
+  height: 600mm;
+  width: 600mm;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: white;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+#exit {
+  float: right;
+  width: 5em;
+  height: 3em;
 }
 
 /*# sourceMappingURL=style.css.map */
