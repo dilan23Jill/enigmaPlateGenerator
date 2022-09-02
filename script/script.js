@@ -303,6 +303,8 @@ document.getElementById('download').onclick = function () {
   downloadSvg();
 };
 
+
+
 document
   .querySelector('#chk_maxNumPlate')
   .addEventListener('change', function () {
@@ -407,9 +409,9 @@ function cloneSvg(x, y, index) {
     document.querySelectorAll('.serial')[index].textContent = textSerialNumber + document.getElementById('serialNumber').value + modelNameFirstPart + NextNum; 
   }
 }
-
+ var svg = document.getElementById('bra');
 function downloadSvg() {
-  var svg = document.getElementById('bra');
+ 
   var serializer = new XMLSerializer();
   var source = serializer.serializeToString(svg);
   source = source.replace(/(\w+)?:?xlink=/g, 'xmlns:xlink='); // Fix root xlink without namespace
@@ -441,4 +443,29 @@ function downloadSvg() {
 
 function exitPreview(){
   document.getElementById('bwp').style.display = "none";
+}
+
+
+document.getElementById('downloadPdf').onclick = function () {
+  downloadPDF(svg, "bralex");
+  };
+
+  function downloadPDF(svg, outFileName) {
+    let doc = new PDFDocument({compress: false,
+      size: [ 1700 , 1700 ]});    
+    let options = {
+      width: 2000,
+      height: 2000
+  };
+
+    SVGtoPDF(doc, svg, 0, 0, options);
+    let stream = doc.pipe(blobStream());
+    stream.on('finish', () => {
+      let blob = stream.toBlob('application/pdf');
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = outFileName + ".pdf";
+      link.click();
+    });
+    doc.end();
 }
