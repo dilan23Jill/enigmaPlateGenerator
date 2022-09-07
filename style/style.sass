@@ -1,145 +1,257 @@
-$hole-edge_offset: 15px
-$border-edge_offset: 96%
-$hole_size: 17.5px
-
 body, html
     height: 100vh
     width: 100vw
     margin: 0
     padding: 0
 
+body
+    background: url(/img/wallpaper.png)
+    background-size: cover
+    background-repeat: no-repeat
+
+    font-family: 'Montserrat', sans-serif !important
+    font-weight: 400
+
 *
     box-sizing: border-box
-    font-family: montserrat
 
 #ctrForm
     position: absolute
     left: 50%
     top: 50%
     transform: translate(-50%, -50%)
-    width: max-content
-    height: min-content
-    padding: 2em
-    background-color: lightblue
-
-.title_tab
-    display: flex
-    justify-content: center
-    padding-bottom: 5em
-
-#imgEnigma
-    width: 6em
-    height: 4em
+    width: 50%
+    height: 100%
+    background: linear-gradient(#e66465, #FFA75C)
+    overflow-y: scroll
+    scroll-behavior: smooth
+    min-width: 450px
 
 #title
-    display: inline-block
-    color: black
-    margin-right: 10em
-    margin-left: 8em
-
-.input_tab
-    width: max-content
-    height: min-content
-
-sup
-    color: red
-
-.companyInfo
     text-align: center
+    font-size: 3em
+    letter-spacing: .3em
+    word-spacing: .6em
+    margin-bottom: 2em
 
 .window
-    width: max-content
+    width: 50%
+    display: inline-grid
+    place-items: center
+    height: max-content
+    padding-top: 1em
+    padding-bottom: 2em
+
+.window_full
+    width: 100%
+    display: inline-grid
+    place-items: center
     height: min-content
-    display: flex
-    justify-content: space-between
+    padding-top: 1em
+
+.wPlateSize, #fileWindow, .wPlateInfoRight
+    float: right
+
+input, select
+    border-right: none
+    border-top: none
+    border-left: none
+    background-color: transparent
+    outline: none
+    color: white
+    caret-color: white
+    text-align: center
+    color: black
+    width: 15em
+
+input::placeholder
+    font-weight: 600
+
+.inputInfo
+    margin-bottom: 2.5em
+    cursor: pointer
+
+.inputInfoBtn
+    margin-bottom: 2.5em
+    cursor: pointer
+
+#textListSize
+    margin-bottom: 2em
+
+.fileInput
+    display: none
+
+.btnFile
+    width: 15em
+    border: none
+    outline: none
+    border-radius: 6px
+
+.btnFile:hover
+    background: black
+    color: white
+
+.wMoreSettings
+    display: none
+    margin-top: 2em
+    padding: 0
+    width: 100%
+    height: max-content
+
+#plateChkMaxNum
+    position: relative
+    left: -10em
+    top: -4.5em
+    width: 2em
+    cursor: pointer
+    outline: none
+    filter: invert(100%) hue-rotate(18deg) brightness(1.7)
+
+#plateProductionDate
+    position: relative
+    top: -1.55em
+
+#btnMoreSettings, #btnClear
+    text-align: center
+    width: 8em
+    height: 3em
+    margin-bottom: 4em
+    cursor: pointer
+    border: none
+    border-radius: 6px
+    top: 2em
     margin-top: 2em
 
-.SNcount
-    width: 5em
+#btnMoreSettings:hover, #btnPreview:hover, #btnClear:hover
+    color: white
+    background-color: black
 
-#companyAddress
-    width: 30em
-
-#serialNumber
-    width: 7em
-    resize: both
-
-#productionDate
-    width: 9em
-
-#display_logo_enigma, #display_logo_certifikat
-    height: 50%
-    width: 80%
-    background-position: center
-    background-size: contain
-    background-repeat: no-repeat
-    visibility: hidden
-
-.drop_text_elec
-    position: relative
-    right: 4em
-    display: inline-block
-    height: 2em
-    border: 0
-    padding: 0
-    margin: 0
-
-.displayValue
+#btnPreview
     text-align: center
-    position: absolute
-    top: 0px
-    left: 0px
-    width: 5.5em
-    height: 2em
-    border: 1px solid #A9A9A9
+    width: 8em
+    height: 3em
+    cursor: pointer
+    border: none
+    border-radius: 6px
 
-#displayValueThree
-    width: 7em
-    display: inline-block
-
-#displayValueFour
-    width: 7em
-    display: inline-block
-
-.drop_text_elec
+.endBtn
+    height: max-content
+    width: min-content
     position: relative
-    right: 4em
-    display: inline-block
-    height: 2em
-    border: 0
-    padding: 0
-    margin: 0
+    left: 50%
+    transform: translateX(-50%)
 
-.drop_text_elec:nth-of-type(2)
-    margin-left: 8em
+.presetWindow
+    position: fixed
+    left: -13%
+    top: 0
+    width: 20%
+    height: 100%
+    transition: left .3s ease-out
+    min-width: 200px
 
-.ElecRatingsGroup
+#preOne
+    margin-top: 20%
+
+.preset
+    width: 60%
+    height: 5em
+    background: white
+    position: relative
+    left: 50%
+    transform: translateX(-50%)
+    border-radius: 12px
+    margin-bottom: 3em
+    display: grid
+    place-items: center
+    cursor: pointer
+    transition: .3s ease-out
+
+
+.preset:hover
+    color: white
+    background: #e66465
+
+.extand
+    width: 100%
+    background-color: #e66465
+
+.toggleWindow
+    background-color: #e66465
+    width: 30%
+    height: max-content
+    position: relative
+    left: 60%
+    cursor: pointer
+    display: grid
+    place-items: center
+    border-radius: 0 0 6px 6px
+
+#arrowExchange
+    width: 4em
+    height: 4em
+
+.numPreset
     position: absolute
-    top: 0px
-    left: 0px
-    width: 7em
-    height: 1.5em
-    line-height: 20px
-    margin: 0
-    padding: 0
+    right: 1em
 
-.previewWinow
-    height: 600mm
-    width: 600mm
+.designWindow
+    position: fixed
+    right: -18%
+    top: 0
+    width: 20%
+    height: 100%
+    transition: right .3s ease-out
+    min-width: 200px
+
+
+#togglePresetBtn
+    left: 70%
+
+.design
+    width: 60%
+    height: fit-content
+    background: white
+    position: relative
+    left: 50%
+    transform: translateX(-50%)
+    border-radius: 6px
+    margin-bottom: 3em
+    display: grid
+    place-items: center
+    cursor: pointer
+    transition: .3s ease-out
+
+.design:hover
+    width: 80%
+    background-color: #e66465
+
+#desOne
+    margin-top: 20%
+
+.prvImg
+    width: 100%
+    padding: 1em
+
+#btnClear
+    position: relative
+    left: 80%
+
+.listBack
+    width: 100%
+    height: 100%
     position: absolute
     top: 50%
     left: 50%
-    background-color: white
-    z-index: 5
     transform: translate(-50%, -50%)
+    background: white
+    z-index: 10
+    border-radius: 12px
     display: none
 
-#exit
-    float: right
-    width: 5em
-    height: 3em
+.openView
+    display: block
 
 
 
-   
-        
+
