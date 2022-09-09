@@ -121,7 +121,8 @@ var drpFontFamily = document.getElementById('wPlateSlcFont')
 var defaultFontSize = 4
 var defaultOffsetInline = 3
 var defaultOffsetHole = 5
-var valTextSpacing = 9
+var defaultHoleDiameter = 1.75
+var defaultTextSpacing = 9
 
 //fixed declaration
 const defaultUnit = 'mm';
@@ -155,16 +156,12 @@ document.getElementById('preOne').onclick = function () {
 };
 
 //more settings values
-var moreHoleDiameter = document.getElementById('numHoleDiameter')
 var moreTextSpacing = document.getElementById('numTextSpacing')
-var moreCutSize = document.getElementById('numCutSize')
 var moreLaserLine = document.getElementById('numLaserLines')
 var moreBRInner = document.getElementById('numBorderRadiusInner')
 var moreBRoutter = document.getElementById('numBorderRadiusOutter')
-
 var moreSettings = document.getElementsByClassName('moreSettings')
-
-
+var moreTextSize = document.getElementById('numTextSize')
 
 //svg elements dec
 var list = document.getElementById('list')
@@ -194,7 +191,7 @@ var xlinkNS = 'http://www.w3.org/1999/xlink'
 
 var textY = 4
 var textX = 0.3
-var textSpacing = numPlateHeight.value / 9
+var textSpacing = numPlateHeight.value / defaultTextSpacing
 var textSize = numPlateWidth.value / 30
 var maxX = Math.floor(numListWidth.value / numPlateWidth.value)
 var maxY = Math.floor(numListHeight.value / numPlateHeight.value)
@@ -202,7 +199,6 @@ var maxList = maxX * maxY
 var nextNum = 0
 var mNameString = '0000000'
 var dateP = dateProductionDate.value
-
 
 
 //preview and fill svg onclick on design
@@ -272,8 +268,41 @@ document.getElementById('desOne').onclick = function () {
   }
   dateProductionDate = dateP[1] + '/' + dateP[0]
 
- 
+    //more settings apply
 
+
+
+  if(numHoleDiameter.value != ''){
+    for(let x=0; x < holes.length; x++){
+      holes[x].setAttribute('r', numHoleDiameter.value + defaultUnit)
+    }
+  }else{
+    for(let x=0; x < holes.length; x++){
+      holes[x].setAttribute('r', defaultHoleDiameter + defaultUnit)
+    }
+  }
+
+  if(moreTextSpacing.value != ''){
+      textSpacing = numPlateHeight.value / moreTextSpacing.value
+  }else textSpacing = numPlateHeight.value / defaultTextSpacing
+
+  if(moreLaserLine.value != ''){
+    innerLine.setAttribute('stroke-width', moreLaserLine.value + defaultUnit)
+  }else innerLine.setAttribute('stroke-width', 0.2 + defaultUnit)
+
+  if(moreBRInner.value != ''){
+    innerLine.setAttribute('rx', moreBRInner.value)
+  }else innerLine.setAttribute('rx', 8)
+
+  if(moreBRoutter.value != ''){
+    plateBorder.setAttribute('rx', moreBRoutter.value)
+  }else plateBorder.setAttribute('rx', 10)
+  
+  if(moreTextSize.value != ''){
+      textSize = numPlateWidth.value/moreTextSize.value
+  }else textSize = numPlateWidth.value / 30
+
+  
   //position of elements
   list.setAttribute('width', numListWidth.value + defaultUnit);
   list.setAttribute('height', numListHeight.value + defaultUnit);
@@ -315,7 +344,9 @@ document.getElementById('desOne').onclick = function () {
   } else {
     modelName.classList.add('data')
     modelName.setAttribute('display', 'block')
-  }
+  } 
+  
+
   for (let i = 0; i < elms.length; i++) {
     elms[i].setAttributeNS(null, 'x', numPlateWidth.value * textX + defaultUnit)
     elms[i].setAttributeNS(null, 'font-size', textSize + defaultUnit)
@@ -336,9 +367,7 @@ document.getElementById('desOne').onclick = function () {
   modelID.textContent = preValueModelID + textModelID.value
   elecRatings.textContent = preValueElecRatings + drpVoltage.value + '~' + drpFrequency.value + ', ' + numWattage.value + 'W, ' + numElCurrent.value + 'A'
 
-  //more settings
-  textSize = numPlateWidth.value / 30
-  textSpacing = numPlateHeight.value / valTextSpacing
+
 
   openWin()
 };
@@ -383,8 +412,6 @@ function cloneSvg(x, y, index) {
   nextNum = parseInt(numFirstNum.value) + index
   serialNumber.textContent = preValueSerialNumber + textSNIdentifier.value + mNameString + nextNum
 };
-
-
 //downloadsvg
 
 document.getElementById('svgDownload').onclick = function () {
@@ -416,7 +443,6 @@ document.getElementById('svgDownload').onclick = function () {
   downloadLink.click();
   document.body.removeChild(downloadLink);
 };
-
 
 //download pdf
 

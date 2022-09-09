@@ -42,9 +42,7 @@
     </svg>
     
 </svg>    
-<button class="menuBtn" id="exitView">EXIT VIEW</button>
-<button class="menuBtn" id="svgDownload">DOWNLOAD SVG</button>
-<button class="menuBtn" id="pdfDownload">DOWNLOAD PDF</button>
+
 </div>   
 
   <div class="designWindow" id="designWindow">
@@ -54,6 +52,8 @@
     </div>
    <div class="design" id="desTwo" >DESIGN 2</div>
    <div class="design" id="desThree" >DESIGN 3</div>
+   <button class="menuBtn" id="svgDownload">DOWNLOAD SVG</button><br />
+<button class="menuBtn" id="pdfDownload">DOWNLOAD PDF</button>
   </div>
   <div class="presetWindow" id="presetWindow">
     <div class="toggleWindow" id="togglePresetBtn">
@@ -90,15 +90,11 @@
     </div>
     <div class="wPlateInfoRight window">
 <input type="text" id="plateSNIdentifier" placeholder="S.N Identifier:*" class="inputInfo" title="Serial Number Identifier"/>
-<input type="number" id="plateFirstNum" min="1" placeholder="First Number:" class="inputInfo" accept="image/png, image/svg"/>
+<input type="number" id="plateFirstNum" min="1" placeholder="First Number:" class="inputInfo"/>
 <input type="number" id="plateLastNum" min="2" placeholder="Last Number:" class="inputInfo"/>
 <input type="checkbox" id="plateChkMaxNum" class="numChange">
 <input type="text" id="plateProductionDate" placeholder="Production Date:*" class="inputInfo" title="Production Date" onfocus="(this.type='date')"/>
-
-
 </div>
-
-
 <div class="wPlateInfo window">
   <b id="textListSize">ELECTRIC RATINGS:</b>
   <select name="font" id="plateVoltage" title="Voltage" class="inputInfo">
@@ -122,7 +118,7 @@
 <div class="wPlateInfo window" id="fileWindow">
   <b id="textListSize">IMAGE:</b>  
 
-  <input type="file" id="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput"/>
+  <input type="file" id="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" accept="image/png, image/svg"/>
   <button id="plateImgLogoFake" class="inputInfoBtn btnFile" title="Logo Image">LOGO</button>
   <span id="plateImgLogoFilename"></span>
 
@@ -132,8 +128,8 @@
 </div>
 <button id="btnClear">Clear</button>
 <div class="endBtn">
-<button id="btnPreview">PREVIEW</button><br/>
-<button id="btnMoreSettings">MORE</button>
+<button id="btnPreview" class="inputInfoBtn">PREVIEW</button><br/>
+<button id="btnMoreSettings" class="inputInfoBtn">MORE</button>
 </div>
 <div class="wMoreSettings" id="wMoreSettings" >
   <div class="wPlateInfo window_full moreOpt">
@@ -146,10 +142,10 @@
     </select>
   <input type="number" id="numHoleDiameter" placeholder="Hole Diameter (val.: 1.75)" class="inputInfo moreSettings" title="Hole Diameter" min="0" step="0.01" maxlength="2" />
   <input type="number" id="numTextSpacing" placeholder="Text Spacing (val.: 9)" class="inputInfo moreSettings" title="Text Spacing" min="0" step="0.1" maxlength="3" />
-  <input type="number" id="numCutSize" placeholder="Cut Lines Width (val.: 0.2)" class="inputInfo moreSettings" title="Cut Lines Width" min="0"  step="0.01" maxlength="2" />
   <input type="number" id="numLaserLines" placeholder="Laser Lines Width (val.: 0.5)" class="inputInfo moreSettings" title="Laser Lines Width" min="0" step="0.01" maxlength="2" />
   <input type="number" id="numBorderRadiusInner" placeholder="Border Radius Inner (val.: 8)" class="inputInfo moreSettings" title="Border Radius Inner" min="0" step="1" maxlength="3" />
   <input type="number" id="numBorderRadiusOutter" placeholder="Border Radius Outter(val.: 10)" class="inputInfo moreSettings" title="Border Radius Outter" min="0" step="1" maxlength="3" />
+  <input type="number" id="numTextSize" placeholder="Text Size(val.: 30)" class="inputInfo moreSettings" title="Text Size" min="0" step="1" maxlength="3" />
 
   </div>
 </div>
