@@ -121,6 +121,7 @@ var drpFontFamily = document.getElementById('wPlateSlcFont')
 var defaultFontSize = 4
 var defaultOffsetInline = 3
 var defaultOffsetHole = 5
+var valTextSpacing = 9
 
 //fixed declaration
 const defaultUnit = 'mm';
@@ -152,6 +153,18 @@ document.getElementById('preOne').onclick = function () {
   numFirstNum.value = '1'
   numLastNum.value = '10'
 };
+
+//more settings values
+var moreHoleDiameter = document.getElementById('numHoleDiameter')
+var moreTextSpacing = document.getElementById('numTextSpacing')
+var moreCutSize = document.getElementById('numCutSize')
+var moreLaserLine = document.getElementById('numLaserLines')
+var moreBRInner = document.getElementById('numBorderRadiusInner')
+var moreBRoutter = document.getElementById('numBorderRadiusOutter')
+
+var moreSettings = document.getElementsByClassName('moreSettings')
+
+
 
 //svg elements dec
 var list = document.getElementById('list')
@@ -225,22 +238,45 @@ for (var i = 0; i < anchors.length; i++) {
 }
 
 document.getElementById('desOne').onclick = function () {
+  numListWidth = document.getElementById('listWidth')
+  numListHeight = document.getElementById('listHeight')
+  numPlateWidth = document.getElementById('plateWidth')
+  numPlateHeight = document.getElementById('plateHeight')
+  textCName = document.getElementById('plateCName')
+  textCAddress = document.getElementById('plateCAddress')
+  textProduct = document.getElementById('plateProduct')
+  textModelName = document.getElementById('plateModelName')
+  textModelID = document.getElementById('plateModelID')
+  drpVoltage = document.getElementById('plateVoltage')
+  drpFrequency = document.getElementById('plateFrequency')
+  numWattage = document.getElementById('plateWattage')
+  numElCurrent = document.getElementById('plateElCurrent')
+  ImgLogo = document.getElementById('plateImgLogo')
+  ImgCertificat = document.getElementById('plateImgCertificat')
+  textSNIdentifier = document.getElementById('plateSNIdentifier')
+  numFirstNum = document.getElementById('plateFirstNum')
+  numLastNum = document.getElementById('plateLastNum')
+  dateProductionDate = document.getElementById('plateProductionDate')
+  numHoleDiameter = document.getElementById('numHoleDiameter')
+  drpFontFamily = document.getElementById('wPlateSlcFont')
+
   if (numLastNum.value - numFirstNum.value > maxList) {
     alert("check num plate")
     return
   }
 
-  if(dateP.includes('/')){
+  if (dateP.includes('/')) {
     dateP = dateP.split('/')
-  }else if(dateP.includes('-')){
+  } else if (dateP.includes('-')) {
     dateP = dateP.split('-')
   }
   dateProductionDate = dateP[1] + '/' + dateP[0]
 
-  textSize = numPlateWidth.value / 30
-  textSpacing = numPlateHeight.value / 9
+ 
 
   //position of elements
+  list.setAttribute('width', numListWidth.value + defaultUnit);
+  list.setAttribute('height', numListHeight.value + defaultUnit);
   plateBorder.setAttribute('width', numPlateWidth.value + defaultUnit);
   plateBorder.setAttribute('height', numPlateHeight.value + defaultUnit);
   plateFull.setAttribute('height', numPlateHeight.value + defaultUnit)
@@ -294,64 +330,60 @@ document.getElementById('desOne').onclick = function () {
   companyName.textContent = textCName.value
   companyAddress.textContent = textCAddress.value
   product.textContent = preValueProduct + textProduct.value
-  serialNumber.textContent = preValueSerialNumber + textSNIdentifier.value
+  serialNumber.textContent = preValueSerialNumber + textSNIdentifier.value + mNameString + parseInt(numFirstNum.value)
   productionDate.textContent = preValueProductionDate + dateProductionDate
   modelName.textContent = preValueModelName + textModelName.value
   modelID.textContent = preValueModelID + textModelID.value
   elecRatings.textContent = preValueElecRatings + drpVoltage.value + '~' + drpFrequency.value + ', ' + numWattage.value + 'W, ' + numElCurrent.value + 'A'
 
-  document.getElementById('listBack').classList.toggle('openView')
-  draw(numPlateWidth.value, numPlateHeight.value)
+  //more settings
+  textSize = numPlateWidth.value / 30
+  textSpacing = numPlateHeight.value / valTextSpacing
+
+  openWin()
 };
 
-//exit viewvar 
-plates_final = document.getElementsByClassName('plates_final')
-document.getElementById('exitView').onclick = function () {
-  document.getElementById('listBack').classList.toggle('openView')
-    for (var i = 1; i < plates_final.length; i++) {
-      plates_final[i].remove();
-  };
-}
+function openWin() {
+  var platesFinal = document.getElementsByClassName('plates_final')
 
-//clone
-let addup = 0
-var x, y
-let posX, posY
-document.getElementsByClassName('serial')[0].setAttribute = ('display', 'none')
-
-function draw(width, height) {
-  var numPlate = numLastNum.value - numFirstNum.value + 1
-  for (x = 0; x < maxY; x += 1) {
-    for (y = 0; y < maxX; y += 1) {
-      if (addup < numPlate) {
-        posX = width * y + defaultUnit;
-        posY = height * x + defaultUnit;
-        cloneSvg(posX, posY, addup);
-        addup++;
-      }
-    }
+  for (let i = 1; i < platesFinal.length; i++) {
+    platesFinal[i].setAttribute('display', 'none')
   }
+  var onPlateMax = numLastNum.value - numFirstNum.value + 1
+  var addup = 1
+  for (let x = 0; x < maxY; x += 1) {
+    for (let y = 0; y < maxX; y += 1) {
+      if (addup > onPlateMax) break;
+      var posX = numPlateWidth.value * y + defaultUnit
+      var posY = numPlateHeight.value * x + defaultUnit
+      cloneSvg(posX, posY, addup)
+      addup++
+    }
+    if (addup > onPlateMax) break;
+  }
+  addup = 1
+  platesFinal[0].setAttribute('display', 'none')
+  document.querySelectorAll('.serial')[1].textContent = preValueSerialNumber + textSNIdentifier.value + mNameString + parseInt(numFirstNum.value)
+
+  var divText = document.getElementById("listBack").outerHTML;
+  var myWindow = window.open('', '', numListWidth.value + 'mm', numListHeight.value + 'mm');
+  var doc = myWindow.document;
+  doc.open();
+  doc.write(divText);
+  doc.close();
+
+  platesFinal[0].setAttribute('display', 'block')
 };
 
 function cloneSvg(x, y, index) {
-  if (index > 0) {
-    var newrect = document.getElementById('prv_plate').cloneNode(true)
-    list.appendChild(newrect)
-    newrect.setAttribute('x', x)
-    newrect.setAttribute('y', y)
-    nextNum = parseInt(numFirstNum.value) + index
-
-        if(index>=9){
-          mNameString='000000'
-        }else if(index>=99){
-          mNameString='00000'
-        }
-
-    document.querySelectorAll('.serial')[index].textContent = preValueSerialNumber + textSNIdentifier.value + mNameString + nextNum
-  } else {
-    document.querySelectorAll('.serial')[index].textContent = preValueSerialNumber + textSNIdentifier.value + mNameString + numFirstNum.value
-  }
+  var newrect = document.getElementById('prv_plate').cloneNode(true)
+  list.appendChild(newrect)
+  newrect.setAttribute('x', x)
+  newrect.setAttribute('y', y)
+  nextNum = parseInt(numFirstNum.value) + index
+  serialNumber.textContent = preValueSerialNumber + textSNIdentifier.value + mNameString + nextNum
 };
+
 
 //downloadsvg
 
