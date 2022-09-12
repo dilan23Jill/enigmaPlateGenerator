@@ -270,8 +270,6 @@ document.getElementById('desOne').onclick = function () {
 
     //more settings apply
 
-
-
   if(numHoleDiameter.value != ''){
     for(let x=0; x < holes.length; x++){
       holes[x].setAttribute('r', numHoleDiameter.value + defaultUnit)
