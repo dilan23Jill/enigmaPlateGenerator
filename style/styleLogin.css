@@ -1,0 +1,104 @@
+body, html{
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: url(../img/wallpaperClean.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 400;
+}
+*{
+    box-sizing: border-box;
+}
+
+#loginWindow{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: max-content;
+    height: max-content;
+    width: 20em;
+    height: max-content;
+    background-color: #242835;
+    padding-top: 3em;
+    padding-bottom: 3em;    
+    border-radius: 12px;
+}
+
+.text{
+    width: 100%;
+    height: 3em;
+    outline: none;
+    border-color: #AFB1BE;
+    text-align: center;
+    background-color : #32364A; 
+}
+#inpUsr{
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+}
+#inpPas{
+    border-left: none;
+    border-right: none;
+    border-color: #AFB1BE;
+}
+
+h1{
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 2em
+}
+
+#forgotPsd{
+    color: #afb1be;
+    display: inline-block;
+    margin-left: 2em;
+    font-size: 10px;
+    text-decoration: underline;
+}
+
+#submit{
+    background: #35394a;
+    color: #DC6180;
+    text-align: center;
+    padding: 1em 3em;
+    cursor: pointer;
+    border-radius: 20px;
+    border-color: #afb1be;
+    width: 7;
+    margin-top: 2em;
+    margin-left: 10%
+}
+
+#submit:hover{
+    background-color: #DC6180;
+    color: #35394a;
+}
+
+#logo{
+    width: 4em;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.usr, .psd{ 
+    width: 100%;
+    height: 40px;
+}
+.psd{
+    margin-bottom: 3em;
+}
+
+#user, #paswd{
+    position: relative;
+    width: 25px;
+    left: 5px;
+    top: 37px;
+}
