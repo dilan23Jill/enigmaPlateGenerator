@@ -43,10 +43,38 @@
     </svg>
     
 </svg>    
-
 </div>   
 
-  <div class="designWindow" id="designWindow">
+<div class="sideMenu" id="sideMenu">
+
+  <div class="openArrow" id="openArrow">
+    <img src="img/arrow.png" alt="arrow" id="arrow">
+  </div>
+
+  <div class="previewClass" id="first">
+    <img src="img/preview.png" alt="prv" id="prvImg">
+    <p class="sideMenuText">Preview</p>
+</div> 
+
+<div class="previewClass" id="second" >
+  <img src="img/sketch.png" alt="prv" id="prvImg">
+  <p class="sideMenuText">Preset</p>
+</div>
+
+<div class="downloadClass" id="third" >
+  <img src="img/download.png" alt="prv" id="dwnImg">
+   <div class="left dwnWrap"><P>PDF</P></div>
+  <div class="right dwnWrap"><p>SVG</p></div>
+  <div class="splitLine dwnWrap"></div>
+</div>
+
+<div class="downloadClass upload" id="four" >
+  <img src="img/cloud-computing.png" alt="prv" id="dwnImg">
+</div>
+
+</div>
+
+  <!-- <div class="designWindow" id="designWindow">
     <div class="design" id="desOne" >DESIGN 1
       <img src="img/previewPlate/SCR-20220906-jit.png" id="prv1" class="prvImg" alt="prv1">
 
@@ -55,6 +83,7 @@
    <div class="design" id="desThree" >DESIGN 3</div>
    <button class="menuBtn" id="svgDownload">DOWNLOAD SVG</button><br />
 <button class="menuBtn" id="pdfDownload">DOWNLOAD PDF</button>
+<button class="menuBtn">ADD TO DATABSE</button>
   </div>
   <div class="presetWindow" id="presetWindow">
     <div class="toggleWindow" id="togglePresetBtn">
@@ -64,8 +93,10 @@
   </div>
     <div class="preset" id="preTwo">PRESET 2<b class="numPreset">2</b></div>
     <div class="preset" id="preThree">PRESET 3<b class="numPreset">3</b></div>
-  </div>
-  <div id="ctrForm">
+  </div> -->
+
+
+  <class id="ctrForm">
     <div class="title_tab">
       <h1 id="title">PLATE GENERATOR</h1>
       </div>        
@@ -119,11 +150,11 @@
 <div class="wPlateInfo window" id="fileWindow">
   <b id="textListSize">IMAGE:</b>  
 
-  <input type="file" id="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" accept="image/png, image/svg"/>
+  <input type="file" id="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" accept="image/svg, image/png"/>
   <button id="plateImgLogoFake" class="inputInfoBtn btnFile" title="Logo Image">LOGO</button>
   <span id="plateImgLogoFilename"></span>
 
-  <input type="file" id="plateImgCertificat" placeholder="Upload Certificat:" class="inputInfo fileInput" accept="image/png, image/svg"/> 
+  <input type="file" id="plateImgCertificat" placeholder="Upload Certificat:" class="inputInfo fileInput" accept="image/svg, image/png"/> 
   <button id="plateImgCertificatFake" class="inputInfoBtn btnFile" title="Certificat Image" >CERTIFICAT</button>
   <span id="plateImgCertificatFilename"></span>
 </div>
@@ -151,7 +182,9 @@
   </div>
 </div>
 
-  <script src="script/script.js"></script>
+<!--   <script src="script/script.js"></script>
+ -->  <script src="script/script1.js"></script>
+
 </body>
 
 </html>

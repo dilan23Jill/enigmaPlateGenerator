@@ -457,3 +457,7 @@ document.getElementById('pdfDownload').onclick = function () {
   });
   doc.end();
 };
+
+
+//side menu animate
+
