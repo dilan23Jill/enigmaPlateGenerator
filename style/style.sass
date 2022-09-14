@@ -5,7 +5,7 @@ body, html
     padding: 0
 
 body
-    background: url(../img/wallpaper.png)
+    background: url(../img/wallpaperClean.jpeg)
     background-size: cover
     background-repeat: no-repeat
 
@@ -122,17 +122,10 @@ input::placeholder
     top: 2em
     margin-top: 2em
 
-#btnMoreSettings:hover, #btnPreview:hover, #btnClear:hover
+#btnMoreSettings:hover, #btnClear:hover
     color: white
     background-color: black
 
-#btnPreview
-    text-align: center
-    width: 8em
-    height: 3em
-    cursor: pointer
-    border: none
-    border-radius: 6px
 
 .endBtn
     height: max-content
@@ -260,7 +253,6 @@ input::placeholder
     position: absolute
     left: 0
     top: 0
-    overflow: hidden
 
 #arrow
     width: 80%
@@ -293,13 +285,13 @@ input::placeholder
     justify-content: center
     align-items: center
 
-.previewClass:hover
+.previewClass:hover, .drpMenu:hover
     background: #AFB1BE
 
-#first
+#btnPreview
     margin-top: 8em
 
-#second
+#preOne
      margin-top: 2em
 
 #prvImg
@@ -320,6 +312,7 @@ input::placeholder
     bottom: 9em
     padding-top: 1em
     padding-bottom: 1em
+    visibility: hidden
 
 .left:hover, .right:hover, .upload:hover
     background: #AFB1BE
@@ -335,6 +328,7 @@ input::placeholder
     background: red
     height: 100%
     width: 3px
+    top: 0
 
 .left
     position: absolute
@@ -355,4 +349,18 @@ input::placeholder
 .dwnWrap
     visibility: hidden
 
+.drpMenu
+    width: 100%
+    height: fit-content
+    background: #AFB1BE
+    position: relative
+    border-radius: 0 0 6px 6px 
+    visibility: hidden
 
+#drpPreset
+    width: 100%
+    margin-bottom: 1em
+    cursor: pointer
+    position: relative
+    top: 0
+    padding: 1em

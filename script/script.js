@@ -48,46 +48,32 @@ for (let p = 0; p < presetElements.length; p++) {
   });
 };
 
-var numPreset = document.getElementsByClassName('numPreset')
-let isPreShown = true
-document.getElementById('togglePresetBtn').onclick = function () {
-  if (!isPreShown) {
-    for (let p = 0; p < numPreset.length; p++) {
-      numPreset[p].style.visibility = 'visible'
-    }
-    document.getElementById('presetWindow').style.left = '-13%'
-    isPreShown = true
-  } else {
-    for (let p = 0; p < numPreset.length; p++) {
-      numPreset[p].style.visibility = 'hidden'
-    }
-    document.getElementById('presetWindow').style.left = '0'
-    isPreShown = false
-  }
-};
-
 //design window modifying
 let isDesShown = true
+var dwnClass = document.getElementsByClassName("downloadClass")
 var inputs = document.getElementsByClassName('inputInfo')
-
+var numAlert;
 document.getElementById('btnPreview').onclick = function () {
+  numAlert=0
   for (let i = 0; i < inputs.length; i++) {
     if (inputs[i].value == "") {
       if (i == 7 || i == 15 || i == 16 || i == 18 || i > 19) {
       } else {
-        alert(i)
-        /* return */
+        numAlert++
+        for(let i = 0; i < dwnClass.length; i++){
+          dwnClass[i].style.visibility = "hidden"
+      }
+      document.getElementById('dwnImg').style.visibility = "hidden"
       }
     }
   }
-
-  if (!isDesShown) {
-    document.getElementById('designWindow').style.right = '-18%'
-    isDesShown = true
-  } else {
-    document.getElementById('designWindow').style.right = '0'
-    isDesShown = false
-  }
+if(numAlert==0) {
+  for(let i = 0; i < dwnClass.length; i++){
+    dwnClass[i].style.visibility = "visible"
+}
+document.getElementById('dwnImg').style.visibility = "visible"
+outputData()
+}else alert("Fill all the neccesary fields")
 };
 
 //clear input fields
@@ -233,7 +219,7 @@ for (var i = 0; i < anchors.length; i++) {
   }
 }
 
-document.getElementById('desOne').onclick = function () {
+function outputData() {
   numListWidth = document.getElementById('listWidth')
   numListHeight = document.getElementById('listHeight')
   numPlateWidth = document.getElementById('plateWidth')
@@ -369,9 +355,9 @@ document.getElementById('desOne').onclick = function () {
 
   openWin()
 };
+  var platesFinal = document.getElementsByClassName('plates_final')
 
 function openWin() {
-  var platesFinal = document.getElementsByClassName('plates_final')
 
   for (let i = 1; i < platesFinal.length; i++) {
     platesFinal[i].setAttribute('display', 'none')
@@ -413,6 +399,7 @@ function cloneSvg(x, y, index) {
 //downloadsvg
 
 document.getElementById('svgDownload').onclick = function () {
+  platesFinal[0].setAttribute('display', 'none')
   var serializer = new XMLSerializer();
   var source = serializer.serializeToString(list);
   source = source.replace(/(\w+)?:?xlink=/g, 'xmlns:xlink='); // Fix root xlink without namespace
@@ -426,7 +413,8 @@ document.getElementById('svgDownload').onclick = function () {
     source = source.replace(
       /^<svg/,
       '<svg xmlns:xlink="http://www.w3.org/1999/xlink"'
-    );
+    ); 
+
   }
 
   var preface = '<?xml version="1.0" standalone="no"?>\r\n';
@@ -439,13 +427,19 @@ document.getElementById('svgDownload').onclick = function () {
   downloadLink.download = name;
   document.body.appendChild(downloadLink);
   downloadLink.click();
-  document.body.removeChild(downloadLink);
+  document.body.removeChild(downloadLink);     
+  platesFinal[0].setAttribute('display', 'block')
+
 };
 
 //download pdf
-
+var pointWidth, pointHeight;
 document.getElementById('pdfDownload').onclick = function () {
-  let doc = new PDFDocument({ compress: false, size: [1700, 1700] });
+  platesFinal[0].setAttribute('display', 'none')
+  
+  pointWidth = numListWidth.value * 2.8346456693
+  pointHeight = numListHeight.value * 2.8346456693
+  let doc = new PDFDocument({ compress: false, size: [pointWidth, pointHeight] });
   SVGtoPDF(doc, list, 0, 0);
   let stream = doc.pipe(blobStream());
   stream.on('finish', () => {
@@ -456,8 +450,48 @@ document.getElementById('pdfDownload').onclick = function () {
     link.click();
   });
   doc.end();
+  platesFinal[0].setAttribute('display', 'block')
 };
 
 
 //side menu animate
+var rotated = 0
+document.getElementById('openArrow').onclick = function(){
+    document.getElementById('sideMenu').classList.toggle('sideBarWidth')
+    rotated+=180
+    document.getElementById('arrow').style.transform = 'rotate('+rotated+'deg)'
+    
+};
+
+
+ document.getElementById('preOne').addEventListener("mouseover", function () {
+    document.getElementById('drpMenu').style.visibility = 'visible'
+ });
+
+ document.getElementById('preOne').addEventListener("mouseout", function () {
+  document.getElementById('drpMenu').style.visibility = 'hidden'
+});
+
+document.getElementById('drpMenu').addEventListener("mouseover", function () {
+  document.getElementById('drpMenu').style.visibility = 'visible'
+  document.getElementById('preOne').style.background = '#AFB1BE'
+
+});
+
+document.getElementById('drpMenu').addEventListener("mouseout", function () {
+document.getElementById('drpMenu').style.visibility = 'hidden'
+document.getElementById('preOne').style.background = ''
+
+});
+
+
+ var checkInputs = document.querySelector('.inputInfo')
+
+ checkInputs.addEventListener('change', () => {
+  console.log("rs");
+  for(let i = 0; i < dwnClass.length; i++){
+    dwnClass[i].style.visibility = "hidden"
+}
+document.getElementById('dwnImg').style.visibility = "hidden"
+ });
 
