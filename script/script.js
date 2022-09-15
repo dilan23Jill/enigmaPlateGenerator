@@ -76,6 +76,27 @@ outputData()
 }else alert("Fill all the neccesary fields")
 };
 
+var elementsDwn = document.getElementsByClassName('dwnWrap')
+document.getElementById('third').addEventListener("mouseover", function () {
+  for(let i = 0; i < elementsDwn.length; i++){
+    elementsDwn[i].style.visibility = 'visible'
+  }
+  document.getElementById('dwnImg').style.visibility = 'hidden'
+
+});
+
+
+
+  document.getElementById('third').addEventListener("mouseout", function () {
+    for(let i = 0; i < elementsDwn.length; i++){
+      elementsDwn[i].style.visibility = 'hidden'
+    }
+    document.getElementById('dwnImg').style.visibility = 'visible'
+
+});
+
+
+
 //clear input fields
 document.getElementById('btnClear').onclick = function () {
   document.location.reload(true)
@@ -139,6 +160,7 @@ document.getElementById('preOne').onclick = function () {
   textSNIdentifier.value = 'USA22'
   numFirstNum.value = '1'
   numLastNum.value = '10'
+  
 };
 
 //more settings values
@@ -350,8 +372,6 @@ function outputData() {
   modelName.textContent = preValueModelName + textModelName.value
   modelID.textContent = preValueModelID + textModelID.value
   elecRatings.textContent = preValueElecRatings + drpVoltage.value + '~' + drpFrequency.value + ', ' + numWattage.value + 'W, ' + numElCurrent.value + 'A'
-
-
 
   openWin()
 };

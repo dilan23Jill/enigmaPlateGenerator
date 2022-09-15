@@ -8,7 +8,9 @@
     $errors = array();
 
     $db = mysqli_connect($host, $user, $password, $database);
-
+    if ($db->connect_error) {
+        die("Connection failed: " . $db->connect_error);
+      } 
     if(isset($_POST['login_user'])) {
         $dbUsername = mysqli_real_escape_string($db, $_POST['username']);
         $dbPassword = mysqli_real_escape_string($db, $_POST['password']);

@@ -1,11 +1,37 @@
 <?php
-/* if(!isset($_SESSION['username'])){ 
-  header("Location: login.php");
-  exit();
-} */
+require 'connection.php';
 
+if(isset($_POST["submit"])){
+    $listWidth = $_POST["listWidth"];
+    $listHeight= $_POST["listHeight"];
+    $plateWidth= $_POST["plateWidth"];
+    $plateHeight= $_POST["plateHeight"];
+    $plateCName= $_POST["plateCName"];
+    $plateCAddress= $_POST["plateCAddress"];
+    $plateProduct= $_POST["plateProduct"];
+    $plateModelName= $_POST["plateModelName"];
+    $plateModelID= $_POST["plateModelID"];
+    $plateSNIdentifier= $_POST["plateSNIdentifier"];
+    $plateImgLogo= $_POST["plateImgLogo"];
+    $plateImgCertificat= $_POST["plateImgCertificat"];
+
+
+$query = "INSERT INTO Plates (listWidth, listHeight,  plateWidth, plateHeight, companyName,
+companyAddress, product, model, idModel, serialNumberIdentifier, svgLogo, svgCertificat)
+VALUES('$listWidth', '$listHeight', '$plateWidth', '$plateHeight', '$plateCName',
+'$plateCAddress', '$plateProduct', '$plateModelName', '$plateModelID', '$plateSNIdentifier', 
+'$plateImgLogo', '$plateImgCertificat')";
+
+mysqli_query($conn, $query);
+echo
+"
+<script>
+alert('sent');
+</script>
+";
+
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,6 +94,13 @@
   <p  class="sideMenuText">Preset</p>
 </div>
 
+<div class="drpMenu" id="drpMenu">
+    <select name="font" id="drpPreset" title="Preset">
+    <option value="" disabled selected>PRESET</option>
+    <option value="Preset1" >Preset1</option>
+      </select> 
+</div>
+
 <div class="downloadClass" id="third" >
   <img src="img/download.png" alt="prv" id="dwnImg">
    <div id="pdfDownload" class="left dwnWrap"><P>PDF</P></div>
@@ -81,32 +114,32 @@
 
 </div>
 
-  <class id="ctrForm">
+  <form id="ctrForm" action="" class="" method="post" autocomplete="off">
     <div class="title_tab">
       <h1 id="title">PLATE GENERATOR</h1>
       </div>        
       <div class="wListSize window">
         <b id="textListSize">LIST SIZE:</b>
-        <input type="number" id="listWidth" min="80" max="1500" placeholder="Width: *" class="inputInfo numChange" value="" title="List Width" minlength="2" maxlength="4" /><br/>
-        <input type="number" id="listHeight" min="50" max="1500" placeholder="Height: *" class="inputInfo numChange" value="" title="List Height" minlength="2" maxlength="4" />
+        <input type="number" id="listWidth" name="listWidth" min="80" max="1500" placeholder="Width: *" class="inputInfo numChange" value="" title="List Width" minlength="2" maxlength="4" /><br/>
+        <input type="number" id="listHeight" name="listHeight" min="50" max="1500" placeholder="Height: *" class="inputInfo numChange" value="" title="List Height" minlength="2" maxlength="4" />
     </div>
     <div class="wPlateSize window">
       <b id="textListSize">PLATE SIZE:</b>
-      <input type="number" id="plateWidth" min="80" max="120" placeholder="Width: *" class="inputInfo numChange" value="" title="Plate Width" minlength="2" maxlength="4" /><br/>
-      <input type="number" id="plateHeight" min="50" max="80" placeholder="Height: *" class="inputInfo numChange" value="" title="Plate Height" minlength="2" maxlength="4" />
+      <input type="number" id="plateWidth" name="plateWidth" min="80" max="120" placeholder="Width: *" class="inputInfo numChange" value="" title="Plate Width" minlength="2" maxlength="4" /><br/>
+      <input type="number" id="plateHeight" name="plateHeight" min="50" max="80" placeholder="Height: *" class="inputInfo numChange" value="" title="Plate Height" minlength="2" maxlength="4" />
     </div>   
       <div class="wPlateInfo window_full">
     <b id="textListSize">PLATE INFO:</b>
     </div>
     <div class="wPlateInfo window">
-    <input type="text" id="plateCName" placeholder="Company Name:*" class="inputInfo" title="Company Name"/>
-    <input type="text" id="plateCAddress" placeholder="Company Address:*" class="inputInfo" title="Company Address"/>
-    <input type="text" id="plateProduct" placeholder="Product:*" class="inputInfo" title="Product"/>
-    <input type="text" id="plateModelName" placeholder="Model Name (optional):" class="inputInfo" title="Model Name"/>
-    <input type="text" id="plateModelID" placeholder="Model ID:*" class="inputInfo" title="Model ID"/>
+    <input type="text" id="plateCName" name="plateCName" placeholder="Company Name:*" class="inputInfo" title="Company Name"/>
+    <input type="text" id="plateCAddress" name="plateCAddress" placeholder="Company Address:*" class="inputInfo" title="Company Address"/>
+    <input type="text" id="plateProduct" name="plateProduct" placeholder="Product:*" class="inputInfo" title="Product"/>
+    <input type="text" id="plateModelName" name="plateModelName" placeholder="Model Name (optional):" class="inputInfo" title="Model Name"/>
+    <input type="text" id="plateModelID" name="plateModelID" placeholder="Model ID:*" class="inputInfo" title="Model ID"/>
     </div>
     <div class="wPlateInfoRight window">
-    <input type="text" id="plateSNIdentifier" placeholder="S.N Identifier:*" class="inputInfo" title="Serial Number Identifier"/>
+    <input type="text" id="plateSNIdentifier" name="plateSNIdentifier" placeholder="S.N Identifier:*" class="inputInfo" title="Serial Number Identifier"/>
     <input type="number" id="plateFirstNum" min="1" placeholder="First Number:" class="inputInfo"/>
     <input type="number" id="plateLastNum" min="2" placeholder="Last Number:" class="inputInfo"/>
     <input type="checkbox" id="plateChkMaxNum" class="numChange">
@@ -135,17 +168,17 @@
     <div class="wPlateInfo window" id="fileWindow">
       <b id="textListSize">IMAGE:</b>  
 
-      <input type="file" id="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" accept="image/svg, image/png"/>
-      <button id="plateImgLogoFake" class="inputInfoBtn btnFile" title="Logo Image">LOGO</button>
+      <input type="file" id="plateImgLogo" name="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" accept="image/svg, image/png"/>
+      <button type="button" id="plateImgLogoFake" class="inputInfoBtn btnFile" title="Logo Image">LOGO</button>
       <span id="plateImgLogoFilename"></span>
 
-      <input type="file" id="plateImgCertificat" placeholder="Upload Certificat:" class="inputInfo fileInput" accept="image/svg, image/png"/> 
-      <button id="plateImgCertificatFake" class="inputInfoBtn btnFile" title="Certificat Image" >CERTIFICAT</button>
+      <input type="file" id="plateImgCertificat" name="plateImgCertificat" placeholder="Upload Certificat:" class="inputInfo fileInput" accept="image/svg, image/png"/> 
+      <button type="button" id="plateImgCertificatFake" class="inputInfoBtn btnFile" title="Certificat Image" >CERTIFICAT</button>
       <span id="plateImgCertificatFilename"></span>
     </div>
-    <button id="btnClear">Clear</button>
+    <button type="button" id="btnClear">Clear</button>
     <div class="endBtn">
-    <button id="btnMoreSettings" class="inputInfoBtn">MORE</button>
+    <button type="button" id="btnMoreSettings" class="inputInfoBtn">MORE</button>
     </div>
     <div class="wMoreSettings" id="wMoreSettings" >
       <div class="wPlateInfo window_full moreOpt">
@@ -162,10 +195,10 @@
       <input type="number" id="numBorderRadiusInner" placeholder="Border Radius Inner (val.: 8)" class="inputInfo moreSettings" title="Border Radius Inner" min="0" step="1" maxlength="3" />
       <input type="number" id="numBorderRadiusOutter" placeholder="Border Radius Outter(val.: 10)" class="inputInfo moreSettings" title="Border Radius Outter" min="0" step="1" maxlength="3" />
       <input type="number" id="numTextSize" placeholder="Text Size(val.: 30)" class="inputInfo moreSettings" title="Text Size" min="0" step="1" maxlength="3" />
-
       </div>
     </div>
-  </div>
+    <input type="submit" value="submit" name="submit">
+</form>
 
   <script src="script/script.js"></script>
 
