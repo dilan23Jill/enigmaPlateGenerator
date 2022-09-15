@@ -1,7 +1,7 @@
 <?php
-require 'connection.php';
+include ('server.php');
 
-if(isset($_POST["submit"])){
+if(isset($_POST['submit'])){
     $listWidth = $_POST["listWidth"];
     $listHeight= $_POST["listHeight"];
     $plateWidth= $_POST["plateWidth"];
@@ -22,15 +22,15 @@ VALUES('$listWidth', '$listHeight', '$plateWidth', '$plateHeight', '$plateCName'
 '$plateCAddress', '$plateProduct', '$plateModelName', '$plateModelID', '$plateSNIdentifier', 
 '$plateImgLogo', '$plateImgCertificat')";
 
-mysqli_query($conn, $query);
+mysqli_query($db, $query);
 echo
 "
 <script>
 alert('sent');
 </script>
 ";
-
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
