@@ -29,7 +29,11 @@ echo
 alert('sent');
 </script>
 ";
+
 }
+//fill inputs
+$link = mysqli_connect("localhost", "root", "dilan123");
+mysqli_select_db($link, "Enigma");
 
 ?>
 <!DOCTYPE html>
@@ -47,7 +51,10 @@ alert('sent');
   <script src="https://cdn.jsdelivr.net/npm/pdfkit@0.10.0/js/pdfkit.standalone.js"></script>
   <script src="https://bundle.run/blob-stream@0.1.3"></script>
   <script src="https://cdn.jsdelivr.net/npm/svg-to-pdfkit@0.1.8/source.js"></script>
-
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <title>Enigma generator</title>
 </head>
 
@@ -114,40 +121,54 @@ alert('sent');
 
 </div>
 
-  <form id="ctrForm" action="" class="" method="post" autocomplete="off">
+  <form id="ctrForm" action="" class="" name="form1" method="post" autocomplete="off">
+  <select onchange="GetDetail(this.value)" name="name" id="name">
+<?php
+    $res= mysqli_query($link, "select * from Plates");
+    while($row=mysqli_fetch_array($res))
+    {
+  ?>      
+<option ><?php echo $row["name"]; ?></option>
+      
+<?php
+  }
+?>
+ 
+    </select>
+
     <div class="title_tab">
       <h1 id="title">PLATE GENERATOR</h1>
       </div>        
       <div class="wListSize window">
         <b id="textListSize">LIST SIZE:</b>
-        <input type="number" id="listWidth" name="listWidth" min="80" max="1500" placeholder="Width: *" class="inputInfo numChange" value="" title="List Width" minlength="2" maxlength="4" /><br/>
-        <input type="number" id="listHeight" name="listHeight" min="50" max="1500" placeholder="Height: *" class="inputInfo numChange" value="" title="List Height" minlength="2" maxlength="4" />
+        <input type="number" id="listWidth" name="listWidth" min="80" max="1500" placeholder="Width: *" class="inputInfo numChange" value="" title="List Width" minlength="2" maxlength="4" required /><br/>
+        <input type="number" id="listHeight" name="listHeight" min="50" max="1500" placeholder="Height: *" class="inputInfo numChange" value="" title="List Height" minlength="2" maxlength="4" required/>
     </div>
     <div class="wPlateSize window">
       <b id="textListSize">PLATE SIZE:</b>
-      <input type="number" id="plateWidth" name="plateWidth" min="80" max="120" placeholder="Width: *" class="inputInfo numChange" value="" title="Plate Width" minlength="2" maxlength="4" /><br/>
-      <input type="number" id="plateHeight" name="plateHeight" min="50" max="80" placeholder="Height: *" class="inputInfo numChange" value="" title="Plate Height" minlength="2" maxlength="4" />
+      <input type="number" id="plateWidth" name="plateWidth" min="80" max="120" placeholder="Width: *" class="inputInfo numChange" value="" title="Plate Width" minlength="2" maxlength="4" required/><br/>
+      <input type="number" id="plateHeight" name="plateHeight" min="50" max="80" placeholder="Height: *" class="inputInfo numChange" value="" title="Plate Height" minlength="2" maxlength="4" required/>
     </div>   
       <div class="wPlateInfo window_full">
     <b id="textListSize">PLATE INFO:</b>
     </div>
     <div class="wPlateInfo window">
-    <input type="text" id="plateCName" name="plateCName" placeholder="Company Name:*" class="inputInfo" title="Company Name"/>
-    <input type="text" id="plateCAddress" name="plateCAddress" placeholder="Company Address:*" class="inputInfo" title="Company Address"/>
-    <input type="text" id="plateProduct" name="plateProduct" placeholder="Product:*" class="inputInfo" title="Product"/>
-    <input type="text" id="plateModelName" name="plateModelName" placeholder="Model Name (optional):" class="inputInfo" title="Model Name"/>
-    <input type="text" id="plateModelID" name="plateModelID" placeholder="Model ID:*" class="inputInfo" title="Model ID"/>
+    <input type="text" id="plateCName" name="plateCName" placeholder="Company Name:*" class="inputInfo" title="Company Name" required/>
+    <input type="text" id="plateCAddress" name="plateCAddress" placeholder="Company Address:*" class="inputInfo" title="Company Address" required/>
+    <input type="text" id="plateProduct" name="plateProduct" placeholder="Product:*" class="inputInfo" title="Product" required/>
+    <input type="text" id="plateModelName" name="plateModelName" placeholder="Model Name (optional):" class="inputInfo" title="Model Name" required/>
+    <input type="text" id="plateModelID" name="plateModelID" placeholder="Model ID:*" class="inputInfo" title="Model ID" required/>
     </div>
     <div class="wPlateInfoRight window">
-    <input type="text" id="plateSNIdentifier" name="plateSNIdentifier" placeholder="S.N Identifier:*" class="inputInfo" title="Serial Number Identifier"/>
-    <input type="number" id="plateFirstNum" min="1" placeholder="First Number:" class="inputInfo"/>
-    <input type="number" id="plateLastNum" min="2" placeholder="Last Number:" class="inputInfo"/>
+    <input type="text" id="plateSNIdentifier" name="plateSNIdentifier" placeholder="S.N Identifier:*" class="inputInfo" title="Serial Number Identifier" required/>
+    <input type="number" id="plateFirstNum" min="1" placeholder="First Number:" class="inputInfo" required/>
+    <input type="number" id="plateLastNum" min="2" placeholder="Last Number:" class="inputInfo" required/>
     <input type="checkbox" id="plateChkMaxNum" class="numChange">
-    <input type="text" id="plateProductionDate" placeholder="Production Date:*" class="inputInfo" title="Production Date" onfocus="(this.type='date')"/>
+    <input type="text" id="plateProductionDate" placeholder="Production Date:*" class="inputInfo" title="Production Date" onfocus="(this.type='date')" required/>
     </div>
     <div class="wPlateInfo window">
     <b id="textListSize">ELECTRIC RATINGS:</b>
-    <select name="font" id="plateVoltage" title="Voltage" class="inputInfo">
+    <select name="font" id="plateVoltage" title="Voltage" class="inputInfo" required>
     <option value="" disabled selected>Voltage:</option>
     <option value="12V">12V</option>
     <option value="24V">24V</option>
@@ -155,24 +176,24 @@ alert('sent');
     <option value="230V">230V</option>
     <option value="120V/230V">120V/230V</option>
       </select>
-      <select name="font" id="plateFrequency" title="Frequency" class="inputInfo">
+      <select name="font" id="plateFrequency" title="Frequency" class="inputInfo" required >
         <option value="" disabled selected>Frequency:</option>
         <option value="50hz">50hz</option>
         <option value="60hz">60hz</option>
         <option value="50hz/60hz">50hz/60hz</option>
       </select>
       
-      <input type="number" id="plateWattage" placeholder="Wattage (optional):" class="inputInfo" title="Wattage"/><br/>
-      <input type="number" id="plateElCurrent" placeholder="El. Current (optional):" class="inputInfo" title="Electric Current"/>
+      <input type="number" id="plateWattage" placeholder="Wattage (optional):" class="inputInfo" title="Wattage" required/><br/>
+      <input type="number" id="plateElCurrent" placeholder="El. Current (optional):" class="inputInfo" title="Electric Current" required/>
     </div>
     <div class="wPlateInfo window" id="fileWindow">
       <b id="textListSize">IMAGE:</b>  
 
-      <input type="file" id="plateImgLogo" name="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" accept="image/svg, image/png"/>
+      <input type="file" id="plateImgLogo" name="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" accept="image/svg, image/png" required>
       <button type="button" id="plateImgLogoFake" class="inputInfoBtn btnFile" title="Logo Image">LOGO</button>
       <span id="plateImgLogoFilename"></span>
 
-      <input type="file" id="plateImgCertificat" name="plateImgCertificat" placeholder="Upload Certificat:" class="inputInfo fileInput" accept="image/svg, image/png"/> 
+      <input type="file" id="plateImgCertificat" name="plateImgCertificat" placeholder="Upload Certificat:" class="inputInfo fileInput" accept="image/svg, image/png" required> 
       <button type="button" id="plateImgCertificatFake" class="inputInfoBtn btnFile" title="Certificat Image" >CERTIFICAT</button>
       <span id="plateImgCertificatFilename"></span>
     </div>
