@@ -1,23 +1,18 @@
 <?php
 
-// Get the user id
-$name = $_REQUEST['name'];
+$name = $_REQUEST['plateName'];
 
-// Database connection
 $con = mysqli_connect("localhost", "root", "dilan123", "Enigma");
 
 if ($name !== "") {
 	
-	// Get corresponding first name and
-	// last name for that user id	
 	$query = mysqli_query($con, "SELECT listWidth ,
 	listHeight, plateWidth, plateHeight ,  companyName , companyAddress , product , model ,
-    idModel ,  serialNumberIdentifier ,  svgLogo ,svgCertificat
-     FROM Plates WHERE name='$name'");
+    idModel ,  serialNumberIdentifier, plateName
+     FROM Plates WHERE plateName='$name'");
 
 	$row = mysqli_fetch_array($query);
 
-	// Get the first name
 	$listWidth = $row["listWidth"];
     $listHeight = $row["listHeight"];
 	$plateWidth = $row["plateWidth"];
@@ -28,16 +23,13 @@ if ($name !== "") {
 	$model = $row["model"];
 	$idModel = $row["idModel"];
 	$serialNumberIdentifier = $row["serialNumberIdentifier"];
-	$svgLogo = $row["svgLogo"];
-	$svgCertificat = $row["svgCertificat"];
+	$plateName = $row["plateName"];
 	
 }
 
-// Store it in a array
 $result = array("$listWidth", "$listHeight", "$plateWidth", "$plateHeight", "$companyName", "$companyAddress", "$product", 
-"$model", "$idModel", "$serialNumberIdentifier", "$svgLogo", "$svgCertificat");
+"$model", "$idModel", "$serialNumberIdentifier", "$plateName");
 
-// Send in JSON encoded form
 $myJSON = json_encode($result);
 echo $myJSON;
 ?>

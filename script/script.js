@@ -517,10 +517,6 @@ document.getElementById('dwnImg').style.visibility = "hidden"
 
 //fill inputs
 
-
-		// onkeyup event will occur when the user
-		// release the key and calls the function
-		// assigned to this event
 		function GetDetail(str) {
 			if (str.length == 0) {
 				document.getElementById("listWidth").value = "";
@@ -533,28 +529,23 @@ document.getElementById('dwnImg').style.visibility = "hidden"
 				document.getElementById("plateModelName").value = "";
 				document.getElementById("plateModelID").value = "";
 				document.getElementById("plateSNIdentifier").value = "";
-				document.getElementById("plateImgLogo").value = "";
-				document.getElementById("plateImgCertificat").value = "";
+        document.getElementById("plateName").value = "";
+
+			
 				return;
 			}
 			else {
 
-				// Creates a new XMLHttpRequest object
 				var xmlhttp = new XMLHttpRequest();
 				xmlhttp.onreadystatechange = function () {
 
-					// Defines a function to be called when
-					// the readyState property changes
 					if (this.readyState == 4 &&
 							this.status == 200) {
 						
 
 						var myObj = JSON.parse(this.responseText);
 
-				
-						
-
-              document.getElementById("listWidth").value = myObj[0];
+        document.getElementById("listWidth").value = myObj[0];
 				document.getElementById("listHeight").value = myObj[1];
         document.getElementById("plateWidth").value = myObj[2];
 				document.getElementById("plateHeight").value = myObj[3];
@@ -564,17 +555,12 @@ document.getElementById('dwnImg').style.visibility = "hidden"
 				document.getElementById("plateModelName").value = myObj[7];
 				document.getElementById("plateModelID").value = myObj[8];
 				document.getElementById("plateSNIdentifier").value = myObj[9];
-				/* document.getElementById("plateImgLogo").value = myObj[10];
-				document.getElementById("plateImgCertificat").value = myObj[11]; */
-
+        document.getElementById("plateName").value = myObj[10];
 
 					}
 				};
 
-				// xhttp.open("GET", "filename", true);
-				xmlhttp.open("GET", "gfg.php?name=" + str, true);
-				
-				// Sends the request to the server
+				xmlhttp.open("GET", "gfg.php?plateName=" + str, true);
 				xmlhttp.send();
 			}
 		}

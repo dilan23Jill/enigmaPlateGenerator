@@ -12,15 +12,14 @@ if(isset($_POST['submit'])){
     $plateModelName= $_POST["plateModelName"];
     $plateModelID= $_POST["plateModelID"];
     $plateSNIdentifier= $_POST["plateSNIdentifier"];
-    $plateImgLogo= $_POST["plateImgLogo"];
-    $plateImgCertificat= $_POST["plateImgCertificat"];
+    $plateName= $_POST["plateName"];
+
 
 
 $query = "INSERT INTO Plates (listWidth, listHeight,  plateWidth, plateHeight, companyName,
-companyAddress, product, model, idModel, serialNumberIdentifier, svgLogo, svgCertificat)
+companyAddress, product, model, idModel, serialNumberIdentifier, plateName)
 VALUES('$listWidth', '$listHeight', '$plateWidth', '$plateHeight', '$plateCName',
-'$plateCAddress', '$plateProduct', '$plateModelName', '$plateModelID', '$plateSNIdentifier', 
-'$plateImgLogo', '$plateImgCertificat')";
+'$plateCAddress', '$plateProduct', '$plateModelName', '$plateModelID', '$plateSNIdentifier', '$plateName')";
 
 mysqli_query($db, $query);
 echo
@@ -31,9 +30,7 @@ alert('sent');
 ";
 
 }
-//fill inputs
-$link = mysqli_connect("localhost", "root", "dilan123");
-mysqli_select_db($link, "Enigma");
+
 
 ?>
 <!DOCTYPE html>
@@ -121,14 +118,16 @@ mysqli_select_db($link, "Enigma");
 
 </div>
 
-  <form id="ctrForm" action="" class="" name="form1" method="post" autocomplete="off">
+  <form id="ctrForm" action="" class="" name="form1" method="post" autocomplete="on">
+    <input type="text" name="plateName" id="plateName" required >
+    
   <select onchange="GetDetail(this.value)" name="name" id="name">
 <?php
-    $res= mysqli_query($link, "select * from Plates");
+    $res= mysqli_query($db, "select * from Plates");
     while($row=mysqli_fetch_array($res))
     {
   ?>      
-<option ><?php echo $row["name"]; ?></option>
+<option ><?php echo $row["plateName"]; ?></option>
       
 <?php
   }
@@ -218,10 +217,10 @@ mysqli_select_db($link, "Enigma");
       <input type="number" id="numTextSize" placeholder="Text Size(val.: 30)" class="inputInfo moreSettings" title="Text Size" min="0" step="1" maxlength="3" />
       </div>
     </div>
-    <input type="submit" value="submit" name="submit">
+    <input type="submit" value="submit" name="submit">  
 </form>
+<script src="script/script.js"></script>
 
-  <script src="script/script.js"></script>
 
 </body>
 
