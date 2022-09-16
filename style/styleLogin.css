@@ -8,7 +8,6 @@ body{
     background: url(../img/wallpaperClean.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
-
     font-family: 'Montserrat', sans-serif !important;
     font-weight: 400;
 }
@@ -21,8 +20,6 @@ body{
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: max-content;
-    height: max-content;
     width: 20em;
     height: max-content;
     background-color: #242835;

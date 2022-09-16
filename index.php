@@ -82,7 +82,9 @@ alert('sent');
 </svg>    
 </div>   
 
-<div class="sideMenu" id="sideMenu">
+
+
+<div class="sideMenu blur" id="sideMenu">
 
   <div class="openArrow" id="openArrow">
     <img src="img/arrow.png" alt="arrow" id="arrow">
@@ -98,17 +100,28 @@ alert('sent');
   <p  class="sideMenuText">Preset</p>
 </div>
 
-<div class="drpMenu" id="drpMenu">
-    <select name="font" id="drpPreset" title="Preset">
-    <option value="" disabled selected>PRESET</option>
-    <option value="Preset1" >Preset1</option>
-      </select> 
-</div>
+<form class="drpMenu" id="drpMenu" action="" class="" name="form1" method="post" autocomplete="on">
+      <select onchange="GetDetail(this.value)" name="name" id="name">
+  <option value="" disabled selected>Plate Name:</option>  
+
+<?php
+    $res= mysqli_query($db, "select * from Plates");
+    while($row=mysqli_fetch_array($res))
+    {
+  ?>    
+<option ><?php echo $row["plateName"]; ?></option>
+      
+<?php
+  }
+?>
+ 
+    </select>
+</form>
 
 <div class="downloadClass" id="third" >
   <img src="img/download.png" alt="prv" id="dwnImg">
-   <div id="pdfDownload" class="left dwnWrap"><P>PDF</P></div>
-  <div id="svgDownload" class="right dwnWrap"><p>SVG</p></div>
+   <div id="pdfDownload" class="left dwnWrap"><b class="dwnText">PDF</b></div>
+  <div id="svgDownload" class="right dwnWrap"><b class="dwnText">SVG</b></div>
   <div id="desOne" class="splitLine dwnWrap"></div>
 </div>
 
@@ -119,53 +132,37 @@ alert('sent');
 </div>
 
   <form id="ctrForm" action="" class="" name="form1" method="post" autocomplete="on">
-    <input type="text" name="plateName" id="plateName" required >
-    
-  <select onchange="GetDetail(this.value)" name="name" id="name">
-<?php
-    $res= mysqli_query($db, "select * from Plates");
-    while($row=mysqli_fetch_array($res))
-    {
-  ?>      
-<option ><?php echo $row["plateName"]; ?></option>
-      
-<?php
-  }
-?>
- 
-    </select>
-
-    <div class="title_tab">
+    <div class="title_tab blur">
       <h1 id="title">PLATE GENERATOR</h1>
       </div>        
-      <div class="wListSize window">
+      <div class="wListSize window blur">
         <b id="textListSize">LIST SIZE:</b>
         <input type="number" id="listWidth" name="listWidth" min="80" max="1500" placeholder="Width: *" class="inputInfo numChange" value="" title="List Width" minlength="2" maxlength="4" required /><br/>
         <input type="number" id="listHeight" name="listHeight" min="50" max="1500" placeholder="Height: *" class="inputInfo numChange" value="" title="List Height" minlength="2" maxlength="4" required/>
     </div>
-    <div class="wPlateSize window">
+    <div class="wPlateSize window blur">
       <b id="textListSize">PLATE SIZE:</b>
       <input type="number" id="plateWidth" name="plateWidth" min="80" max="120" placeholder="Width: *" class="inputInfo numChange" value="" title="Plate Width" minlength="2" maxlength="4" required/><br/>
       <input type="number" id="plateHeight" name="plateHeight" min="50" max="80" placeholder="Height: *" class="inputInfo numChange" value="" title="Plate Height" minlength="2" maxlength="4" required/>
     </div>   
-      <div class="wPlateInfo window_full">
+      <div class="wPlateInfo window_full blur">
     <b id="textListSize">PLATE INFO:</b>
     </div>
-    <div class="wPlateInfo window">
+    <div class="wPlateInfo window blur">
     <input type="text" id="plateCName" name="plateCName" placeholder="Company Name:*" class="inputInfo" title="Company Name" required/>
     <input type="text" id="plateCAddress" name="plateCAddress" placeholder="Company Address:*" class="inputInfo" title="Company Address" required/>
     <input type="text" id="plateProduct" name="plateProduct" placeholder="Product:*" class="inputInfo" title="Product" required/>
-    <input type="text" id="plateModelName" name="plateModelName" placeholder="Model Name (optional):" class="inputInfo" title="Model Name" required/>
+    <input type="text" id="plateModelName" name="plateModelName" placeholder="Model Name (optional):" class="inputInfo" title="Model Name"/>
     <input type="text" id="plateModelID" name="plateModelID" placeholder="Model ID:*" class="inputInfo" title="Model ID" required/>
     </div>
-    <div class="wPlateInfoRight window">
+    <div class="wPlateInfoRight window blur">
     <input type="text" id="plateSNIdentifier" name="plateSNIdentifier" placeholder="S.N Identifier:*" class="inputInfo" title="Serial Number Identifier" required/>
     <input type="number" id="plateFirstNum" min="1" placeholder="First Number:" class="inputInfo" required/>
     <input type="number" id="plateLastNum" min="2" placeholder="Last Number:" class="inputInfo" required/>
     <input type="checkbox" id="plateChkMaxNum" class="numChange">
     <input type="text" id="plateProductionDate" placeholder="Production Date:*" class="inputInfo" title="Production Date" onfocus="(this.type='date')" required/>
     </div>
-    <div class="wPlateInfo window">
+    <div class="wPlateInfo window blur">
     <b id="textListSize">ELECTRIC RATINGS:</b>
     <select name="font" id="plateVoltage" title="Voltage" class="inputInfo" required>
     <option value="" disabled selected>Voltage:</option>
@@ -182,25 +179,26 @@ alert('sent');
         <option value="50hz/60hz">50hz/60hz</option>
       </select>
       
-      <input type="number" id="plateWattage" placeholder="Wattage (optional):" class="inputInfo" title="Wattage" required/><br/>
-      <input type="number" id="plateElCurrent" placeholder="El. Current (optional):" class="inputInfo" title="Electric Current" required/>
+      <input type="number" id="plateWattage" placeholder="Wattage (optional):" class="inputInfo" title="Wattage" /><br/>
+      <input type="number" id="plateElCurrent" placeholder="El. Current (optional):" class="inputInfo" title="Electric Current" 
+      />
     </div>
-    <div class="wPlateInfo window" id="fileWindow">
+    <div class="wPlateInfo window blur" id="fileWindow">
       <b id="textListSize">IMAGE:</b>  
 
-      <input type="file" id="plateImgLogo" name="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" accept="image/svg, image/png" required>
+      <input type="file" id="plateImgLogo" name="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" accept=".svg" required>
       <button type="button" id="plateImgLogoFake" class="inputInfoBtn btnFile" title="Logo Image">LOGO</button>
       <span id="plateImgLogoFilename"></span>
 
-      <input type="file" id="plateImgCertificat" name="plateImgCertificat" placeholder="Upload Certificat:" class="inputInfo fileInput" accept="image/svg, image/png" required> 
+      <input type="file" id="plateImgCertificat" name="plateImgCertificat" placeholder="Upload Certificat:" class="inputInfo fileInput" accept=".svg"> 
       <button type="button" id="plateImgCertificatFake" class="inputInfoBtn btnFile" title="Certificat Image" >CERTIFICAT</button>
       <span id="plateImgCertificatFilename"></span>
     </div>
-    <button type="button" id="btnClear">Clear</button>
-    <div class="endBtn">
+    <button type="button" id="btnClear" class="blur">Clear</button>
+    <div class="endBtn blur">
     <button type="button" id="btnMoreSettings" class="inputInfoBtn">MORE</button>
     </div>
-    <div class="wMoreSettings" id="wMoreSettings" >
+    <div class="wMoreSettings blur" id="wMoreSettings" >
       <div class="wPlateInfo window_full moreOpt">
           <select name="font" id="wPlateSlcFont" title="Font Style" class="inputInfo">
           <option value="" disabled selected>Font Style</option>
@@ -217,7 +215,11 @@ alert('sent');
       <input type="number" id="numTextSize" placeholder="Text Size(val.: 30)" class="inputInfo moreSettings" title="Text Size" min="0" step="1" maxlength="3" />
       </div>
     </div>
-    <input type="submit" value="submit" name="submit">  
+     <div id="uploadWindow">
+      <img src="img/reject.png" alt="exit" id="exitUpload">
+            <input type="text" name="plateName" id="plateName" placeholder="Plate Name" required >   <br/>
+            <input type="submit" value="submit" name="submit" id="submit">  
+</div>
 </form>
 <script src="script/script.js"></script>
 

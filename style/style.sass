@@ -335,17 +335,19 @@ input::placeholder
     position: absolute
     width:50%
     height:100%
-    left: 0
-    display: grid
-    place-items: center
+    left: 0  
 
 .right
     position: absolute
     width:50%
     height:100%
     right: 0
-    display: grid
-    place-items: center
+
+.dwnText
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
 
 .dwnWrap
     visibility: hidden
@@ -358,10 +360,52 @@ input::placeholder
     border-radius: 0 0 6px 6px 
     visibility: hidden
 
-#drpPreset
+#name
     width: 100%
     margin-bottom: 1em
     cursor: pointer
     position: relative
+    left: 50%
+    transform: translateX(-50%)
     top: 0
-    padding: 1em
+
+#uploadWindow
+    position: absolute
+    z-index: 2
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    width: 20em
+    height: max-content
+    background-color: #242835
+    padding-top: 3em
+    padding-bottom: 3em
+    border-radius: 12px
+    display: none
+
+#plateName
+    color: #fff
+    position: relative
+    left: 50%
+    transform: translateX(-50%)
+    cursor: pointer
+
+#submit
+    margin-top: 5em
+    color: #fff
+    position: relative
+    left: 50%
+    transform: translateX(-50%)
+    width: 5em
+    border-radius: 6px 
+    padding: .5em
+
+#submit:hover
+    background: #DC6180
+
+#exitUpload
+    width: 30px
+    position: absolute
+    top: 5px
+    right: 5px
+    cursor: pointer

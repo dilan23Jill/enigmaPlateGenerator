@@ -1,3 +1,11 @@
+
+
+// prevent sending data on refresh
+if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+
+
 //INPUT SETTINGS
 
 // more/less settings button
@@ -146,22 +154,6 @@ numListHeight.value = '600'
 numPlateWidth.value = '90'
 numPlateHeight.value = '54'
 
-//fill with preset 1
-document.getElementById('preOne').onclick = function () {
-  textCName.value = 'ENIGMA GAMING'
-  textCAddress.value = 'ENIGMA GAMING, Vrtine 4, 6276 Pobegi, Slovenia, Europe'
-  textProduct.value = 'USA22'
-  textModelName.value = 'USA22'
-  textModelID.value = 'USA22'
-  drpVoltage.value = '12V'
-  drpFrequency.value = '50hz'
-  numWattage.value = '200'
-  numElCurrent.value = '100'
-  textSNIdentifier.value = 'USA22'
-  numFirstNum.value = '1'
-  numLastNum.value = '10'
-  
-};
 
 //more settings values
 var moreTextSpacing = document.getElementById('numTextSpacing')
@@ -564,3 +556,22 @@ document.getElementById('dwnImg').style.visibility = "hidden"
 				xmlhttp.send();
 			}
 		}
+
+    var blurred = document.getElementsByClassName('blur')
+
+  document.getElementById('four').onclick = function(){
+    document.getElementById('uploadWindow').style.display = 'block'
+    for(let i=0; i < blurred.length; i++){
+      blurred[i].style.filter = "blur(5px)"
+      blurred[i].style.pointerEvents = "none"
+
+    }
+  };
+
+  document.getElementById('exitUpload').onclick = function(){
+    document.getElementById('uploadWindow').style.display = 'none';
+    for(let i=0; i < blurred.length; i++){
+      blurred[i].style.filter="blur(0px)"
+      blurred[i].style.pointerEvents = "auto"
+    }
+  };
