@@ -70,22 +70,22 @@ alert('sent');
     <image id="svg_imgCertificat" />
     <text id="svg_CompanyName" class="Ffamily" text-anchor="middle" >ENIGMA GAMING</text>
 
-    <text id="preSvg_product" class="preData Ffamily">Serial Number:</text>
+    <text id="preSvg_serialNumber" class="preData Ffamily">Serial Number:</text>
     <text id="svg_serialNumber" class="data serial Ffamily"></text>
 
     <text id="preSvg_productionDate" class="preData Ffamily">Production Date:</text>
     <text id="svg_productionDate" class="data Ffamily"></text>
 
-    <text id="preSvg_product" class="preData Ffamily">Product: </text>
+    <text id="preSvg_product" class="preData Ffamily">Product:</text>
     <text id="svg_product" class="data Ffamily"></text> 
 
     <text id="preSvg_modelName" class="preData Ffamily">Model Name:</text>
     <text id="svg_modelName" class="data Ffamily"></text>
 
-    <text id="preSvg_product" class="preData Ffamily">Model ID:</text>
+    <text id="preSvg_modelID" class="preData Ffamily">Model ID:</text>
     <text id="svg_modelID" class="data Ffamily"></text>
 
-    <text id="preSvg_product" class="preData Ffamily">Elec. ratings:</text>
+    <text id="preSvg_elecRatings" class="preData Ffamily">Elec. ratings:</text>
     <text id="svg_elecRatings" class="data Ffamily"></text>
 
     <text id="svg_companyAddress" text-anchor="middle" class="Ffamily" font-size="2.4mm">ENIGMA GAMING, Vrtine 4, 6276 Pobegi,
@@ -170,7 +170,7 @@ alert('sent');
     </div>
     <div class="wPlateInfoRight window blur">
     <input type="text" id="plateSNIdentifier" name="plateSNIdentifier" placeholder="S.N Identifier:*" class="inputInfo" title="Serial Number Identifier" required/>
-    <input type="number" id="plateFirstNum" min="1" placeholder="First Number:" class="inputInfo" required/>
+    <input type="number" id="plateFirstNum" min="1" placeholder="First Number:" class="inputInfo numChange" required/>
     <input type="number" id="plateLastNum" min="2" placeholder="Last Number:" class="inputInfo" required/>
     <input type="checkbox" id="plateChkMaxNum" class="numChange">
     <input type="text" id="plateProductionDate" placeholder="Production Date:*" class="inputInfo" title="Production Date" onfocus="(this.type='date')" required/>

@@ -217,8 +217,7 @@ document.getElementById('plateImgCertificat').addEventListener('change', functio
 //disable/enable last num
 var anchors = document.getElementsByClassName('numChange')
 for (var i = 0; i < anchors.length; i++) {
-  var anchor = anchors[i];
-  anchor.onchange = function () {
+  anchors[i].addEventListener('change',   function () {
     maxX = Math.floor(numListWidth.value / numPlateWidth.value)
     maxY = Math.floor(numListHeight.value / numPlateHeight.value)
     maxList = maxX * maxY
@@ -226,8 +225,9 @@ for (var i = 0; i < anchors.length; i++) {
       numLastNum.disabled = true
       numLastNum.value = maxList + parseInt(numFirstNum.value)
     } else numLastNum.disabled = false
-  }
+  });
 }
+
 
 function outputData() {
   numListWidth = document.getElementById('listWidth')
@@ -252,11 +252,14 @@ function outputData() {
   numHoleDiameter = document.getElementById('numHoleDiameter')
   drpFontFamily = document.getElementById('wPlateSlcFont')
 
+
+
   if (numLastNum.value - numFirstNum.value > maxList) {
     alert("check num plate")
     return
   }
-
+  
+  
   var dateP = dateProductionDate.value
   var finalDate = dateP.split('-')
   dateP = finalDate[1] + '/' + finalDate[0]
@@ -275,7 +278,22 @@ function outputData() {
   if(numWattage.value == '' && numElCurrent.value == ''){
     comma = ''
   }
-  
+var preTestStartX = numPlateWidth.value/3;
+var serialNumberLength = document.getElementById('preSvg_serialNumber').getBBox().width;
+var productionDateLength = document.getElementById('preSvg_productionDate').getBBox().width;
+var productLength = document.getElementById('preSvg_product').getComputedTextLength();
+var modelNameLength = document.getElementById('preSvg_modelName').getComputedTextLength();
+var modelIDLength = document.getElementById('preSvg_modelID').getComputedTextLength();
+var elecRatingsLength = document.getElementById('preSvg_elecRatings').getComputedTextLength();
+
+var offset1 = (productionDateLength - serialNumberLength) * 0.75
+var offset2 = (productionDateLength - productLength) 
+var offset3 = (productionDateLength - modelNameLength) 
+var offset4 = (productionDateLength - modelIDLength) 
+var offset5 = (productionDateLength - elecRatingsLength) 
+
+console.log(productionDateLength, preTestStartX, offset1,offset2,offset3,offset4,offset5)
+
 
     //more settings apply
 
@@ -361,25 +379,24 @@ function outputData() {
     document.getElementById('preSvg_modelName').classList.add('preData')
     document.getElementById('preSvg_modelName').setAttribute('display', 'block')
   } 
-      console.log(document.getElementById('svg_productionDate').getComputedTextLength())
 
-
+  
   for (let i = 0; i < preData.length; i++) {
     preData[i].setAttributeNS(null, 'font-size', textSize + defaultUnit)
     preData[i].setAttributeNS(null, 'y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
 
     if(i==0){
-      preData[i].setAttributeNS(null, 'x', numPlateWidth.value * 0.35 + defaultUnit)
+      preData[i].setAttributeNS(null, 'x', preTestStartX + offset1)
     }else if(i==1){
-      preData[i].setAttributeNS(null, 'x', numPlateWidth.value * 0.3 + defaultUnit)
+      preData[i].setAttributeNS(null, 'x', preTestStartX + 0.75 )
     }else if(i==2){
-      preData[i].setAttributeNS(null, 'x', numPlateWidth.value * 0.4 + defaultUnit)
+      preData[i].setAttributeNS(null, 'x', preTestStartX  )
     }else if(i==3){
-      preData[i].setAttributeNS(null, 'x', numPlateWidth.value * 0.3 + defaultUnit)
+      preData[i].setAttributeNS(null, 'x', preTestStartX  )
     }else if(i==4){
-      preData[i].setAttributeNS(null, 'x', numPlateWidth.value * 0.37 + defaultUnit)
+      preData[i].setAttributeNS(null, 'x', preTestStartX  )
     }else if(i==5){
-      preData[i].setAttributeNS(null, 'x', numPlateWidth.value * 0.35 + defaultUnit)
+      preData[i].setAttributeNS(null, 'x', preTestStartX )
     }
 
     
@@ -503,6 +520,7 @@ document.getElementById('pdfDownload').onclick = function () {
     link.click();
   });
   doc.end();
+
   platesFinal[0].setAttribute('display', 'block')
 };
 
