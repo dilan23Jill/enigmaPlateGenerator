@@ -137,16 +137,10 @@ var defaultFontSize = 4
 var defaultOffsetInline = 3
 var defaultOffsetHole = 5
 var defaultHoleDiameter = 1.75
-var defaultTextSpacing = 9
+var defaultTextSpacing = 11
 
 //fixed declaration
 const defaultUnit = 'mm';
-const preValueSerialNumber = 'Serial Number: ';
-const preValueProductionDate = 'Production Date: ';
-const preValueProduct = 'Product: ';
-const preValueModelName = 'Model Name: ';
-const preValueModelID = 'Model ID: ';
-const preValueElecRatings = 'Elec. ratings: ';
 var modelNameFirstPart = '00000000';
 
 numListWidth.value = '600'
@@ -183,14 +177,16 @@ var modelName = document.getElementById('svg_modelName')
 var modelID = document.getElementById('svg_modelID')
 var elecRatings = document.getElementById('svg_elecRatings')
 var companyAddress = document.getElementById('svg_companyAddress')
+var tspantest = document.getElementById('preSvg_product')
 
 var holes = document.getElementsByClassName('hole')
 var elms = document.getElementsByClassName('data')
+var preData = document.getElementsByClassName('preData')
 var fontFamily = document.getElementsByClassName('Ffamily')
 var xlinkNS = 'http://www.w3.org/1999/xlink'
 
 var textY = 4
-var textX = 0.3
+var textX = 0.55
 var textSpacing = numPlateHeight.value / defaultTextSpacing
 var textSize = numPlateWidth.value / 30
 var maxX = Math.floor(numListWidth.value / numPlateWidth.value)
@@ -198,7 +194,7 @@ var maxY = Math.floor(numListHeight.value / numPlateHeight.value)
 var maxList = maxX * maxY
 var nextNum = 0
 var mNameString = '0000000'
-var dateP = dateProductionDate.value
+
 
 
 //preview and fill svg onclick on design
@@ -261,12 +257,25 @@ function outputData() {
     return
   }
 
-  if (dateP.includes('/')) {
-    dateP = dateP.split('/')
-  } else if (dateP.includes('-')) {
-    dateP = dateP.split('-')
+  var dateP = dateProductionDate.value
+  var finalDate = dateP.split('-')
+  dateP = finalDate[1] + '/' + finalDate[0]
+  var wattageSign = 'W, '
+  var elecTurrentSign = 'A'
+  var comma = ', '
+
+  if(numWattage.value == ''){
+  wattageSign = ''
   }
-  dateProductionDate = dateP[1] + '/' + dateP[0]
+
+  if(numElCurrent.value == ''){
+    elecTurrentSign = ''
+  }
+
+  if(numWattage.value == '' && numElCurrent.value == ''){
+    comma = ''
+  }
+  
 
     //more settings apply
 
@@ -323,15 +332,19 @@ function outputData() {
   holeBR.setAttribute('cx', numPlateWidth.value - defaultOffsetHole + defaultUnit)
   holeBL.setAttribute('cy', numPlateHeight.value - defaultOffsetHole + defaultUnit)
   holeBR.setAttribute('cy', numPlateHeight.value - defaultOffsetHole + defaultUnit)
-  imgLogo.setAttribute('width', numPlateWidth.value / 4 + defaultUnit)
-  imgLogo.setAttribute('height', numPlateWidth.value / 4 + defaultUnit)
+  imgLogo.setAttribute('width', numPlateWidth.value / 4.5 + defaultUnit)
+  imgLogo.setAttribute('height', numPlateWidth.value / 4.5 + defaultUnit)
   imgLogo.setAttribute('x', numPlateHeight.value / 25 + defaultUnit)
+
+ 
+
+
   if (inputs[18].value == "") {
     imgLogo.setAttribute('y', numPlateHeight.value / 3.4 + defaultUnit)
   } else {
     imgLogo.setAttribute('y', numPlateHeight.value / 6 + defaultUnit)
-    imgCertificat.setAttribute('width', numPlateWidth.value / 4 + defaultUnit)
-    imgCertificat.setAttribute('height', numPlateWidth.value / 4 + defaultUnit)
+    imgCertificat.setAttribute('width', numPlateWidth.value / 4.5 + defaultUnit)
+    imgCertificat.setAttribute('height', numPlateWidth.value / 4.5 + defaultUnit)
     imgCertificat.setAttribute('x', numPlateHeight.value / 25 + defaultUnit)
     imgCertificat.setAttribute('y', numPlateHeight.value / 2 + defaultUnit)
   }
@@ -339,13 +352,41 @@ function outputData() {
   if (textModelName.value == '') {
     modelName.classList.remove('data')
     modelName.setAttribute('display', 'none')
+    document.getElementById('preSvg_modelName').classList.remove('preData')
+    document.getElementById('preSvg_modelName').setAttribute('display', 'none')
+
   } else {
     modelName.classList.add('data')
     modelName.setAttribute('display', 'block')
+    document.getElementById('preSvg_modelName').classList.add('preData')
+    document.getElementById('preSvg_modelName').setAttribute('display', 'block')
   } 
-  
+      console.log(document.getElementById('svg_productionDate').getComputedTextLength())
+
+
+  for (let i = 0; i < preData.length; i++) {
+    preData[i].setAttributeNS(null, 'font-size', textSize + defaultUnit)
+    preData[i].setAttributeNS(null, 'y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
+
+    if(i==0){
+      preData[i].setAttributeNS(null, 'x', numPlateWidth.value * 0.35 + defaultUnit)
+    }else if(i==1){
+      preData[i].setAttributeNS(null, 'x', numPlateWidth.value * 0.3 + defaultUnit)
+    }else if(i==2){
+      preData[i].setAttributeNS(null, 'x', numPlateWidth.value * 0.4 + defaultUnit)
+    }else if(i==3){
+      preData[i].setAttributeNS(null, 'x', numPlateWidth.value * 0.3 + defaultUnit)
+    }else if(i==4){
+      preData[i].setAttributeNS(null, 'x', numPlateWidth.value * 0.37 + defaultUnit)
+    }else if(i==5){
+      preData[i].setAttributeNS(null, 'x', numPlateWidth.value * 0.35 + defaultUnit)
+    }
+
+    
+  }
 
   for (let i = 0; i < elms.length; i++) {
+    elms[i].setAttributeNS(null, 'font-weight', 'bold')
     elms[i].setAttributeNS(null, 'x', numPlateWidth.value * textX + defaultUnit)
     elms[i].setAttributeNS(null, 'font-size', textSize + defaultUnit)
     elms[i].setAttributeNS(null, 'y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
@@ -356,14 +397,14 @@ function outputData() {
   }
 
   //text content of elements
-  companyName.textContent = textCName.value
+  companyName.textContent = textCName.value 
   companyAddress.textContent = textCAddress.value
-  product.textContent = preValueProduct + textProduct.value
-  serialNumber.textContent = preValueSerialNumber + textSNIdentifier.value + mNameString + parseInt(numFirstNum.value)
-  productionDate.textContent = preValueProductionDate + dateProductionDate
-  modelName.textContent = preValueModelName + textModelName.value
-  modelID.textContent = preValueModelID + textModelID.value
-  elecRatings.textContent = preValueElecRatings + drpVoltage.value + '~' + drpFrequency.value + ', ' + numWattage.value + 'W, ' + numElCurrent.value + 'A'
+  product.textContent = textProduct.value
+  serialNumber.textContent = textSNIdentifier.value + mNameString + parseInt(numFirstNum.value)
+  productionDate.textContent = dateP
+  modelName.innerHTML = textModelName.value 
+  modelID.textContent = textModelID.value
+  elecRatings.textContent = drpVoltage.value + '~' + drpFrequency.value + comma + numWattage.value + wattageSign + numElCurrent.value + elecTurrentSign
 
   openWin()
 };
@@ -388,7 +429,7 @@ function openWin() {
   }
   addup = 1
   platesFinal[0].setAttribute('display', 'none')
-  document.querySelectorAll('.serial')[1].textContent = preValueSerialNumber + textSNIdentifier.value + mNameString + parseInt(numFirstNum.value)
+  document.querySelectorAll('.serial')[1].textContent = textSNIdentifier.value + mNameString + parseInt(numFirstNum.value)
 
   var divText = document.getElementById("listBack").outerHTML;
   var myWindow = window.open('', '', numListWidth.value + 'mm', numListHeight.value + 'mm');
@@ -401,12 +442,12 @@ function openWin() {
 };
 
 function cloneSvg(x, y, index) {
-  var newrect = document.getElementById('prv_plate').cloneNode(true)
+  var newrect = plateFull.cloneNode(true)
   list.appendChild(newrect)
   newrect.setAttribute('x', x)
   newrect.setAttribute('y', y)
   nextNum = parseInt(numFirstNum.value) + index
-  serialNumber.textContent = preValueSerialNumber + textSNIdentifier.value + mNameString + nextNum
+  serialNumber.textContent = textSNIdentifier.value + mNameString + nextNum
 };
 //downloadsvg
 
@@ -471,10 +512,8 @@ var rotated = 0
 document.getElementById('openArrow').onclick = function(){
     document.getElementById('sideMenu').classList.toggle('sideBarWidth')
     rotated+=180
-    document.getElementById('arrow').style.transform = 'rotate('+rotated+'deg)'
-    
+    document.getElementById('arrow').style.transform = 'rotate('+rotated+'deg)'  
 };
-
 
  document.getElementById('preOne').addEventListener("mouseover", function () {
     document.getElementById('drpMenu').style.visibility = 'visible'
@@ -561,15 +600,20 @@ document.getElementById('dwnImg').style.visibility = "hidden"
 
   document.getElementById('four').onclick = function(){
     document.getElementById('uploadWindow').style.display = 'block'
+    objDiv.scrollTop = 0
     for(let i=0; i < blurred.length; i++){
       blurred[i].style.filter = "blur(5px)"
       blurred[i].style.pointerEvents = "none"
-
     }
   };
 
   document.getElementById('exitUpload').onclick = function(){
     document.getElementById('uploadWindow').style.display = 'none';
+    for(let i = 0; i < dwnClass.length; i++){
+      dwnClass[i].style.visibility = "hidden"
+  }
+  document.getElementById('dwnImg').style.visibility = "hidden"
+
     for(let i=0; i < blurred.length; i++){
       blurred[i].style.filter="blur(0px)"
       blurred[i].style.pointerEvents = "auto"

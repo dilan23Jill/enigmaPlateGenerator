@@ -68,13 +68,26 @@ alert('sent');
     <circle id="svg_hole_br" class="hole" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
     <image id="svg_imgLogo" />
     <image id="svg_imgCertificat" />
-    <text id="svg_CompanyName" font-weight="bold" class="Ffamily" text-anchor="middle" >ENIGMA GAMING</text>
-    <text id="svg_serialNumber" class="data serial Ffamily">Serial Number:</text>
-    <text id="svg_productionDate" class="data Ffamily">Production Date:</text>
-    <text id="svg_product" class="data Ffamily">Product:</text>
-    <text id="svg_modelName" class="data Ffamily">Model Name:</text>
-    <text id="svg_modelID" class="data Ffamily">Model ID:</text>
-    <text id="svg_elecRatings" class="data Ffamily">Elec. ratings:</text>
+    <text id="svg_CompanyName" class="Ffamily" text-anchor="middle" >ENIGMA GAMING</text>
+
+    <text id="preSvg_product" class="preData Ffamily">Serial Number:</text>
+    <text id="svg_serialNumber" class="data serial Ffamily"></text>
+
+    <text id="preSvg_productionDate" class="preData Ffamily">Production Date:</text>
+    <text id="svg_productionDate" class="data Ffamily"></text>
+
+    <text id="preSvg_product" class="preData Ffamily">Product: </text>
+    <text id="svg_product" class="data Ffamily"></text> 
+
+    <text id="preSvg_modelName" class="preData Ffamily">Model Name:</text>
+    <text id="svg_modelName" class="data Ffamily"></text>
+
+    <text id="preSvg_product" class="preData Ffamily">Model ID:</text>
+    <text id="svg_modelID" class="data Ffamily"></text>
+
+    <text id="preSvg_product" class="preData Ffamily">Elec. ratings:</text>
+    <text id="svg_elecRatings" class="data Ffamily"></text>
+
     <text id="svg_companyAddress" text-anchor="middle" class="Ffamily" font-size="2.4mm">ENIGMA GAMING, Vrtine 4, 6276 Pobegi,
       Slovenia, Europe</text>
     </svg>
@@ -208,7 +221,7 @@ alert('sent');
           <option value="Bahnschrift">Bahnschrift</option>
         </select>
       <input type="number" id="numHoleDiameter" placeholder="Hole Diameter (val.: 1.75)" class="inputInfo moreSettings" title="Hole Diameter" min="0" max="2.25" step="0.01" />
-      <input type="number" id="numTextSpacing" placeholder="Text Spacing (val.: 9)" class="inputInfo moreSettings" title="Text Spacing" min="0" step="0.1" maxlength="3" />
+      <input type="number" id="numTextSpacing" placeholder="Text Spacing (val.: 11)" class="inputInfo moreSettings" title="Text Spacing" min="0" step="0.1" maxlength="3" />
       <input type="number" id="numLaserLines" placeholder="Laser Lines Width (val.: 0.5)" class="inputInfo moreSettings" title="Laser Lines Width" min="0" max="3" step="0.01" />
       <input type="number" id="numBorderRadiusInner" placeholder="Border Radius Inner (val.: 8)" class="inputInfo moreSettings" title="Border Radius Inner" min="0" step="1" maxlength="3" />
       <input type="number" id="numBorderRadiusOutter" placeholder="Border Radius Outter(val.: 10)" class="inputInfo moreSettings" title="Border Radius Outter" min="0" step="1" maxlength="3" />
