@@ -201,7 +201,7 @@ var mNameString = '0000000'
 document.getElementById('plateImgLogo').addEventListener('change', function () {
   var reader = new FileReader()
   reader.onload = function (e) {
-    document.getElementById('svg_imgLogo').setAttributeNS(xlinkNS, 'href', e.target.result)
+    document.getElementById('svg_imgLogo').setAttributeNS(xlinkNS,  'href', e.target.result)
   };
   reader.readAsDataURL(this.files[0])
 });
@@ -209,7 +209,7 @@ document.getElementById('plateImgLogo').addEventListener('change', function () {
 document.getElementById('plateImgCertificat').addEventListener('change', function () {
   var reader_two = new FileReader()
   reader_two.onload = function (e) {
-    document.getElementById('svg_imgCertificat').setAttributeNS(xlinkNS, 'href', e.target.result)
+    document.getElementById('svg_imgCertificat').setAttributeNS(xlinkNS, 'href', e.target.result )
   };
   reader_two.readAsDataURL(this.files[0])
 });
@@ -371,7 +371,7 @@ function outputData() {
 for (let i = 0; i < preData.length; i++) {
     preData[i].setAttributeNS(null, 'font-size', textSize + defaultUnit)
     preData[i].setAttributeNS(null, 'y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
-    preData[i].setAttributeNS(null, 'x',   numPlateWidth.value * textX - 3 + defaultUnit)
+    preData[i].setAttributeNS(null, 'x',   numPlateWidth.value * textX  + defaultUnit)
     preData[i].setAttributeNS(null, 'letter-spacing',  numPlateWidth.value/400 + defaultUnit)
 
   }
@@ -443,34 +443,17 @@ function cloneSvg(x, y, index) {
 
 document.getElementById('svgDownload').onclick = function () {
   platesFinal[0].setAttribute('display', 'none')
-  var serializer = new XMLSerializer();
-  var source = serializer.serializeToString(list);
-  source = source.replace(/(\w+)?:?xlink=/g, 'xmlns:xlink='); // Fix root xlink without namespace
-
-  source = source.replace(/ns\d+:href/g, 'xlink:href'); // Safari NS namespace fix.
-
-  if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
-    source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
-  }
-  if (!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)) {
-    source = source.replace(
-      /^<svg/,
-      '<svg xmlns:xlink="http://www.w3.org/1999/xlink"'
-    ); 
-
-  }
-
-  var preface = '<?xml version="1.0" standalone="no"?>\r\n';
-  var svgBlob = new Blob([preface, source], {
-    type: 'image/svg+xml;charset=utf-8',
-  });
-  var svgUrl = URL.createObjectURL(svgBlob);
-  var downloadLink = document.createElement('a');
-  downloadLink.href = svgUrl;
-  downloadLink.download = name;
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);     
+  list.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    var svgData = list.outerHTML;
+    var preface = '<?xml version="1.0" standalone="no"?>\r\n';
+    var svgBlob = new Blob([preface, svgData], {type:"image/svg+xml;charset=utf-8"});
+    var svgUrl = URL.createObjectURL(svgBlob);
+    var downloadLink = document.createElement("a");
+    downloadLink.href = svgUrl;
+    downloadLink.download = "download.svg";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   platesFinal[0].setAttribute('display', 'block')
 
 };
@@ -485,7 +468,7 @@ document.getElementById('pdfDownload').onclick = function () {
   let doc = new PDFDocument({ compress: false, size: [pointWidth, pointHeight] });
   SVGtoPDF(doc, list, 0, 0);
   let stream = doc.pipe(blobStream());
-  stream.on('finish', () => {
+  stream.on('finish', () => {  
     let blob = stream.toBlob('application/pdf');
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
@@ -616,3 +599,4 @@ document.getElementById('dwnImg').style.visibility = "hidden"
       blurred[i].style.pointerEvents = "auto"
     }
   };
+

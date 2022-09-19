@@ -54,7 +54,6 @@ alert('sent');
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,400i,700,700i" />
 
 
-
   <script src="https://cdn.jsdelivr.net/npm/pdfkit@0.10.0/js/pdfkit.standalone.js"></script>
   <script src="https://bundle.run/blob-stream@0.1.3"></script>
   <script src="https://cdn.jsdelivr.net/npm/svg-to-pdfkit@0.1.8/source.js"></script>
@@ -66,18 +65,21 @@ alert('sent');
 </head>
 
 <body>
-  <div id="listBack" class="listBack">
+  <div id="listBack" class="listBack">    
+
 <svg width="600mm" height="600mm" id="list">
   <svg id="prv_plate" class="plates_final" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="90mm" height="54mm" >
-    <rect id="svg_plateBorder" rx="10" x="0" y="0" fill="none" stroke="magenta" stroke-width="0.2mm" />
+    <rect id="svg_plateBorder" rx="10" x="0" y="0" fill="none" stroke="magenta" stroke-width="0.21mm" />
     <rect id="svg_plateInnerLine" rx="8" x="1.5mm" y="1.5mm" fill="none" stroke="black" stroke-width="0.5mm" />
     <rect id="svg_underline" x="10mm" y="10mm" width="70mm" height="0.3mm" fill="black" />
-    <circle id="svg_hole_tl" class="hole" cx="5mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
-    <circle id="svg_hole_tr" class="hole" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
-    <circle id="svg_hole_bl" class="hole" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
-    <circle id="svg_hole_br" class="hole" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
-    <image src="img/arrowExchange.svg" id="svg_imgLogo" />
-    <image id="svg_imgCertificat" />
+    <circle id="svg_hole_tl" class="hole" cx="5mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
+    <circle id="svg_hole_tr" class="hole" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
+    <circle id="svg_hole_bl" class="hole" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
+    <circle id="svg_hole_br" class="hole" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
+   
+    <image src="" id="svg_imgLogo" />
+    <image src="" id="svg_imgCertificat" />
+
     <text id="svg_CompanyName" class="Ffamily" text-anchor="middle" >ENIGMA GAMING</text>
 
     <text id="preSvg_serialNumber"  text-anchor="end" class="preData Ffamily">Serial Number:</text>
@@ -100,7 +102,7 @@ alert('sent');
 
     <text id="svg_companyAddress" text-anchor="middle" class="Ffamily" font-size="2.4mm">ENIGMA GAMING, Vrtine 4, 6276 Pobegi,
       Slovenia, Europe</text>
-    </svg>
+    </svg> 
     
 </svg>    
 </div>   
@@ -209,11 +211,11 @@ alert('sent');
     <div class="wPlateInfo window blur" id="fileWindow">
       <b id="textListSize">IMAGE:</b>  
 
-      <input type="file" id="plateImgLogo" name="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" required>
+      <input type="file" id="plateImgLogo" name="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" accept=".svg" required>
       <button type="button" id="plateImgLogoFake" class="inputInfoBtn btnFile" title="Logo Image">LOGO</button>
       <span id="plateImgLogoFilename"></span>
 
-      <input type="file" id="plateImgCertificat" name="plateImgCertificat" placeholder="Upload Certificat:" class="inputInfo fileInput" > 
+      <input type="file" id="plateImgCertificat" name="plateImgCertificat" placeholder="Upload Certificat:" class="inputInfo fileInput" accept=".svg"> 
       <button type="button" id="plateImgCertificatFake" class="inputInfoBtn btnFile" title="Certificat Image" >CERTIFICAT</button>
       <span id="plateImgCertificatFilename"></span>
     </div>
