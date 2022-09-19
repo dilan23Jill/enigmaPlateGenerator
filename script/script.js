@@ -259,7 +259,6 @@ function outputData() {
     return
   }
   
-  
   var dateP = dateProductionDate.value
   var finalDate = dateP.split('-')
   dateP = finalDate[1] + '/' + finalDate[0]
@@ -278,22 +277,6 @@ function outputData() {
   if(numWattage.value == '' && numElCurrent.value == ''){
     comma = ''
   }
-var preTestStartX = numPlateWidth.value/3;
-var serialNumberLength = document.getElementById('preSvg_serialNumber').getBBox().width;
-var productionDateLength = document.getElementById('preSvg_productionDate').getBBox().width;
-var productLength = document.getElementById('preSvg_product').getComputedTextLength();
-var modelNameLength = document.getElementById('preSvg_modelName').getComputedTextLength();
-var modelIDLength = document.getElementById('preSvg_modelID').getComputedTextLength();
-var elecRatingsLength = document.getElementById('preSvg_elecRatings').getComputedTextLength();
-
-var offset1 = (productionDateLength - serialNumberLength) * 0.75
-var offset2 = (productionDateLength - productLength) 
-var offset3 = (productionDateLength - modelNameLength) 
-var offset4 = (productionDateLength - modelIDLength) 
-var offset5 = (productionDateLength - elecRatingsLength) 
-
-console.log(productionDateLength, preTestStartX, offset1,offset2,offset3,offset4,offset5)
-
 
     //more settings apply
 
@@ -380,26 +363,17 @@ console.log(productionDateLength, preTestStartX, offset1,offset2,offset3,offset4
     document.getElementById('preSvg_modelName').setAttribute('display', 'block')
   } 
 
-  
-  for (let i = 0; i < preData.length; i++) {
+
+   for (let i = 0; i < fontFamily.length; i++) {
+    fontFamily[i].setAttributeNS(null, 'font-family', drpFontFamily.value)
+  } 
+ 
+for (let i = 0; i < preData.length; i++) {
     preData[i].setAttributeNS(null, 'font-size', textSize + defaultUnit)
     preData[i].setAttributeNS(null, 'y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
+    preData[i].setAttributeNS(null, 'x',   numPlateWidth.value * textX - 3 + defaultUnit)
+    preData[i].setAttributeNS(null, 'letter-spacing',  numPlateWidth.value/400 + defaultUnit)
 
-    if(i==0){
-      preData[i].setAttributeNS(null, 'x', preTestStartX + offset1)
-    }else if(i==1){
-      preData[i].setAttributeNS(null, 'x', preTestStartX + 0.75 )
-    }else if(i==2){
-      preData[i].setAttributeNS(null, 'x', preTestStartX  )
-    }else if(i==3){
-      preData[i].setAttributeNS(null, 'x', preTestStartX  )
-    }else if(i==4){
-      preData[i].setAttributeNS(null, 'x', preTestStartX  )
-    }else if(i==5){
-      preData[i].setAttributeNS(null, 'x', preTestStartX )
-    }
-
-    
   }
 
   for (let i = 0; i < elms.length; i++) {
@@ -407,12 +381,11 @@ console.log(productionDateLength, preTestStartX, offset1,offset2,offset3,offset4
     elms[i].setAttributeNS(null, 'x', numPlateWidth.value * textX + defaultUnit)
     elms[i].setAttributeNS(null, 'font-size', textSize + defaultUnit)
     elms[i].setAttributeNS(null, 'y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
+    elms[i].setAttributeNS(null, 'letter-spacing', numPlateWidth.value/700  + defaultUnit)
+
   }
 
-  for (let i = 0; i < fontFamily.length; i++) {
-    fontFamily[i].setAttributeNS(null, 'font-family', drpFontFamily.value)
-  }
-
+ 
   //text content of elements
   companyName.textContent = textCName.value 
   companyAddress.textContent = textCAddress.value
@@ -421,7 +394,7 @@ console.log(productionDateLength, preTestStartX, offset1,offset2,offset3,offset4
   productionDate.textContent = dateP
   modelName.innerHTML = textModelName.value 
   modelID.textContent = textModelID.value
-  elecRatings.textContent = drpVoltage.value + '~' + drpFrequency.value + comma + numWattage.value + wattageSign + numElCurrent.value + elecTurrentSign
+  elecRatings.textContent = drpVoltage.value + ' ' + drpFrequency.value + comma + numWattage.value + wattageSign + numElCurrent.value + elecTurrentSign
 
   openWin()
 };
@@ -557,7 +530,6 @@ document.getElementById('preOne').style.background = ''
  var checkInputs = document.querySelector('.inputInfo')
 
  checkInputs.addEventListener('change', () => {
-  console.log("rs");
   for(let i = 0; i < dwnClass.length; i++){
     dwnClass[i].style.visibility = "hidden"
 }
@@ -579,7 +551,10 @@ document.getElementById('dwnImg').style.visibility = "hidden"
 				document.getElementById("plateModelID").value = "";
 				document.getElementById("plateSNIdentifier").value = "";
         document.getElementById("plateName").value = "";
-
+        document.getElementById("valbra").value = "";
+				document.getElementById("plateFrequency").value = "";
+				document.getElementById("plateWattage").value = "";
+        document.getElementById("plateElCurrent").value = "";
 			
 				return;
 			}
@@ -605,6 +580,10 @@ document.getElementById('dwnImg').style.visibility = "hidden"
 				document.getElementById("plateModelID").value = myObj[8];
 				document.getElementById("plateSNIdentifier").value = myObj[9];
         document.getElementById("plateName").value = myObj[10];
+        document.getElementById("plateVoltage").value = myObj[11];
+				document.getElementById("plateFrequency").value = myObj[12];
+				document.getElementById("plateWattage").value = myObj[13];
+        document.getElementById("plateElCurrent").value = myObj[14];
 
 					}
 				};

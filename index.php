@@ -13,13 +13,17 @@ if(isset($_POST['submit'])){
     $plateModelID= $_POST["plateModelID"];
     $plateSNIdentifier= $_POST["plateSNIdentifier"];
     $plateName= $_POST["plateName"];
+    $voltage = $_POST["voltage"];
+    $frequency = $_POST["frequency"];
+    $wattage = $_POST["wattage"];
+    $electricCurrent = $_POST["electricCurrent"];
 
 
-
-$query = "INSERT INTO Plates (listWidth, listHeight,  plateWidth, plateHeight, companyName,
-companyAddress, product, model, idModel, serialNumberIdentifier, plateName)
+$query = "REPLACE INTO Plates (listWidth, listHeight,  plateWidth, plateHeight, companyName,
+companyAddress, product, model, idModel, serialNumberIdentifier, plateName, voltage, frequency, wattage, electricCurrent)
 VALUES('$listWidth', '$listHeight', '$plateWidth', '$plateHeight', '$plateCName',
-'$plateCAddress', '$plateProduct', '$plateModelName', '$plateModelID', '$plateSNIdentifier', '$plateName')";
+'$plateCAddress', '$plateProduct', '$plateModelName', '$plateModelID', '$plateSNIdentifier', 
+'$plateName', '$voltage', '$frequency', '$wattage', '$electricCurrent')";
 
 mysqli_query($db, $query);
 echo
@@ -43,7 +47,13 @@ alert('sent');
 
   <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
   <link rel="stylesheet" href="style/style.css" />
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,900" >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,400i,700,700i" />
+
+
 
   <script src="https://cdn.jsdelivr.net/npm/pdfkit@0.10.0/js/pdfkit.standalone.js"></script>
   <script src="https://bundle.run/blob-stream@0.1.3"></script>
@@ -66,26 +76,26 @@ alert('sent');
     <circle id="svg_hole_tr" class="hole" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
     <circle id="svg_hole_bl" class="hole" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
     <circle id="svg_hole_br" class="hole" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.2" fill="none" />
-    <image id="svg_imgLogo" />
+    <image src="img/arrowExchange.svg" id="svg_imgLogo" />
     <image id="svg_imgCertificat" />
     <text id="svg_CompanyName" class="Ffamily" text-anchor="middle" >ENIGMA GAMING</text>
 
-    <text id="preSvg_serialNumber" class="preData Ffamily">Serial Number:</text>
+    <text id="preSvg_serialNumber"  text-anchor="end" class="preData Ffamily">Serial Number:</text>
     <text id="svg_serialNumber" class="data serial Ffamily"></text>
 
-    <text id="preSvg_productionDate" class="preData Ffamily">Production Date:</text>
+    <text id="preSvg_productionDate" text-anchor="end" class="preData Ffamily">Production Date:</text>
     <text id="svg_productionDate" class="data Ffamily"></text>
 
-    <text id="preSvg_product" class="preData Ffamily">Product:</text>
+    <text id="preSvg_product" text-anchor="end" class="preData Ffamily">Product:</text>
     <text id="svg_product" class="data Ffamily"></text> 
 
-    <text id="preSvg_modelName" class="preData Ffamily">Model Name:</text>
+    <text id="preSvg_modelName" text-anchor="end" class="preData Ffamily">Model Name:</text>
     <text id="svg_modelName" class="data Ffamily"></text>
 
-    <text id="preSvg_modelID" class="preData Ffamily">Model ID:</text>
+    <text id="preSvg_modelID" text-anchor="end" class="preData Ffamily">Model ID:</text>
     <text id="svg_modelID" class="data Ffamily"></text>
 
-    <text id="preSvg_elecRatings" class="preData Ffamily">Elec. ratings:</text>
+    <text id="preSvg_elecRatings" text-anchor="end" class="preData Ffamily">Elec. ratings:</text>
     <text id="svg_elecRatings" class="data Ffamily"></text>
 
     <text id="svg_companyAddress" text-anchor="middle" class="Ffamily" font-size="2.4mm">ENIGMA GAMING, Vrtine 4, 6276 Pobegi,
@@ -177,33 +187,33 @@ alert('sent');
     </div>
     <div class="wPlateInfo window blur">
     <b id="textListSize">ELECTRIC RATINGS:</b>
-    <select name="font" id="plateVoltage" title="Voltage" class="inputInfo" required>
+    <select id="plateVoltage" name="voltage" title="Voltage" class="inputInfo" required>
     <option value="" disabled selected>Voltage:</option>
-    <option value="12V">12V</option>
-    <option value="24V">24V</option>
-    <option value="120V">120V</option>
-    <option value="230V">230V</option>
-    <option value="120V/230V">120V/230V</option>
+    <option value="12V⎓">12V⎓</option>
+    <option value="24V⎓">24V⎓</option>
+    <option value="110V~">120V~</option>
+    <option value="230V~">230V~</option>
+    <option value="110-230V~">110-230V~</option>
       </select>
-      <select name="font" id="plateFrequency" title="Frequency" class="inputInfo" required >
+      <select  id="plateFrequency" name="frequency" title="Frequency" class="inputInfo" required >
         <option value="" disabled selected>Frequency:</option>
         <option value="50hz">50hz</option>
         <option value="60hz">60hz</option>
         <option value="50hz/60hz">50hz/60hz</option>
       </select>
       
-      <input type="number" id="plateWattage" placeholder="Wattage (optional):" class="inputInfo" title="Wattage" /><br/>
-      <input type="number" id="plateElCurrent" placeholder="El. Current (optional):" class="inputInfo" title="Electric Current" 
+      <input type="number" id="plateWattage" name="wattage" placeholder="Wattage (optional):" class="inputInfo" title="Wattage" /><br/>
+      <input type="number" id="plateElCurrent" name="electricCurrent" placeholder="El. Current (optional):" class="inputInfo" title="Electric Current" 
       />
     </div>
     <div class="wPlateInfo window blur" id="fileWindow">
       <b id="textListSize">IMAGE:</b>  
 
-      <input type="file" id="plateImgLogo" name="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" accept=".svg" required>
+      <input type="file" id="plateImgLogo" name="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" required>
       <button type="button" id="plateImgLogoFake" class="inputInfoBtn btnFile" title="Logo Image">LOGO</button>
       <span id="plateImgLogoFilename"></span>
 
-      <input type="file" id="plateImgCertificat" name="plateImgCertificat" placeholder="Upload Certificat:" class="inputInfo fileInput" accept=".svg"> 
+      <input type="file" id="plateImgCertificat" name="plateImgCertificat" placeholder="Upload Certificat:" class="inputInfo fileInput" > 
       <button type="button" id="plateImgCertificatFake" class="inputInfoBtn btnFile" title="Certificat Image" >CERTIFICAT</button>
       <span id="plateImgCertificatFilename"></span>
     </div>
@@ -216,9 +226,12 @@ alert('sent');
           <select name="font" id="wPlateSlcFont" title="Font Style" class="inputInfo">
           <option value="" disabled selected>Font Style</option>
           <option value="Arial">Arial</option>
+          <option value="Roboto Condensed">Roboto Condensed</option>
           <option value="Montserrat" selected>Montserrat</option>
           <option value="Open Sans">Open Sans</option>
           <option value="Bahnschrift">Bahnschrift</option>
+          <option value="Anonymous Pro">Anonymous Pro</option>
+
         </select>
       <input type="number" id="numHoleDiameter" placeholder="Hole Diameter (val.: 1.75)" class="inputInfo moreSettings" title="Hole Diameter" min="0" max="2.25" step="0.01" />
       <input type="number" id="numTextSpacing" placeholder="Text Spacing (val.: 11)" class="inputInfo moreSettings" title="Text Spacing" min="0" step="0.1" maxlength="3" />
