@@ -52,8 +52,9 @@ alert('sent');
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,400i,700,700i" />
-
-
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/svg-to-pdfkit@0.1.8/source.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pdfkit@0.10.0/js/pdfkit.standalone.js"></script>
   <script src="https://bundle.run/blob-stream@0.1.3"></script>
   <script src="https://cdn.jsdelivr.net/npm/svg-to-pdfkit@0.1.8/source.js"></script>
@@ -66,41 +67,39 @@ alert('sent');
 
 <body>
   <div id="listBack" class="listBack">    
-
-<svg width="600mm" height="600mm" id="list">
+<svg width="600mm" height="600mm" id="list" viewBox="0 0 600mm 600mm" xmlns="http://www.w3.org/2000/svg">
   <svg id="prv_plate" class="plates_final" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="90mm" height="54mm" >
-    <rect id="svg_plateBorder" rx="10" x="0" y="0" fill="none" stroke="magenta" stroke-width="0.21mm" />
+    <rect id="svg_plateBorder" rx="10" x="0" y="0" fill="none" stroke="magenta" stroke-width="0.1mm" />
     <rect id="svg_plateInnerLine" rx="8" x="1.5mm" y="1.5mm" fill="none" stroke="black" stroke-width="0.5mm" />
     <rect id="svg_underline" x="10mm" y="10mm" width="70mm" height="0.3mm" fill="black" />
     <circle id="svg_hole_tl" class="hole" cx="5mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
     <circle id="svg_hole_tr" class="hole" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
     <circle id="svg_hole_bl" class="hole" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
     <circle id="svg_hole_br" class="hole" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
-   
-    <image src="" id="svg_imgLogo" />
-    <image src="" id="svg_imgCertificat" />
+    <image  x="10" y="20" width="80" height="80"  id="svg_imgLogo" />
+    <image  x="10" y="20" width="80" height="80" id="svg_imgCertificat" />
 
-    <text id="svg_CompanyName" class="Ffamily" text-anchor="middle" >ENIGMA GAMING</text>
+    <text id="svg_CompanyName" fill="black" class="Ffamily" text-anchor="middle" >ENIGMA GAMING</text>
 
-    <text id="preSvg_serialNumber"  text-anchor="end" class="preData Ffamily">Serial Number:</text>
-    <text id="svg_serialNumber" class="data serial Ffamily"></text>
+    <text id="preSvg_serialNumber"  fill="black" text-anchor="end" class="preData Ffamily">Serial Number:</text>
+    <text id="svg_serialNumber" fill="black" class="data serial Ffamily"></text>
 
-    <text id="preSvg_productionDate" text-anchor="end" class="preData Ffamily">Production Date:</text>
-    <text id="svg_productionDate" class="data Ffamily"></text>
+    <text id="preSvg_productionDate"  fill="black" text-anchor="end" class="preData Ffamily">Production Date:</text>
+    <text id="svg_productionDate"  fill="black" class="data Ffamily"></text>
 
-    <text id="preSvg_product" text-anchor="end" class="preData Ffamily">Product:</text>
-    <text id="svg_product" class="data Ffamily"></text> 
+    <text id="preSvg_product"  fill="black" text-anchor="end" class="preData Ffamily">Product:</text>
+    <text id="svg_product"  fill="black" class="data Ffamily"></text> 
 
-    <text id="preSvg_modelName" text-anchor="end" class="preData Ffamily">Model Name:</text>
-    <text id="svg_modelName" class="data Ffamily"></text>
+    <text id="preSvg_modelName"  fill="black" text-anchor="end" class="preData Ffamily">Model Name:</text>
+    <text id="svg_modelName"  fill="black" class="data Ffamily"></text>
 
-    <text id="preSvg_modelID" text-anchor="end" class="preData Ffamily">Model ID:</text>
-    <text id="svg_modelID" class="data Ffamily"></text>
+    <text id="preSvg_modelID"  fill="black" text-anchor="end" class="preData Ffamily">Model ID:</text>
+    <text id="svg_modelID" fill="black" class="data Ffamily"></text>
 
-    <text id="preSvg_elecRatings" text-anchor="end" class="preData Ffamily">Elec. ratings:</text>
-    <text id="svg_elecRatings" class="data Ffamily"></text>
+    <text id="preSvg_elecRatings"  fill="black" text-anchor="end" class="preData Ffamily">Elec. ratings:</text>
+    <text id="svg_elecRatings"  fill="black" class="data Ffamily"></text>
 
-    <text id="svg_companyAddress" text-anchor="middle" class="Ffamily" font-size="2.4mm">ENIGMA GAMING, Vrtine 4, 6276 Pobegi,
+    <text id="svg_companyAddress"  fill="black" text-anchor="middle" class="Ffamily" font-size="2.4mm">ENIGMA GAMING, Vrtine 4, 6276 Pobegi,
       Slovenia, Europe</text>
     </svg> 
     
@@ -157,6 +156,7 @@ alert('sent');
 </div>
 
   <form id="ctrForm" action="" class="" name="form1" method="post" autocomplete="on">
+    <div > <a href="">downloa</a></div>
     <div class="title_tab blur">
       <h1 id="title">PLATE GENERATOR</h1>
       </div>        
@@ -211,7 +211,7 @@ alert('sent');
     <div class="wPlateInfo window blur" id="fileWindow">
       <b id="textListSize">IMAGE:</b>  
 
-      <input type="file" id="plateImgLogo" name="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" accept=".svg" required>
+      <input type="file" id="plateImgLogo" (change)="openFile($event)" name="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" accept=".svg" required>
       <button type="button" id="plateImgLogoFake" class="inputInfoBtn btnFile" title="Logo Image">LOGO</button>
       <span id="plateImgLogoFilename"></span>
 

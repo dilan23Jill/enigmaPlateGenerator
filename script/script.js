@@ -1,9 +1,9 @@
 
 
 // prevent sending data on refresh
-if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
+if (window.history.replaceState) {
+  window.history.replaceState(null, null, window.location.href);
+}
 
 
 //INPUT SETTINGS
@@ -50,9 +50,9 @@ var presetElements = document.getElementsByClassName('preset')
 for (let p = 0; p < presetElements.length; p++) {
   presetElements[p].addEventListener('click', function () {
     for (let p = 0; p < presetElements.length; p++) {
-      presetElements[p].classList.remove('extand')
+      presetElements[p].classList.remove('extend')
     }
-    this.classList.toggle('extand')
+    this.classList.toggle('extend')
   });
 };
 
@@ -62,31 +62,31 @@ var dwnClass = document.getElementsByClassName("downloadClass")
 var inputs = document.getElementsByClassName('inputInfo')
 var numAlert;
 document.getElementById('btnPreview').onclick = function () {
-  numAlert=0
+  numAlert = 0
   for (let i = 0; i < inputs.length; i++) {
     if (inputs[i].value == "") {
       if (i == 7 || i == 15 || i == 16 || i == 18 || i > 19) {
       } else {
         numAlert++
-        for(let i = 0; i < dwnClass.length; i++){
+        for (let i = 0; i < dwnClass.length; i++) {
           dwnClass[i].style.visibility = "hidden"
-      }
-      document.getElementById('dwnImg').style.visibility = "hidden"
+        }
+        document.getElementById('dwnImg').style.visibility = "hidden"
       }
     }
   }
-if(numAlert==0) {
-  for(let i = 0; i < dwnClass.length; i++){
-    dwnClass[i].style.visibility = "visible"
-}
-document.getElementById('dwnImg').style.visibility = "visible"
-outputData()
-}else alert("Fill all the neccesary fields")
+  if (numAlert == 0) {
+    for (let i = 0; i < dwnClass.length; i++) {
+      dwnClass[i].style.visibility = "visible"
+    }
+    document.getElementById('dwnImg').style.visibility = "visible"
+    outputData()
+  } else alert("Fill all the neccesary fields")
 };
 
 var elementsDwn = document.getElementsByClassName('dwnWrap')
 document.getElementById('third').addEventListener("mouseover", function () {
-  for(let i = 0; i < elementsDwn.length; i++){
+  for (let i = 0; i < elementsDwn.length; i++) {
     elementsDwn[i].style.visibility = 'visible'
   }
   document.getElementById('dwnImg').style.visibility = 'hidden'
@@ -95,11 +95,11 @@ document.getElementById('third').addEventListener("mouseover", function () {
 
 
 
-  document.getElementById('third').addEventListener("mouseout", function () {
-    for(let i = 0; i < elementsDwn.length; i++){
-      elementsDwn[i].style.visibility = 'hidden'
-    }
-    document.getElementById('dwnImg').style.visibility = 'visible'
+document.getElementById('third').addEventListener("mouseout", function () {
+  for (let i = 0; i < elementsDwn.length; i++) {
+    elementsDwn[i].style.visibility = 'hidden'
+  }
+  document.getElementById('dwnImg').style.visibility = 'visible'
 
 });
 
@@ -143,10 +143,10 @@ var defaultTextSpacing = 11
 const defaultUnit = 'mm';
 var modelNameFirstPart = '00000000';
 
-numListWidth.value = '600'
-numListHeight.value = '600'
-numPlateWidth.value = '90'
-numPlateHeight.value = '54'
+numListWidth.value = 600
+numListHeight.value = 600
+numPlateWidth.value = 90
+numPlateHeight.value = 54
 
 
 //more settings values
@@ -201,7 +201,7 @@ var mNameString = '0000000'
 document.getElementById('plateImgLogo').addEventListener('change', function () {
   var reader = new FileReader()
   reader.onload = function (e) {
-    document.getElementById('svg_imgLogo').setAttributeNS(xlinkNS,  'href', e.target.result)
+    document.getElementById('svg_imgLogo').setAttribute('href', e.target.result)
   };
   reader.readAsDataURL(this.files[0])
 });
@@ -209,7 +209,7 @@ document.getElementById('plateImgLogo').addEventListener('change', function () {
 document.getElementById('plateImgCertificat').addEventListener('change', function () {
   var reader_two = new FileReader()
   reader_two.onload = function (e) {
-    document.getElementById('svg_imgCertificat').setAttributeNS(xlinkNS, 'href', e.target.result )
+    document.getElementById('svg_imgCertificat').setAttribute('href', e.target.result)
   };
   reader_two.readAsDataURL(this.files[0])
 });
@@ -217,7 +217,7 @@ document.getElementById('plateImgCertificat').addEventListener('change', functio
 //disable/enable last num
 var anchors = document.getElementsByClassName('numChange')
 for (var i = 0; i < anchors.length; i++) {
-  anchors[i].addEventListener('change',   function () {
+  anchors[i].addEventListener('change', function () {
     maxX = Math.floor(numListWidth.value / numPlateWidth.value)
     maxY = Math.floor(numListHeight.value / numPlateHeight.value)
     maxList = maxX * maxY
@@ -258,7 +258,7 @@ function outputData() {
     alert("check num plate")
     return
   }
-  
+
   var dateP = dateProductionDate.value
   var finalDate = dateP.split('-')
   dateP = finalDate[1] + '/' + finalDate[0]
@@ -266,51 +266,53 @@ function outputData() {
   var elecTurrentSign = 'A'
   var comma = ', '
 
-  if(numWattage.value == ''){
-  wattageSign = ''
+  if (numWattage.value == '') {
+    wattageSign = ''
   }
 
-  if(numElCurrent.value == ''){
+  if (numElCurrent.value == '') {
     elecTurrentSign = ''
   }
 
-  if(numWattage.value == '' && numElCurrent.value == ''){
+  if (numWattage.value == '' && numElCurrent.value == '') {
     comma = ''
   }
 
-    //more settings apply
+  //more settings apply
 
-  if(numHoleDiameter.value != ''){
-    for(let x=0; x < holes.length; x++){
+  if (numHoleDiameter.value != '') {
+    for (let x = 0; x < holes.length; x++) {
       holes[x].setAttribute('r', numHoleDiameter.value + defaultUnit)
     }
-  }else{
-    for(let x=0; x < holes.length; x++){
+  } else {
+    for (let x = 0; x < holes.length; x++) {
       holes[x].setAttribute('r', defaultHoleDiameter + defaultUnit)
     }
   }
 
-  if(moreTextSpacing.value != ''){
-      textSpacing = numPlateHeight.value / moreTextSpacing.value
-  }else textSpacing = numPlateHeight.value / defaultTextSpacing
+  if (moreTextSpacing.value != '') {
+    textSpacing = numPlateHeight.value / moreTextSpacing.value
+  } else textSpacing = numPlateHeight.value / defaultTextSpacing
 
-  if(moreLaserLine.value != ''){
+  if (moreLaserLine.value != '') {
     innerLine.setAttribute('stroke-width', moreLaserLine.value + defaultUnit)
-  }else innerLine.setAttribute('stroke-width', 0.2 + defaultUnit)
+  } else innerLine.setAttribute('stroke-width', 0.2 + defaultUnit)
 
-  if(moreBRInner.value != ''){
+  if (moreBRInner.value != '') {
     innerLine.setAttribute('rx', moreBRInner.value)
-  }else innerLine.setAttribute('rx', 8)
+  } else innerLine.setAttribute('rx', 8)
 
-  if(moreBRoutter.value != ''){
+  if (moreBRoutter.value != '') {
     plateBorder.setAttribute('rx', moreBRoutter.value)
-  }else plateBorder.setAttribute('rx', 10)
-  
-  if(moreTextSize.value != ''){
-      textSize = numPlateWidth.value/moreTextSize.value
-  }else textSize = numPlateWidth.value / 30
+  } else plateBorder.setAttribute('rx', 10)
 
-  
+  if (moreTextSize.value != '') {
+    textSize = numPlateWidth.value / moreTextSize.value
+  } else textSize = numPlateWidth.value / 30
+
+  var addressTextPosX = numPlateWidth.value / 2 + defaultUnit;
+
+
   //position of elements
   list.setAttribute('width', numListWidth.value + defaultUnit);
   list.setAttribute('height', numListHeight.value + defaultUnit);
@@ -323,10 +325,10 @@ function outputData() {
   underLine.setAttribute('x', 2 * defaultOffsetHole + defaultUnit)
   underLine.setAttribute('y', 2 * defaultFontSize + defaultUnit)
   underLine.setAttribute('width', numPlateWidth.value - 4 * defaultOffsetHole + defaultUnit)
-  companyName.setAttribute('x', numPlateWidth.value / 2 + defaultUnit)
+  companyName.setAttributeNS(null, 'x', addressTextPosX)
   companyName.setAttribute('y', defaultFontSize + defaultOffsetInline + defaultUnit)
   companyName.setAttribute('textLength', numPlateWidth.value - 20 + defaultUnit)
-  companyAddress.setAttribute('x', numPlateWidth.value / 2 + defaultUnit)
+  companyAddress.setAttributeNS(null, 'x', addressTextPosX)
   companyAddress.setAttribute('y', numPlateHeight.value - 1.4 * defaultOffsetInline + defaultUnit)
   companyAddress.setAttribute('textLength', numPlateWidth.value - 20 + defaultUnit)
   holeTR.setAttribute('cx', numPlateWidth.value - defaultOffsetHole + defaultUnit)
@@ -336,8 +338,8 @@ function outputData() {
   imgLogo.setAttribute('width', numPlateWidth.value / 4.5 + defaultUnit)
   imgLogo.setAttribute('height', numPlateWidth.value / 4.5 + defaultUnit)
   imgLogo.setAttribute('x', numPlateHeight.value / 25 + defaultUnit)
+  imgCertificat.setAttribute('x', numPlateHeight.value / 25 + defaultUnit)
 
- 
 
 
   if (inputs[18].value == "") {
@@ -346,7 +348,6 @@ function outputData() {
     imgLogo.setAttribute('y', numPlateHeight.value / 6 + defaultUnit)
     imgCertificat.setAttribute('width', numPlateWidth.value / 4.5 + defaultUnit)
     imgCertificat.setAttribute('height', numPlateWidth.value / 4.5 + defaultUnit)
-    imgCertificat.setAttribute('x', numPlateHeight.value / 25 + defaultUnit)
     imgCertificat.setAttribute('y', numPlateHeight.value / 2 + defaultUnit)
   }
 
@@ -361,44 +362,44 @@ function outputData() {
     modelName.setAttribute('display', 'block')
     document.getElementById('preSvg_modelName').classList.add('preData')
     document.getElementById('preSvg_modelName').setAttribute('display', 'block')
-  } 
+  }
 
 
-   for (let i = 0; i < fontFamily.length; i++) {
+  for (let i = 0; i < fontFamily.length; i++) {
     fontFamily[i].setAttributeNS(null, 'font-family', drpFontFamily.value)
-  } 
- 
-for (let i = 0; i < preData.length; i++) {
-    preData[i].setAttributeNS(null, 'font-size', textSize + defaultUnit)
-    preData[i].setAttributeNS(null, 'y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
-    preData[i].setAttributeNS(null, 'x',   numPlateWidth.value * textX  + defaultUnit)
-    preData[i].setAttributeNS(null, 'letter-spacing',  numPlateWidth.value/400 + defaultUnit)
+  }
+
+  for (let i = 0; i < preData.length; i++) {
+    preData[i].setAttribute('font-size', textSize + defaultUnit)
+    preData[i].setAttribute('y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
+    preData[i].setAttribute('x', numPlateWidth.value * textX + 5 + defaultUnit)
+    preData[i].setAttribute('letter-spacing', numPlateWidth.value / 400 + defaultUnit)
 
   }
 
   for (let i = 0; i < elms.length; i++) {
     elms[i].setAttributeNS(null, 'font-weight', 'bold')
-    elms[i].setAttributeNS(null, 'x', numPlateWidth.value * textX + defaultUnit)
+    elms[i].setAttributeNS(null, 'x', numPlateWidth.value * textX + 5 + defaultUnit)
     elms[i].setAttributeNS(null, 'font-size', textSize + defaultUnit)
     elms[i].setAttributeNS(null, 'y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
-    elms[i].setAttributeNS(null, 'letter-spacing', numPlateWidth.value/700  + defaultUnit)
+    elms[i].setAttributeNS(null, 'letter-spacing', numPlateWidth.value / 700 + defaultUnit)
 
   }
 
- 
+
   //text content of elements
-  companyName.textContent = textCName.value 
+  companyName.textContent = textCName.value
   companyAddress.textContent = textCAddress.value
   product.textContent = textProduct.value
   serialNumber.textContent = textSNIdentifier.value + mNameString + parseInt(numFirstNum.value)
   productionDate.textContent = dateP
-  modelName.innerHTML = textModelName.value 
+  modelName.innerHTML = textModelName.value
   modelID.textContent = textModelID.value
   elecRatings.textContent = drpVoltage.value + ' ' + drpFrequency.value + comma + numWattage.value + wattageSign + numElCurrent.value + elecTurrentSign
 
   openWin()
 };
-  var platesFinal = document.getElementsByClassName('plates_final')
+var platesFinal = document.getElementsByClassName('plates_final')
 
 function openWin() {
 
@@ -443,17 +444,15 @@ function cloneSvg(x, y, index) {
 
 document.getElementById('svgDownload').onclick = function () {
   platesFinal[0].setAttribute('display', 'none')
-  list.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    var svgData = list.outerHTML;
-    var preface = '<?xml version="1.0" standalone="no"?>\r\n';
-    var svgBlob = new Blob([preface, svgData], {type:"image/svg+xml;charset=utf-8"});
-    var svgUrl = URL.createObjectURL(svgBlob);
-    var downloadLink = document.createElement("a");
-    downloadLink.href = svgUrl;
-    downloadLink.download = "download.svg";
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+    var svgData = platesFinal[2].outerHTML;
+      var svgBlob = new Blob([svgData], {type:'image/svg+xml;'});
+      var svgUrl = URL.createObjectURL(svgBlob);
+      var downloadLink = document.createElement("a");
+      downloadLink.href = svgUrl;
+      downloadLink.download = "download.svg";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink); 
   platesFinal[0].setAttribute('display', 'block')
 
 };
@@ -462,13 +461,12 @@ document.getElementById('svgDownload').onclick = function () {
 var pointWidth, pointHeight;
 document.getElementById('pdfDownload').onclick = function () {
   platesFinal[0].setAttribute('display', 'none')
-  
   pointWidth = numListWidth.value * 2.8346456693
   pointHeight = numListHeight.value * 2.8346456693
   let doc = new PDFDocument({ compress: false, size: [pointWidth, pointHeight] });
-  SVGtoPDF(doc, list, 0, 0);
+  SVGtoPDF(doc, platesFinal[2], 0, 0);
   let stream = doc.pipe(blobStream());
-  stream.on('finish', () => {  
+  stream.on('finish', () => {
     let blob = stream.toBlob('application/pdf');
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
@@ -483,17 +481,17 @@ document.getElementById('pdfDownload').onclick = function () {
 
 //side menu animate
 var rotated = 0
-document.getElementById('openArrow').onclick = function(){
-    document.getElementById('sideMenu').classList.toggle('sideBarWidth')
-    rotated+=180
-    document.getElementById('arrow').style.transform = 'rotate('+rotated+'deg)'  
+document.getElementById('openArrow').onclick = function () {
+  document.getElementById('sideMenu').classList.toggle('sideBarWidth')
+  rotated += 180
+  document.getElementById('arrow').style.transform = 'rotate(' + rotated + 'deg)'
 };
 
- document.getElementById('preOne').addEventListener("mouseover", function () {
-    document.getElementById('drpMenu').style.visibility = 'visible'
- });
+document.getElementById('preOne').addEventListener("mouseover", function () {
+  document.getElementById('drpMenu').style.visibility = 'visible'
+});
 
- document.getElementById('preOne').addEventListener("mouseout", function () {
+document.getElementById('preOne').addEventListener("mouseout", function () {
   document.getElementById('drpMenu').style.visibility = 'hidden'
 });
 
@@ -504,99 +502,99 @@ document.getElementById('drpMenu').addEventListener("mouseover", function () {
 });
 
 document.getElementById('drpMenu').addEventListener("mouseout", function () {
-document.getElementById('drpMenu').style.visibility = 'hidden'
-document.getElementById('preOne').style.background = ''
+  document.getElementById('drpMenu').style.visibility = 'hidden'
+  document.getElementById('preOne').style.background = ''
 
 });
 
 
- var checkInputs = document.querySelector('.inputInfo')
+var checkInputs = document.querySelector('.inputInfo')
 
- checkInputs.addEventListener('change', () => {
-  for(let i = 0; i < dwnClass.length; i++){
+checkInputs.addEventListener('change', () => {
+  for (let i = 0; i < dwnClass.length; i++) {
     dwnClass[i].style.visibility = "hidden"
-}
-document.getElementById('dwnImg').style.visibility = "hidden"
- });
+  }
+  document.getElementById('dwnImg').style.visibility = "hidden"
+});
 
 //fill inputs
 
-		function GetDetail(str) {
-			if (str.length == 0) {
-				document.getElementById("listWidth").value = "";
-				document.getElementById("listHeight").value = "";
-        document.getElementById("plateWidth").value = "";
-				document.getElementById("plateHeight").value = "";
-				document.getElementById("plateCName").value = "";
-				document.getElementById("plateCAddress").value = "";
-				document.getElementById("plateProduct").value = "";
-				document.getElementById("plateModelName").value = "";
-				document.getElementById("plateModelID").value = "";
-				document.getElementById("plateSNIdentifier").value = "";
-        document.getElementById("plateName").value = "";
-        document.getElementById("valbra").value = "";
-				document.getElementById("plateFrequency").value = "";
-				document.getElementById("plateWattage").value = "";
-        document.getElementById("plateElCurrent").value = "";
-			
-				return;
-			}
-			else {
+function GetDetail(str) {
+  if (str.length == 0) {
+    document.getElementById("listWidth").value = "";
+    document.getElementById("listHeight").value = "";
+    document.getElementById("plateWidth").value = "";
+    document.getElementById("plateHeight").value = "";
+    document.getElementById("plateCName").value = "";
+    document.getElementById("plateCAddress").value = "";
+    document.getElementById("plateProduct").value = "";
+    document.getElementById("plateModelName").value = "";
+    document.getElementById("plateModelID").value = "";
+    document.getElementById("plateSNIdentifier").value = "";
+    document.getElementById("plateName").value = "";
+    document.getElementById("valbra").value = "";
+    document.getElementById("plateFrequency").value = "";
+    document.getElementById("plateWattage").value = "";
+    document.getElementById("plateElCurrent").value = "";
 
-				var xmlhttp = new XMLHttpRequest();
-				xmlhttp.onreadystatechange = function () {
+    return;
+  }
+  else {
 
-					if (this.readyState == 4 &&
-							this.status == 200) {
-						
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
 
-						var myObj = JSON.parse(this.responseText);
+      if (this.readyState == 4 &&
+        this.status == 200) {
+
+
+        var myObj = JSON.parse(this.responseText);
 
         document.getElementById("listWidth").value = myObj[0];
-				document.getElementById("listHeight").value = myObj[1];
+        document.getElementById("listHeight").value = myObj[1];
         document.getElementById("plateWidth").value = myObj[2];
-				document.getElementById("plateHeight").value = myObj[3];
-				document.getElementById("plateCName").value = myObj[4];
-				document.getElementById("plateCAddress").value = myObj[5];
-				document.getElementById("plateProduct").value = myObj[6];
-				document.getElementById("plateModelName").value = myObj[7];
-				document.getElementById("plateModelID").value = myObj[8];
-				document.getElementById("plateSNIdentifier").value = myObj[9];
+        document.getElementById("plateHeight").value = myObj[3];
+        document.getElementById("plateCName").value = myObj[4];
+        document.getElementById("plateCAddress").value = myObj[5];
+        document.getElementById("plateProduct").value = myObj[6];
+        document.getElementById("plateModelName").value = myObj[7];
+        document.getElementById("plateModelID").value = myObj[8];
+        document.getElementById("plateSNIdentifier").value = myObj[9];
         document.getElementById("plateName").value = myObj[10];
         document.getElementById("plateVoltage").value = myObj[11];
-				document.getElementById("plateFrequency").value = myObj[12];
-				document.getElementById("plateWattage").value = myObj[13];
+        document.getElementById("plateFrequency").value = myObj[12];
+        document.getElementById("plateWattage").value = myObj[13];
         document.getElementById("plateElCurrent").value = myObj[14];
 
-					}
-				};
+      }
+    };
 
-				xmlhttp.open("GET", "gfg.php?plateName=" + str, true);
-				xmlhttp.send();
-			}
-		}
+    xmlhttp.open("GET", "gfg.php?plateName=" + str, true);
+    xmlhttp.send();
+  }
+}
 
-    var blurred = document.getElementsByClassName('blur')
+var blurred = document.getElementsByClassName('blur')
 
-  document.getElementById('four').onclick = function(){
-    document.getElementById('uploadWindow').style.display = 'block'
-    objDiv.scrollTop = 0
-    for(let i=0; i < blurred.length; i++){
-      blurred[i].style.filter = "blur(5px)"
-      blurred[i].style.pointerEvents = "none"
-    }
-  };
+document.getElementById('four').onclick = function () {
+  document.getElementById('uploadWindow').style.display = 'block'
+  objDiv.scrollTop = 0
+  for (let i = 0; i < blurred.length; i++) {
+    blurred[i].style.filter = "blur(5px)"
+    blurred[i].style.pointerEvents = "none"
+  }
+};
 
-  document.getElementById('exitUpload').onclick = function(){
-    document.getElementById('uploadWindow').style.display = 'none';
-    for(let i = 0; i < dwnClass.length; i++){
-      dwnClass[i].style.visibility = "hidden"
+document.getElementById('exitUpload').onclick = function () {
+  document.getElementById('uploadWindow').style.display = 'none';
+  for (let i = 0; i < dwnClass.length; i++) {
+    dwnClass[i].style.visibility = "hidden"
   }
   document.getElementById('dwnImg').style.visibility = "hidden"
 
-    for(let i=0; i < blurred.length; i++){
-      blurred[i].style.filter="blur(0px)"
-      blurred[i].style.pointerEvents = "auto"
-    }
-  };
+  for (let i = 0; i < blurred.length; i++) {
+    blurred[i].style.filter = "blur(0px)"
+    blurred[i].style.pointerEvents = "auto"
+  }
+};
 
