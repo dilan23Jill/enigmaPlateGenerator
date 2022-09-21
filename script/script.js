@@ -143,8 +143,8 @@ var defaultTextSpacing = 11
 const defaultUnit = 'mm';
 var modelNameFirstPart = '00000000';
 
-numListWidth.value = 600
-numListHeight.value = 600
+numListWidth.value = 600 * 2.8346456693
+numListHeight.value = 600 
 numPlateWidth.value = 90
 numPlateHeight.value = 54
 
@@ -201,15 +201,16 @@ var mNameString = '0000000'
 document.getElementById('plateImgLogo').addEventListener('change', function () {
   var reader = new FileReader()
   reader.onload = function (e) {
-    document.getElementById('svg_imgLogo').setAttribute('href', e.target.result)
-  };
+    document.getElementById('svg_imgLogo').setAttributeNS("http://www.w3.org/1999/xlink", 'xlink:href', e.target.result)
+   };
   reader.readAsDataURL(this.files[0])
-});
+
+ });
 
 document.getElementById('plateImgCertificat').addEventListener('change', function () {
   var reader_two = new FileReader()
   reader_two.onload = function (e) {
-    document.getElementById('svg_imgCertificat').setAttribute('href', e.target.result)
+    document.getElementById('svg_imgCertificat').setAttributeNS("http://www.w3.org/1999/xlink", 'xlink:href', e.target.result)
   };
   reader_two.readAsDataURL(this.files[0])
 });
@@ -310,7 +311,7 @@ function outputData() {
     textSize = numPlateWidth.value / moreTextSize.value
   } else textSize = numPlateWidth.value / 30
 
-  var addressTextPosX = numPlateWidth.value / 2 + defaultUnit;
+  var addressTextPosX = 45 + defaultUnit;
 
 
   //position of elements
@@ -325,10 +326,9 @@ function outputData() {
   underLine.setAttribute('x', 2 * defaultOffsetHole + defaultUnit)
   underLine.setAttribute('y', 2 * defaultFontSize + defaultUnit)
   underLine.setAttribute('width', numPlateWidth.value - 4 * defaultOffsetHole + defaultUnit)
-  companyName.setAttributeNS(null, 'x', addressTextPosX)
+  companyName.setAttribute('x', addressTextPosX)
   companyName.setAttribute('y', defaultFontSize + defaultOffsetInline + defaultUnit)
-  companyName.setAttribute('textLength', numPlateWidth.value - 20 + defaultUnit)
-  companyAddress.setAttributeNS(null, 'x', addressTextPosX)
+  companyAddress.setAttribute('x', addressTextPosX)
   companyAddress.setAttribute('y', numPlateHeight.value - 1.4 * defaultOffsetInline + defaultUnit)
   companyAddress.setAttribute('textLength', numPlateWidth.value - 20 + defaultUnit)
   holeTR.setAttribute('cx', numPlateWidth.value - defaultOffsetHole + defaultUnit)
@@ -339,8 +339,6 @@ function outputData() {
   imgLogo.setAttribute('height', numPlateWidth.value / 4.5 + defaultUnit)
   imgLogo.setAttribute('x', numPlateHeight.value / 25 + defaultUnit)
   imgCertificat.setAttribute('x', numPlateHeight.value / 25 + defaultUnit)
-
-
 
   if (inputs[18].value == "") {
     imgLogo.setAttribute('y', numPlateHeight.value / 3.4 + defaultUnit)
@@ -365,28 +363,27 @@ function outputData() {
   }
 
 
-  for (let i = 0; i < fontFamily.length; i++) {
-    fontFamily[i].setAttributeNS(null, 'font-family', drpFontFamily.value)
-  }
+  /* for (let i = 0; i < fontFamily.length; i++) {
+    fontFamily[i].setAttribute('font-family', drpFontFamily.value)
+  } */
 
   for (let i = 0; i < preData.length; i++) {
-    preData[i].setAttribute('font-size', textSize + defaultUnit)
+    preData[i].setAttribute('font-size', '5')
     preData[i].setAttribute('y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
-    preData[i].setAttribute('x', numPlateWidth.value * textX + 5 + defaultUnit)
-    preData[i].setAttribute('letter-spacing', numPlateWidth.value / 400 + defaultUnit)
-
+    preData[i].setAttribute('x', numPlateWidth.value / 2  + defaultUnit)
+/*     preData[i].setAttribute('letter-spacing', numPlateWidth.value / 400 + defaultUnit)
+ */
   }
 
   for (let i = 0; i < elms.length; i++) {
-    elms[i].setAttributeNS(null, 'font-weight', 'bold')
-    elms[i].setAttributeNS(null, 'x', numPlateWidth.value * textX + 5 + defaultUnit)
-    elms[i].setAttributeNS(null, 'font-size', textSize + defaultUnit)
-    elms[i].setAttributeNS(null, 'y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
-    elms[i].setAttributeNS(null, 'letter-spacing', numPlateWidth.value / 700 + defaultUnit)
-
+    elms[i].setAttribute('font-weight', 'bold')
+    elms[i].setAttribute('x', numPlateWidth.value / 2 + 5 + defaultUnit)
+    elms[i].setAttribute('font-size', '10')
+    elms[i].setAttribute('y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
+/*     elms[i].setAttributeNS(null, 'letter-spacing', numPlateWidth.value / 700 + defaultUnit)
+ */
   }
-
-
+ 
   //text content of elements
   companyName.textContent = textCName.value
   companyAddress.textContent = textCAddress.value
@@ -443,8 +440,9 @@ function cloneSvg(x, y, index) {
 //downloadsvg
 
 document.getElementById('svgDownload').onclick = function () {
+  
   platesFinal[0].setAttribute('display', 'none')
-    var svgData = platesFinal[2].outerHTML;
+    var svgData = list.outerHTML;
       var svgBlob = new Blob([svgData], {type:'image/svg+xml;'});
       var svgUrl = URL.createObjectURL(svgBlob);
       var downloadLink = document.createElement("a");
@@ -464,7 +462,7 @@ document.getElementById('pdfDownload').onclick = function () {
   pointWidth = numListWidth.value * 2.8346456693
   pointHeight = numListHeight.value * 2.8346456693
   let doc = new PDFDocument({ compress: false, size: [pointWidth, pointHeight] });
-  SVGtoPDF(doc, platesFinal[2], 0, 0);
+  SVGtoPDF(doc, list, 0, 0);
   let stream = doc.pipe(blobStream());
   stream.on('finish', () => {
     let blob = stream.toBlob('application/pdf');

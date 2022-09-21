@@ -67,7 +67,7 @@ alert('sent');
 
 <body>
   <div id="listBack" class="listBack">    
-<svg width="600mm" height="600mm" id="list" viewBox="0 0 600mm 600mm" xmlns="http://www.w3.org/2000/svg">
+<svg width="600mm" height="600mm"  id="list" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <svg id="prv_plate" class="plates_final" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="90mm" height="54mm" >
     <rect id="svg_plateBorder" rx="10" x="0" y="0" fill="none" stroke="magenta" stroke-width="0.1mm" />
     <rect id="svg_plateInnerLine" rx="8" x="1.5mm" y="1.5mm" fill="none" stroke="black" stroke-width="0.5mm" />
@@ -76,11 +76,11 @@ alert('sent');
     <circle id="svg_hole_tr" class="hole" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
     <circle id="svg_hole_bl" class="hole" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
     <circle id="svg_hole_br" class="hole" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
-    <image  x="10" y="20" width="80" height="80"  id="svg_imgLogo" />
-    <image  x="10" y="20" width="80" height="80" id="svg_imgCertificat" />
+    <image id="svg_imgLogo" />
+    <image id="svg_imgCertificat" />
 
     <text id="svg_CompanyName" fill="black" class="Ffamily" text-anchor="middle" >ENIGMA GAMING</text>
-
+  
     <text id="preSvg_serialNumber"  fill="black" text-anchor="end" class="preData Ffamily">Serial Number:</text>
     <text id="svg_serialNumber" fill="black" class="data serial Ffamily"></text>
 
@@ -97,7 +97,10 @@ alert('sent');
     <text id="svg_modelID" fill="black" class="data Ffamily"></text>
 
     <text id="preSvg_elecRatings"  fill="black" text-anchor="end" class="preData Ffamily">Elec. ratings:</text>
-    <text id="svg_elecRatings"  fill="black" class="data Ffamily"></text>
+    <text id="svg_elecRatings"  fill="black" class="data Ffamily">
+    <tspan x="0" dy="1.2em">very long text</tspan>
+    <tspan x="0" dy="1.2em">I would like to linebreak</tspan>
+    </text>
 
     <text id="svg_companyAddress"  fill="black" text-anchor="middle" class="Ffamily" font-size="2.4mm">ENIGMA GAMING, Vrtine 4, 6276 Pobegi,
       Slovenia, Europe</text>
@@ -156,7 +159,6 @@ alert('sent');
 </div>
 
   <form id="ctrForm" action="" class="" name="form1" method="post" autocomplete="on">
-    <div > <a href="">downloa</a></div>
     <div class="title_tab blur">
       <h1 id="title">PLATE GENERATOR</h1>
       </div>        
