@@ -97,10 +97,8 @@ alert('sent');
     <text id="svg_modelID" fill="black" class="data Ffamily"></text>
 
     <text id="preSvg_elecRatings"  fill="black" text-anchor="end" class="preData Ffamily">Elec. ratings:</text>
-    <text id="svg_elecRatings"  fill="black" class="data Ffamily">
-    <tspan x="0" dy="1.2em">very long text</tspan>
-    <tspan x="0" dy="1.2em">I would like to linebreak</tspan>
-    </text>
+    <text id="svg_elecRatings"  fill="black" class="data Ffamily"></text>
+    <text id="svg_elecRatings_two"  fill="black" class="data Ffamily"></text>
 
     <text id="svg_companyAddress"  fill="black" text-anchor="middle" class="Ffamily" font-size="2.4mm">ENIGMA GAMING, Vrtine 4, 6276 Pobegi,
       Slovenia, Europe</text>
@@ -158,7 +156,7 @@ alert('sent');
 
 </div>
 
-  <form id="ctrForm" action="" class="" name="form1" method="post" autocomplete="on">
+  <form id="ctrForm" action="" class="" name="form1" method="post" autocomplete="on" onkeydown="return event.key != 'Enter';">
     <div class="title_tab blur">
       <h1 id="title">PLATE GENERATOR</h1>
       </div>        

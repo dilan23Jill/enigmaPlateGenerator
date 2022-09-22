@@ -37,6 +37,7 @@ body {
   letter-spacing: 0.3em;
   word-spacing: 0.6em;
   margin-bottom: 2em;
+  color: #32364A;
 }
 
 .window {
@@ -69,12 +70,13 @@ input, select {
   color: white;
   caret-color: white;
   text-align: center;
-  color: black;
   width: 15em;
+  border-color: #32364A;
 }
 
 input::placeholder {
-  font-weight: 600;
+  font-weight: 500;
+  color: #32364A;
 }
 
 .inputInfo {
@@ -118,7 +120,7 @@ input::placeholder {
 
 #plateChkMaxNum {
   position: relative;
-  left: -10em;
+  left: -7em;
   top: -4.5em;
   width: 2em;
   cursor: pointer;

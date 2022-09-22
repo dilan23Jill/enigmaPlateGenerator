@@ -143,7 +143,7 @@ var defaultTextSpacing = 11
 const defaultUnit = 'mm';
 var modelNameFirstPart = '00000000';
 
-numListWidth.value = 600 * 2.8346456693
+numListWidth.value = 600 
 numListHeight.value = 600 
 numPlateWidth.value = 90
 numPlateHeight.value = 54
@@ -176,6 +176,7 @@ var product = document.getElementById('svg_product')
 var modelName = document.getElementById('svg_modelName')
 var modelID = document.getElementById('svg_modelID')
 var elecRatings = document.getElementById('svg_elecRatings')
+var elecRatingsTwo = document.getElementById('svg_elecRatings_two')
 var companyAddress = document.getElementById('svg_companyAddress')
 var tspantest = document.getElementById('preSvg_product')
 
@@ -309,7 +310,7 @@ function outputData() {
 
   if (moreTextSize.value != '') {
     textSize = numPlateWidth.value / moreTextSize.value
-  } else textSize = numPlateWidth.value / 30
+  } else textSize 
 
   var addressTextPosX = 45 + defaultUnit;
 
@@ -328,25 +329,29 @@ function outputData() {
   underLine.setAttribute('width', numPlateWidth.value - 4 * defaultOffsetHole + defaultUnit)
   companyName.setAttribute('x', addressTextPosX)
   companyName.setAttribute('y', defaultFontSize + defaultOffsetInline + defaultUnit)
+  companyName.setAttribute('textLength', numPlateWidth.value - 25 + defaultUnit)
+ 
   companyAddress.setAttribute('x', addressTextPosX)
   companyAddress.setAttribute('y', numPlateHeight.value - 1.4 * defaultOffsetInline + defaultUnit)
-  companyAddress.setAttribute('textLength', numPlateWidth.value - 20 + defaultUnit)
+  companyAddress.setAttribute('textLength', numPlateWidth.value - 25 + defaultUnit)
   holeTR.setAttribute('cx', numPlateWidth.value - defaultOffsetHole + defaultUnit)
   holeBR.setAttribute('cx', numPlateWidth.value - defaultOffsetHole + defaultUnit)
   holeBL.setAttribute('cy', numPlateHeight.value - defaultOffsetHole + defaultUnit)
   holeBR.setAttribute('cy', numPlateHeight.value - defaultOffsetHole + defaultUnit)
   imgLogo.setAttribute('width', numPlateWidth.value / 4.5 + defaultUnit)
   imgLogo.setAttribute('height', numPlateWidth.value / 4.5 + defaultUnit)
-  imgLogo.setAttribute('x', numPlateHeight.value / 25 + defaultUnit)
-  imgCertificat.setAttribute('x', numPlateHeight.value / 25 + defaultUnit)
+  imgLogo.setAttribute('x', numPlateHeight.value / 12 + defaultUnit)
+  imgCertificat.setAttribute('x', numPlateHeight.value / 12 + defaultUnit)
+
+  var centerImageY = numPlateHeight.value / 2 - numPlateHeight.value / 4.5 
 
   if (inputs[18].value == "") {
-    imgLogo.setAttribute('y', numPlateHeight.value / 3.4 + defaultUnit)
+    imgLogo.setAttribute('y', centerImageY + defaultFontSize + defaultUnit)
   } else {
-    imgLogo.setAttribute('y', numPlateHeight.value / 6 + defaultUnit)
+    imgLogo.setAttribute('y', centerImageY - numPlateHeight.value / 6 + numPlateHeight.value / 20 + defaultUnit)
     imgCertificat.setAttribute('width', numPlateWidth.value / 4.5 + defaultUnit)
     imgCertificat.setAttribute('height', numPlateWidth.value / 4.5 + defaultUnit)
-    imgCertificat.setAttribute('y', numPlateHeight.value / 2 + defaultUnit)
+    imgCertificat.setAttribute('y', centerImageY + numPlateHeight.value / 6 + numPlateHeight.value / 20  + defaultUnit)
   }
 
   if (textModelName.value == '') {
@@ -363,25 +368,26 @@ function outputData() {
   }
 
 
-  /* for (let i = 0; i < fontFamily.length; i++) {
+  for (let i = 0; i < fontFamily.length; i++) {
     fontFamily[i].setAttribute('font-family', drpFontFamily.value)
-  } */
+    fontFamily[i].setAttribute('font-size', textSize + defaultUnit)
+
+  } 
 
   for (let i = 0; i < preData.length; i++) {
-    preData[i].setAttribute('font-size', '5')
+    preData[i].setAttribute('font-size', '70%')
     preData[i].setAttribute('y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
-    preData[i].setAttribute('x', numPlateWidth.value / 2  + defaultUnit)
-/*     preData[i].setAttribute('letter-spacing', numPlateWidth.value / 400 + defaultUnit)
- */
+    preData[i].setAttribute('x', numPlateWidth.value / 1.9  + defaultUnit)
   }
 
   for (let i = 0; i < elms.length; i++) {
     elms[i].setAttribute('font-weight', 'bold')
-    elms[i].setAttribute('x', numPlateWidth.value / 2 + 5 + defaultUnit)
-    elms[i].setAttribute('font-size', '10')
+    elms[i].setAttribute('x', numPlateWidth.value / 1.9 + 5 + defaultUnit)
+    elms[i].setAttribute('font-size', '70%')
     elms[i].setAttribute('y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
-/*     elms[i].setAttributeNS(null, 'letter-spacing', numPlateWidth.value / 700 + defaultUnit)
- */
+
+if(i==elms.length -1) elms[i].setAttribute('y', numPlateHeight.value / textY + i * textSpacing - textSpacing/2 +1+ defaultUnit)
+
   }
  
   //text content of elements
@@ -392,7 +398,8 @@ function outputData() {
   productionDate.textContent = dateP
   modelName.innerHTML = textModelName.value
   modelID.textContent = textModelID.value
-  elecRatings.textContent = drpVoltage.value + ' ' + drpFrequency.value + comma + numWattage.value + wattageSign + numElCurrent.value + elecTurrentSign
+  elecRatings.textContent = drpVoltage.value + ' ' + drpFrequency.value + comma 
+  elecRatingsTwo.textContent = numWattage.value + wattageSign + numElCurrent.value + elecTurrentSign
 
   openWin()
 };
@@ -419,12 +426,12 @@ function openWin() {
   platesFinal[0].setAttribute('display', 'none')
   document.querySelectorAll('.serial')[1].textContent = textSNIdentifier.value + mNameString + parseInt(numFirstNum.value)
 
-  var divText = document.getElementById("listBack").outerHTML;
-  var myWindow = window.open('', '', numListWidth.value + 'mm', numListHeight.value + 'mm');
-  var doc = myWindow.document;
-  doc.open();
-  doc.write(divText);
-  doc.close();
+  var divText = document.getElementById("list").outerHTML
+  var myWindow = window.open('', '', numListWidth.value + 'mm', numListHeight.value + 'mm')
+  var doc = myWindow.document
+  doc.open()
+  doc.write(divText)
+  doc.close()
 
   platesFinal[0].setAttribute('display', 'block')
 };
