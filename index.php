@@ -1,5 +1,25 @@
 <?php
-include ('server.php');
+ session_start();
+
+ if (!isset($_SESSION['username'])) {
+  $_SESSION['msg'] = "You have to log in first";
+  header('location: login.php');
+}
+if (isset($_GET['logout'])) {
+  session_destroy();
+  unset($_SESSION['username']);
+  header("location: login.php");
+}
+$host="localhost";
+$user="root";
+$password="dilan123";
+$database="Enigma";
+$errors = array();
+
+$db = mysqli_connect($host, $user, $password, $database);
+if ($db->connect_error) {
+    die("Connection failed: " . $db->connect_error);
+  } 
 
 if(isset($_POST['submit'])){
     $listWidth = $_POST["listWidth"];
@@ -107,7 +127,21 @@ alert('sent');
 </svg>    
 </div>   
 
+<div class="loginWindow">
+<?php  if (isset($_SESSION['username'])) : ?>
 
+ <p id="welcomeTxt">  Welcome             
+  <strong> 
+    <?php echo $_SESSION['username']; ?> 
+  </strong>
+</p>                   
+                    
+<p id="logoutTxt">
+  <a href="index.php?logout='1'" style="color: red;" > Click here to Logout</a>
+</p>
+
+<?php endif ?>
+</div>
 
 <div class="sideMenu blur" id="sideMenu">
 
@@ -248,6 +282,7 @@ alert('sent');
             <input type="text" name="plateName" id="plateName" placeholder="Plate Name" required >   <br/>
             <input type="submit" value="submit" name="submit" id="submit">  
 </div>
+
 </form>
 <script src="script/script.js"></script>
 

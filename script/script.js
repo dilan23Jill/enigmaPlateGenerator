@@ -574,7 +574,7 @@ function GetDetail(str) {
       }
     };
 
-    xmlhttp.open("GET", "gfg.php?plateName=" + str, true);
+    xmlhttp.open("GET", "requestPlateName.php?plateName=" + str, true);
     xmlhttp.send();
   }
 }
