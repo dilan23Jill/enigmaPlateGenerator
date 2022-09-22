@@ -19,7 +19,6 @@
         <input type="password" class="text" id="inpPas" name="password" id="password" placeholder="Password"><br/>
        </div> 
        <input type="submit" value="LOGIN" name="login_user" id="submit">
-        <a href="http://"><p id="forgotPsd">Forgot password?</p></a>
     </form>
     
 </body>

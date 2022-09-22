@@ -71,7 +71,8 @@ h1{
     border-color: #afb1be;
     width: 7;
     margin-top: 2em;
-    margin-left: 10%
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 
 #submit:hover{

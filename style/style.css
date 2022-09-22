@@ -72,6 +72,7 @@ input, select {
   text-align: center;
   width: 15em;
   border-color: #32364A;
+  border-bottom: 2px solid #000;
 }
 
 input::placeholder {
