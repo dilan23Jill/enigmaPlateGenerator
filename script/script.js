@@ -120,8 +120,6 @@ var drpVoltage = document.getElementById('plateVoltage')
 var drpFrequency = document.getElementById('plateFrequency')
 var numWattage = document.getElementById('plateWattage')
 var numElCurrent = document.getElementById('plateElCurrent')
-var ImgLogo = document.getElementById('plateImgLogo')
-var ImgCertificat = document.getElementById('plateImgCertificat')
 var textSNIdentifier = document.getElementById('plateSNIdentifier')
 var numFirstNum = document.getElementById('plateFirstNum')
 var numLastNum = document.getElementById('plateLastNum')
@@ -163,8 +161,6 @@ var holeTL = document.getElementById('svg_hole_tl')
 var holeTR = document.getElementById('svg_hole_tr')
 var holeBR = document.getElementById('svg_hole_br')
 var holeBL = document.getElementById('svg_hole_bl')
-var imgLogo = document.getElementById('svg_imgLogo')
-var imgCertificat = document.getElementById('svg_imgCertificat')
 var companyName = document.getElementById('svg_CompanyName')
 var serialNumber = document.getElementById('svg_serialNumber')
 var productionDate = document.getElementById('svg_productionDate')
@@ -218,8 +214,6 @@ document.getElementById('plateImgCertificat').addEventListener('change', functio
      var decode2 =  window.atob( innertext2 )
      console.log(decode2)
      document.getElementsByTagName("svg")[3].outerHTML = decode2;
-     
- 
     };
   reader_two.readAsDataURL(this.files[0])
 });
@@ -253,8 +247,6 @@ function outputData() {
   drpFrequency = document.getElementById('plateFrequency')
   numWattage = document.getElementById('plateWattage')
   numElCurrent = document.getElementById('plateElCurrent')
-  ImgLogo = document.getElementById('plateImgLogo')
-  ImgCertificat = document.getElementById('plateImgCertificat')
   textSNIdentifier = document.getElementById('plateSNIdentifier')
   numFirstNum = document.getElementById('plateFirstNum')
   numLastNum = document.getElementById('plateLastNum')

@@ -96,8 +96,7 @@ alert('sent');
     <circle id="svg_hole_tr" class="hole" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
     <circle id="svg_hole_bl" class="hole" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
     <circle id="svg_hole_br" class="hole" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
-    <image id="svg_imgCertificat" />
-    <image id="svg_imgLogo" />
+   
 <svg id="newSvgImgLogo"></svg>
 <svg id="newSvgImgCertificat"></svg>
 
