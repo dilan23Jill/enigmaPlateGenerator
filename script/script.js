@@ -93,8 +93,6 @@ document.getElementById('third').addEventListener("mouseover", function () {
 
 });
 
-
-
 document.getElementById('third').addEventListener("mouseout", function () {
   for (let i = 0; i < elementsDwn.length; i++) {
     elementsDwn[i].style.visibility = 'hidden'
@@ -102,8 +100,6 @@ document.getElementById('third').addEventListener("mouseout", function () {
   document.getElementById('dwnImg').style.visibility = 'visible'
 
 });
-
-
 
 //clear input fields
 document.getElementById('btnClear').onclick = function () {
@@ -197,22 +193,34 @@ var nextNum = 0
 var mNameString = '0000000'
 
 
-
 //preview and fill svg onclick on design
 document.getElementById('plateImgLogo').addEventListener('change', function () {
   var reader = new FileReader()
-  reader.onload = function (e) {
-    document.getElementById('svg_imgLogo').setAttributeNS("http://www.w3.org/1999/xlink", 'xlink:href', e.target.result)
-   };
+  reader.onload =  function (e) {
+    'use strict';    
+    const test123 = reader.result   
+    var myArray = test123.split(",")
+    var innertext = myArray[1]
+    var decode =  window.atob( innertext )
+    console.log(decode)
+    document.getElementsByTagName("svg")[2].outerHTML = decode;
+  };
   reader.readAsDataURL(this.files[0])
-
  });
 
 document.getElementById('plateImgCertificat').addEventListener('change', function () {
   var reader_two = new FileReader()
   reader_two.onload = function (e) {
-    document.getElementById('svg_imgCertificat').setAttributeNS("http://www.w3.org/1999/xlink", 'xlink:href', e.target.result)
-  };
+  'use strict';    
+     const test245 = reader_two.result   
+     var myArray2 = test245.split(",")
+     var innertext2 = myArray2[1]
+     var decode2 =  window.atob( innertext2 )
+     console.log(decode2)
+     document.getElementsByTagName("svg")[3].outerHTML = decode2;
+     
+ 
+    };
   reader_two.readAsDataURL(this.files[0])
 });
 
@@ -338,20 +346,26 @@ function outputData() {
   holeBR.setAttribute('cx', numPlateWidth.value - defaultOffsetHole + defaultUnit)
   holeBL.setAttribute('cy', numPlateHeight.value - defaultOffsetHole + defaultUnit)
   holeBR.setAttribute('cy', numPlateHeight.value - defaultOffsetHole + defaultUnit)
-  imgLogo.setAttribute('width', numPlateWidth.value / 4.5 + defaultUnit)
-  imgLogo.setAttribute('height', numPlateWidth.value / 4.5 + defaultUnit)
-  imgLogo.setAttribute('x', numPlateHeight.value / 12 + defaultUnit)
-  imgCertificat.setAttribute('x', numPlateHeight.value / 12 + defaultUnit)
+
+
+  document.getElementsByTagName("svg")[3].setAttribute('x', numPlateHeight.value / 12 + defaultUnit)
+
+  document.getElementsByTagName("svg")[2].setAttribute('width', numPlateWidth.value / 4.5 + defaultUnit)
+  document.getElementsByTagName("svg")[2].setAttribute('height', numPlateWidth.value / 4.5 + defaultUnit)
+  document.getElementsByTagName("svg")[2].setAttribute('x', numPlateHeight.value / 12 + defaultUnit)
+
 
   var centerImageY = numPlateHeight.value / 2 - numPlateHeight.value / 4.5 
 
   if (inputs[18].value == "") {
-    imgLogo.setAttribute('y', centerImageY + defaultFontSize + defaultUnit)
+    document.getElementsByTagName("svg")[2].setAttribute('y', centerImageY + defaultFontSize + defaultUnit)
+
   } else {
-    imgLogo.setAttribute('y', centerImageY - numPlateHeight.value / 6 + numPlateHeight.value / 20 + defaultUnit)
-    imgCertificat.setAttribute('width', numPlateWidth.value / 4.5 + defaultUnit)
-    imgCertificat.setAttribute('height', numPlateWidth.value / 4.5 + defaultUnit)
-    imgCertificat.setAttribute('y', centerImageY + numPlateHeight.value / 6 + numPlateHeight.value / 20  + defaultUnit)
+    document.getElementsByTagName("svg")[2].setAttribute('y', centerImageY - numPlateHeight.value / 6 + numPlateHeight.value / 20 + defaultUnit)
+
+    document.getElementsByTagName("svg")[3].setAttribute('width', numPlateWidth.value / 4.5 + defaultUnit)
+    document.getElementsByTagName("svg")[3].setAttribute('height', numPlateWidth.value / 4.5 + defaultUnit)
+    document.getElementsByTagName("svg")[3].setAttribute('y', centerImageY + numPlateHeight.value / 6 + numPlateHeight.value / 20  + defaultUnit)
   }
 
   if (textModelName.value == '') {

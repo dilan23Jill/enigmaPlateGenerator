@@ -87,7 +87,7 @@ alert('sent');
 
 <body>
   <div id="listBack" class="listBack">    
-<svg width="600mm" height="600mm"  id="list" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="600mm" height="600mm"  id="list"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <svg id="prv_plate" class="plates_final" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="90mm" height="54mm" >
     <rect id="svg_plateBorder" rx="10" x="0" y="0" fill="none" stroke="magenta" stroke-width="0.1mm" />
     <rect id="svg_plateInnerLine" rx="8" x="1.5mm" y="1.5mm" fill="none" stroke="black" stroke-width="0.5mm" />
@@ -96,10 +96,12 @@ alert('sent');
     <circle id="svg_hole_tr" class="hole" cx="85mm" cy="5mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
     <circle id="svg_hole_bl" class="hole" cx="5mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
     <circle id="svg_hole_br" class="hole" cx="85mm" cy="49mm" r="1.75mm" stroke="magenta" stroke-width="0.1mm" fill="none" />
-    <image id="svg_imgLogo" />
     <image id="svg_imgCertificat" />
+    <image id="svg_imgLogo" />
+<svg id="newSvgImgLogo"></svg>
+<svg id="newSvgImgCertificat"></svg>
 
-    <text id="svg_CompanyName" fill="black" class="Ffamily" text-anchor="middle" >ENIGMA GAMING</text>
+  <text id="svg_CompanyName" fill="black" class="Ffamily" text-anchor="middle" >ENIGMA GAMING</text>
   
     <text id="preSvg_serialNumber"  fill="black" text-anchor="end" class="preData Ffamily">Serial Number:</text>
     <text id="svg_serialNumber" fill="black" class="data serial Ffamily"></text>
