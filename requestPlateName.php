@@ -1,7 +1,7 @@
 <?php
+ session_start();
 
 $name = $_REQUEST['plateName'];
-
 $con = mysqli_connect("localhost", "root", "dilan123", "Enigma");
 
 if ($name !== "") {

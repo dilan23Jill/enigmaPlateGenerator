@@ -198,7 +198,6 @@ document.getElementById('plateImgLogo').addEventListener('change', function () {
     var myArray = test123.split(",")
     var innertext = myArray[1]
     var decode =  window.atob( innertext )
-    console.log(decode)
     document.getElementsByTagName("svg")[2].outerHTML = decode;
   };
   reader.readAsDataURL(this.files[0])
@@ -212,7 +211,6 @@ document.getElementById('plateImgCertificat').addEventListener('change', functio
      var myArray2 = test245.split(",")
      var innertext2 = myArray2[1]
      var decode2 =  window.atob( innertext2 )
-     console.log(decode2)
      document.getElementsByTagName("svg")[3].outerHTML = decode2;
     };
   reader_two.readAsDataURL(this.files[0])
@@ -519,13 +517,15 @@ document.getElementById('drpMenu').addEventListener("mouseout", function () {
 });
 
 
-var checkInputs = document.querySelector('.inputInfo')
+var checkInputs = document.querySelectorAll('.inputInfo')
 
-checkInputs.addEventListener('change', () => {
+checkInputs.forEach(checkInput => {
+checkInput.addEventListener('click', (event) => {
   for (let i = 0; i < dwnClass.length; i++) {
     dwnClass[i].style.visibility = "hidden"
   }
   document.getElementById('dwnImg').style.visibility = "hidden"
+  });
 });
 
 //fill inputs

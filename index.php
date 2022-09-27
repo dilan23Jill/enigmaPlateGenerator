@@ -262,7 +262,7 @@ alert('sent');
       <div class="wPlateInfo window_full moreOpt">
           <select name="font" id="wPlateSlcFont" title="Font Style" class="inputInfo">
           <option value="" disabled selected>Font Style</option>
-          <option value="Arial">Arial</option>
+          <option value="sans-serif">sans-serif</option>
           <option value="Roboto Condensed">Roboto Condensed</option>
           <option value="Montserrat" selected>Montserrat</option>
           <option value="Open Sans">Open Sans</option>
