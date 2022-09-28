@@ -434,7 +434,7 @@ function openWin() {
   var myWindow = window.open('', '', numListWidth.value + 'mm', numListHeight.value + 'mm')
   var doc = myWindow.document
   doc.open()
-  doc.write(divText)inkscape downloadinkscape 
+  doc.write(divText)
   doc.close()
 
   platesFinal[0].setAttribute('display', 'block')
@@ -480,7 +480,6 @@ document.getElementById('pdfDownload').onclick = function () {
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = 'http://10.1.50.150/temp/plates.pdf';
-    console.log(blob)
     link.click();
   });
   doc.end();
