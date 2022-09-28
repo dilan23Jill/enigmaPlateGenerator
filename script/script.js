@@ -479,11 +479,13 @@ document.getElementById('pdfDownload').onclick = function () {
     let blob = stream.toBlob('application/pdf');
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = 'http://10.1.50.150/temp/plates.pdf';
-    link.click();
+    link.download = 'plates.pdf';
+    link.click();  
+/*     console.log(blob)
+ */
   });
   doc.end();
-
+  
   platesFinal[0].setAttribute('display', 'block')
 };
 
