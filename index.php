@@ -37,13 +37,16 @@ if(isset($_POST['submit'])){
     $frequency = $_POST["frequency"];
     $wattage = $_POST["wattage"];
     $electricCurrent = $_POST["electricCurrent"];
+    $logoRemark = $_POST["logoRemark"];
+    $certificatRemark = $_POST["certificatRemark"];
+
 
 
 $query = "REPLACE INTO Plates (listWidth, listHeight,  plateWidth, plateHeight, companyName,
-companyAddress, product, model, idModel, serialNumberIdentifier, plateName, voltage, frequency, wattage, electricCurrent)
+companyAddress, product, model, idModel, serialNumberIdentifier, plateName, voltage, frequency, wattage, electricCurrent, logoRemark, certificatRemark)
 VALUES('$listWidth', '$listHeight', '$plateWidth', '$plateHeight', '$plateCName',
 '$plateCAddress', '$plateProduct', '$plateModelName', '$plateModelID', '$plateSNIdentifier', 
-'$plateName', '$voltage', '$frequency', '$wattage', '$electricCurrent')";
+'$plateName', '$voltage', '$frequency', '$wattage', '$electricCurrent', '$logoRemark', '$certificatRemark')";
 
 mysqli_query($db, $query);
 echo
@@ -245,7 +248,7 @@ alert('sent');
       </select>
       
       <input type="number" id="plateWattage" name="wattage" placeholder="Wattage (optional):" class="inputInfo" title="Wattage" /><br/>
-      <input type="number" id="plateElCurrent" name="electricCurrent" placeholder="El. Current (optional):" class="inputInfo" title="Electric Current" 
+      <input type="number" id="plateElCurrent" name="electricCurrent" step="0.5" placeholder="El. Current (optional):" class="inputInfo" title="Electric Current" 
       />
     </div>
     <div class="wPlateInfo window blur" id="fileWindow">
@@ -253,10 +256,12 @@ alert('sent');
 
       <input type="file" id="plateImgLogo" (change)="openFile($event)" name="plateImgLogo" placeholder="Upload Logo:" class="inputInfo fileInput" accept=".svg" required>
       <button type="button" id="plateImgLogoFake" class="inputInfoBtn btnFile" title="Logo Image">LOGO</button>
+      <input type="text" name="logoRemark" id="logoRemark" placeholder="Logo Remark (optional):" class="inputInfo" title="Logo Remark" />
       <span id="plateImgLogoFilename"></span>
 
       <input type="file" id="plateImgCertificat" name="plateImgCertificat" placeholder="Upload Certificat:" class="inputInfo fileInput" accept=".svg"> 
       <button type="button" id="plateImgCertificatFake" class="inputInfoBtn btnFile" title="Certificat Image" >CERTIFICAT</button>
+      <input type="text" name="certificatRemark" id="certificatRemark" placeholder="Certificat Remark (optional):" class="inputInfo" title="Certificat Remark" />
       <span id="plateImgCertificatFilename"></span>
     </div>
     <button type="button" id="btnClear" class="blur">Clear</button>

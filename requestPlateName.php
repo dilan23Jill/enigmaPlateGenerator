@@ -8,7 +8,7 @@ if ($name !== "") {
 	
 	$query = mysqli_query($con, "SELECT listWidth ,
 	listHeight, plateWidth, plateHeight ,  companyName , companyAddress , product , model ,
-    idModel ,  serialNumberIdentifier, plateName, voltage, frequency, wattage, electricCurrent 
+    idModel ,  serialNumberIdentifier, plateName, voltage, frequency, wattage, electricCurrent, logoRemark, certificatRemark
      FROM Plates WHERE plateName='$name'");
 
 	$row = mysqli_fetch_array($query);
@@ -28,10 +28,12 @@ if ($name !== "") {
 	$frequency = $row["frequency"];
 	$wattage = $row["wattage"];
 	$electricCurrent = $row["electricCurrent"];
+	$logoRemark = $row["logoRemark"];
+    $certificatRemark = $row["certificatRemark"];
 }
 
 $result = array("$listWidth", "$listHeight", "$plateWidth", "$plateHeight", "$companyName", "$companyAddress", "$product", 
-"$model", "$idModel", "$serialNumberIdentifier", "$plateName", "$voltage", "$frequency", "$wattage", "$electricCurrent");
+"$model", "$idModel", "$serialNumberIdentifier", "$plateName", "$voltage", "$frequency", "$wattage", "$electricCurrent", "$logoRemark", "$certificatRemark");
 
 $myJSON = json_encode($result);
 echo $myJSON;

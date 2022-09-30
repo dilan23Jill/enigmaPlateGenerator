@@ -65,7 +65,7 @@ document.getElementById('btnPreview').onclick = function () {
   numAlert = 0
   for (let i = 0; i < inputs.length; i++) {
     if (inputs[i].value == "") {
-      if (i == 7 || i == 15 || i == 16 || i == 18 || i > 19) {
+      if (i == 7 || i == 15 || i == 16 || i > 17) {
       } else {
         numAlert++
         for (let i = 0; i < dwnClass.length; i++) {
@@ -326,9 +326,14 @@ function outputData() {
   companyName.setAttribute('x', addressTextPosX)
   companyName.setAttribute('y', defaultFontSize + defaultOffsetInline - 0.5 + defaultUnit)
   companyName.setAttribute('textLength', numPlateWidth.value - 25 + defaultUnit)
+  companyName.setAttribute('font-weight', 'bold')
+
   companyAddress.setAttribute('x', addressTextPosX)
   companyAddress.setAttribute('y', numPlateHeight.value - 1.4 * defaultOffsetInline + defaultUnit)
-  companyAddress.setAttribute('textLength', numPlateWidth.value - 25 + defaultUnit)
+  companyAddress.setAttribute('textLength', numPlateWidth.value - 30 + defaultUnit)
+  companyAddress.setAttribute('font-size',  numPlateWidth.value/33 + defaultUnit)
+
+
   holeTR.setAttribute('cx', numPlateWidth.value - defaultOffsetHole + defaultUnit)
   holeBR.setAttribute('cx', numPlateWidth.value - defaultOffsetHole + defaultUnit)
   holeBL.setAttribute('cy', numPlateHeight.value - defaultOffsetHole + defaultUnit)
@@ -367,7 +372,6 @@ function outputData() {
   for (let i = 0; i < fontFamily.length; i++) {
     fontFamily[i].setAttribute('font-family', drpFontFamily.value)
     fontFamily[i].setAttribute('font-size', textSize + defaultUnit)
-
   }
 
   for (let i = 0; i < preData.length; i++) {
@@ -375,6 +379,7 @@ function outputData() {
     preData[i].setAttribute('y', numPlateHeight.value / textY + i * textSpacing + defaultUnit)
     preData[i].setAttribute('x', numPlateWidth.value / 1.7 + defaultUnit)
   }
+  companyAddress.setAttribute('font-size',  numPlateWidth.value/33 + defaultUnit)
 
   for (let i = 0; i < elms.length; i++) {
     elms[i].setAttribute('font-weight', 'bold')
@@ -540,7 +545,8 @@ function GetDetail(str) {
     document.getElementById("plateFrequency").value = "";
     document.getElementById("plateWattage").value = "";
     document.getElementById("plateElCurrent").value = "";
-
+    document.getElementById("logoRemark").value = "";
+    document.getElementById("certificatRemark").value = "";
     return;
   }
   else {
@@ -569,7 +575,8 @@ function GetDetail(str) {
         document.getElementById("plateFrequency").value = myObj[12];
         document.getElementById("plateWattage").value = myObj[13];
         document.getElementById("plateElCurrent").value = myObj[14];
-
+        document.getElementById("logoRemark").value = myObj[15];
+        document.getElementById("certificatRemark").value = myObj[16];
       }
     };
 
